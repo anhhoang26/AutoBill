@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HAL Express Laos</title>
+    <script src="./JsBarcode.all.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif; background: transparent; }
+
+        .outer {
+            background: red;
+            width: 398px;
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 16px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            width: 100%;
+            overflow: hidden;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            position: relative;
+        }
+        .logo-wrap {
+            width: 16.6%;
+        }
+        .logo {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .logo img { width: 90%; height: 90%; object-fit: cover; }
+        .header-info {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 56px;
+        }
+        .company-name { font-size: 15px; font-weight: 500; padding: 4px 4px 0; }
+        .company-hotline { font-size: 12px; color: #6b7280; padding: 0 4px; }
+        .date-label { font-size: 13px; color: #6b7280; font-weight: 500; text-align: right; padding: 4px 4px 0; }
+        .date-value { font-size: 12px; text-align: right; padding: 0 4px; }
+
+        /* Decorative circles */
+        .header::after, .header::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            width: 16px; height: 16px;
+            background: red;
+            border-radius: 50%;
+        }
+        .header::before { left: -8px; }
+        .header::after { right: -8px; }
+
+        /* Barcode */
+        .barcode-section {
+            width: 100%;
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            min-height: 80px;
+        }
+        .barcode-section svg { max-width: 95%; }
+
+        /* Sender/Receiver grid */
+        .info-grid {
+            display: flex;
+            border-top: 1px solid #d1d5db;
+            border-bottom: 1px solid #d1d5db;
+            min-height: 90px;
+        }
+        .info-cell {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            padding: 4px 8px;
+        }
+        .info-cell:first-child { border-right: 1px solid #d1d5db; }
+        .info-label { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+        .info-value { font-size: 14px; color: #4b5563; margin-top: 4px; }
+
+        /* Route */
+        .route-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px dashed #d1d5db;
+            font-size: 14px;
+        }
+        .route-arrow { font-size: 24px; color: #333; }
+
+        /* Parcel name */
+        .parcel-name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            min-height: 40px;
+            border-bottom: 1px dashed #d1d5db;
+            font-size: 14px;
+        }
+
+        /* Details grid */
+        .details-row {
+            display: flex;
+            border-bottom: 1px dashed #d1d5db;
+            min-height: 60px;
+        }
+        .detail-item {
+            width: 33.33%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+        }
+        .detail-item span:first-child { color: #333; }
+        .detail-item span:last-child { color: #333; margin-top: 2px; }
+
+        /* Footer: CDC / COD */
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            min-height: 60px;
+        }
+        .footer-item {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .footer-item:last-child { align-items: flex-end; padding-right: 8px; }
+        .footer-label { font-size: 14px; color: #9ca3af; }
+        .footer-value { font-size: 15px; color: rgba(0,0,0,0.8); }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo-wrap">
+                    <div class="logo">
+                        <img src="data:image/png;base64,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" alt="" />
+                    </div>
+                </div>
+                <div class="header-info">
+                    <div>
+                        <div class="company-name">ຮຸ່ງອາລຸນຂົນສົ່ງດ່ວນ</div>
+                        <div class="company-hotline">ໂທສາຍດ່ວນ: 1419</div>
+                    </div>
+                    <div>
+                        <div class="date-label">ວັນທິສ້າງບິນ</div>
+                        <div class="date-value">{{start_date_actual}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barcode -->
+            <div class="barcode-section">
+                <svg id="barcode_index"></svg>
+            </div>
+
+            <!-- Sender / Receiver -->
+            <div class="info-grid">
+                <div class="info-cell">
+                    <span class="info-label">ຜູ້ຝາກ:</span>
+                    <span class="info-value">{{sender_customer.name}}</span>
+                    <span class="info-value">{{sender_customer.tel}}</span>
+                </div>
+                <div class="info-cell">
+                    <span class="info-label">ຜູ້ຮັບ:</span>
+                    <span class="info-value">{{receiver_customer.name}}</span>
+                    <span class="info-value">{{receiver_customer.tel}}</span>
+                </div>
+            </div>
+
+            <!-- Route -->
+            <div class="route-row">
+                <span>{{start_branch.name}}</span>
+                <span class="route-arrow">→</span>
+                <span>{{end_branch.name}}</span>
+            </div>
+
+            <!-- Parcel name -->
+            <div class="parcel-name">{{parcel.name}}</div>
+
+            <!-- Quantity / Weight / Size -->
+            <div class="details-row">
+                <div class="detail-item">
+                    <span>ຈຳນວນ</span>
+                    <span>{{pieces}}</span>
+                </div>
+                <div class="detail-item">
+                    <span>ນ້ຳໜັກ</span>
+                    <span>{{parcel.weight}} {{parcel.weight_unit}}</span>
+                </div>
+                <div class="detail-item">
+                    <span>ຂະໜາດ</span>
+                    <span>{{parcel.dimension_length}} cm</span>
+                </div>
+            </div>
+
+            <!-- CDC / COD -->
+            <div class="footer-row">
+                <div class="footer-item">
+                    <span class="footer-label">ຄ່າຂົນສົ່ງ</span>
+                    <span class="footer-value">{{total_freight}} K</span>
+                </div>
+                <div class="footer-item">
+                    <span class="footer-label">COD</span>
+                    <span class="footer-value">{{total_price}} K</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        JsBarcode("#barcode_index", "{{shipment_number}}", {
+            format: "code128",
+            displayValue: true,
+            width: 2,
+            height: 50,
+            margin: 10,
+            fontSize: 20,
+            text: "{{shipment_number}}"
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+@font-face {
+	font-family: 'LAOS';
+	src: url('NotoSansLao-Regular.ttf') format('truetype');
+}
+body,
+th,
+td,
+div,
+ul li a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+.btn,
+button,
+select.input-text,
+.textarea,
+.Notify.init,
+.text-field,
+.fl-primary,
+span{
+	font-family: 'LAOS'!important;
+}
+table>th{
+	text-align: center!important;
+}

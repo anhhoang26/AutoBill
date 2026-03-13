@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anousith Express</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Lao', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+        }
+        .bill-content {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 0.5rem;
+            width: 600px;
+            min-height: 500px;
+        }
+        .bill-content h3 {
+            text-align: center;
+            padding: 8px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .bill-row {
+            border-top: 1px solid #b9b3b3;
+            display: flex;
+            padding: 6px 8px;
+        }
+        .bill-column {
+            color: #000;
+            flex: 1 1;
+            padding: 2px;
+            text-align: center;
+        }
+        .bill-column b { font-weight: 700 !important; }
+        .text-center { text-align: center; }
+        .text-start { text-align: left; }
+        .text-end { text-align: right; }
+        .text-dark { color: #343a40; }
+        .text-primary { color: #b51818; }
+        .text-secondary { color: #6c757d; }
+        .customFont { font-size: 18px !important; }
+        .customFontItem { font-size: 12px !important; }
+        .textLeftCustom {
+            width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .textRightCustom {
+            overflow: hidden;
+            text-align: right;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100px;
+        }
+        .font-weight-bold { font-weight: 700; }
+
+        /* Sender/Receiver row */
+        .sender-receiver-row {
+            border-top: 1px solid #ede4e6;
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 8px;
+            font-size: 16px;
+        }
+        .sender-receiver-row b { font-weight: 700; color: #343a40; }
+
+        /* Info rows */
+        .info-row {
+            border-top: 1px solid #ede4e6;
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 8px;
+            font-size: 16px;
+            color: #343a40;
+        }
+        .info-row b { font-weight: 700; }
+
+        /* Total row */
+        .total-row {
+            border-top: 1px solid #ede4e6;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .download-footer {
+            border-top: 1px solid #ede4e6;
+            padding: 8px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .download-footer font { color: red; }
+        .user-select-all { user-select: all; }
+    </style>
+</head>
+<body>
+    <div class="bill-content">
+        <h3>#1 ຜົນການຄົ້ນຫາ: {{trackingId}}</h3>
+
+        <!-- Province route -->
+        <div class="bill-row">
+            <div class="bill-column text-start">
+                <span class="customFont"><b class="text-dark">{{originProvinceId.provinceName}}</b></span>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 8px;">→</div>
+            <div class="bill-column customFont text-end">
+                <b class="text-dark">{{destProvinceId.provinceName}}</b>
+            </div>
+        </div>
+
+        <!-- Branch route -->
+        <div class="bill-row">
+            <div class="bill-column text-start">
+                <div class="customFont"><b class="text-dark">{{originBranchId.branch_name}}</b></div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 8px;">→</div>
+            <div class="bill-column customFont text-end">
+                <b class="text-dark">{{destBranchId.branch_name}}</b>
+            </div>
+        </div>
+
+        <!-- Bill number -->
+        <div class="info-row">
+            <span>ເລກບິນ:</span>
+            <b>{{trackingId}}</b>
+        </div>
+
+        <!-- Sender → Receiver -->
+        <div class="sender-receiver-row">
+            <b class="text-dark" style="flex:1;">ຈາກ: {{customerId.full_name}}<br/>ໂທ: {{customerId.contact_info}}</b>
+            <b style="display:flex;align-items:center;padding:0 8px;color:#6c757d;">→</b>
+            <b class="text-dark" style="flex:1;text-align:right;">ເຖິງ: {{receiverName}}<br/>ໂທ: {{receiverPhone}}</b>
+        </div>
+
+        <!-- Empty separator -->
+        <div class="bill-row"></div>
+
+        <!-- Service type -->
+        <div class="info-row">
+            <b class="text-dark">ຄ່າບໍລິການ:</b>
+            <b class="text-primary">ຈ່າຍປາຍທາງ</b>
+        </div>
+
+        <!-- Size -->
+        <div class="info-row">
+            <b class="text-dark">ຂະໜາດ</b>
+            <b class="text-dark">{{width}} cm</b>
+        </div>
+
+        <!-- Weight -->
+        <div class="info-row">
+            <b class="text-dark">ນ້ຳໜັກ</b>
+            <b class="text-dark">{{weight}} kg</b>
+        </div>
+
+        <!-- Service fee -->
+        <div class="info-row">
+            <b class="text-dark">ຄ່າບໍລິການ</b>
+            <b class="text-dark">{{packagePrice}} ກີບ</b>
+        </div>
+
+        <!-- COD -->
+        <div class="info-row">
+            <b class="text-dark">COD</b>
+            <b class="customFont">{{itemValueKIP}} KIP</b>
+        </div>
+
+        <!-- Total -->
+        <div class="total-row">
+            <span>ລວມທັງໝົດ:</span>
+            <span>{{totalValueInKip}} KIP</span>
+        </div>
+
+        <!-- Download footer -->
+        <div class="download-footer">
+            <font>*</font> ໂຫຼດແອັບ ຫຼື ນຳໃຊ້ຈາກ<br/>
+            1. Play store (andriod) ຄົ້ນຫາ: <b>Anousith Logistics</b><br/>
+            2. App store(IOS) ຄົ້ນຫາ: <b>Anousith Express Laos</b><br/>
+            3. PC ຫຼື Notebook ນຳໃຊ້ link: <b>app.anousith.express</b>
+        </div>
+    </div>
+</body>
+</html>

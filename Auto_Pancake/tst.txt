@@ -1,0 +1,22 @@
+fetch("https://pancake.vn/api/v1/pages/103924851328372/contents?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QiLCJleHAiOjE3NTU1MDkyNjAsImFwcGxpY2F0aW9uIjoxLCJ1aWQiOiJjNzkyNDNhOS1jZTdiLTQwZmEtODU4Ni03MGFlZTExM2U1NGUiLCJzZXNzaW9uX2lkIjoiMjliL2NJelQ3cG5tYTlCNWlaNStubW9HV2pYemo5U1o0cEN0OERXemtQdyIsImlhdCI6MTc0NzczMzI2MCwiZmJfaWQiOiI5OTgwNzM4MzgyMjk1MTkiLCJsb2dpbl9zZXNzaW9uIjpudWxsLCJmYl9uYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QifQ.DlaXVXqQotBrmAWf0qXV9EOOJOOTGQVezkgBHJypwws", {
+  "headers": {
+    "accept": "application/json",
+    "accept-language": "vi,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6",
+    "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryUvv6AA90vPSOW5KN",
+    "sec-ch-ua": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "__stripe_mid=005d5d40-99f6-4f16-9378-d7a75e412797f2cbc3; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QiLCJleHAiOjE3NTU1MDkyNjAsImFwcGxpY2F0aW9uIjoxLCJ1aWQiOiJjNzkyNDNhOS1jZTdiLTQwZmEtODU4Ni03MGFlZTExM2U1NGUiLCJzZXNzaW9uX2lkIjoiMjliL2NJelQ3cG5tYTlCNWlaNStubW9HV2pYemo5U1o0cEN0OERXemtQdyIsImlhdCI6MTc0NzczMzI2MCwiZmJfaWQiOiI5OTgwNzM4MzgyMjk1MTkiLCJsb2dpbl9zZXNzaW9uIjpudWxsLCJmYl9uYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QifQ.DlaXVXqQotBrmAWf0qXV9EOOJOOTGQVezkgBHJypwws; locale=vi; _gid=GA1.2.591884371.1748182251; _ga_5N5FG6VLHC=GS2.1.s1748182548$o362$g0$t1748182557$j51$l0$h0$dcuyzn3f56bMMuPScd0FTC4ZOhgXm7qxjYQ; _ga=GA1.1.2025781104.1740792750; _ga_VG3LFY1C9R=GS2.1.s1748185069$o203$g1$t1748185282$j0$l0$h0",
+    "Referer": "https://pancake.vn/103924851328372",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "------WebKitFormBoundaryUvv6AA90vPSOW5KN\r\nContent-Disposition: form-data; name=\"action\"\r\n\r\nlisting\r\n------WebKitFormBoundaryUvv6AA90vPSOW5KN\r\nContent-Disposition: form-data; name=\"contents\"\r\n\r\n[{\"sha\":\"8e908ab16eb0b5591dc9eb0c268e2fa57ea9c095\",\"needsCompress\":false,\"name\":\"bill_anousith_256339466.png\"}]\r\n------WebKitFormBoundaryUvv6AA90vPSOW5KN--\r\n",
+  "method": "POST"
+});
+
+/media/anhhv/dad4fe31-8f48-4843-bc68-20b0d7878bd8/AIAGENT/CHOCKAI/discord
+/media/anhhv/projects/Python/Degen_Telegram
+/media/anhhv/projects/Python/Discord-CoinMarket-Cap

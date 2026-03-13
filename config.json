@@ -1,0 +1,20 @@
+{
+  "poll_interval_seconds": 300,
+  "output_dir": "output",
+  "data_dir": "data",
+  "sessions_dir": "sessions",
+  "sites": {
+    "hal": {
+      "name": "HAL Logistics",
+      "base_url": "https://adminexpress.hal-logistics.la",
+      "orders_url": "https://adminexpress.hal-logistics.la/parcel/shipment/status/out?tab=1&status=arrived_status",
+      "cookie_file": "sessions/hal_cookies.json"
+    },
+    "anousith": {
+      "name": "Anousith Express",
+      "base_url": "https://app.anousith.express",
+      "orders_url": "https://app.anousith.express/nextday/cod?tab=all_cod",
+      "cookie_file": "sessions/anousith_cookies.json"
+    }
+  }
+}

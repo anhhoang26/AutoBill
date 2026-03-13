@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 280px; padding: 16px; font-family: system-ui, sans-serif; font-size: 14px; }
+    h3 { margin: 0 0 12px; font-size: 16px; }
+    .status { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.connected { background: #22c55e; }
+    .dot.disconnected { background: #ef4444; }
+    .status-text { font-size: 13px; color: #666; }
+    button { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; background: #f5f5f5; cursor: pointer; font-size: 13px; }
+    button:hover { background: #e5e5e5; }
+    .log { margin-top: 12px; font-size: 11px; color: #999; max-height: 100px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <h3>AutoBill Messenger</h3>
+  <div class="status">
+    <div class="dot" id="dot"></div>
+    <span class="status-text" id="statusText">Checking...</span>
+  </div>
+  <button id="reconnectBtn">Reconnect</button>
+  <div class="log" id="log"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

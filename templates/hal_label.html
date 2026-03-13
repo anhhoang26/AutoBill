@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans Lao', 'Phetsarath OT', Arial, sans-serif;
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  .label-container {
+    width: 420px;
+    background: white;
+    border: 3px solid #e53e3e;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .header {
+    background: #e53e3e;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #e53e3e;
+    font-size: 22px;
+  }
+  .company-info {
+    line-height: 1.3;
+  }
+  .company-name {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .company-code {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .header-right {
+    text-align: right;
+    line-height: 1.3;
+  }
+  .header-right .label-text {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .header-right .date-text {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .divider-dashed {
+    border: none;
+    border-top: 2px dashed #999;
+    margin: 0 12px;
+  }
+  .barcode-section {
+    text-align: center;
+    padding: 14px 20px 8px;
+  }
+  .barcode-section svg {
+    width: 85%;
+    height: 70px;
+  }
+  .tracking-number {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid #ddd;
+    margin: 0 12px;
+  }
+  .info-cell {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .info-cell:nth-child(odd) {
+    border-right: 1px solid #ddd;
+  }
+  .info-label {
+    font-size: 11px;
+    color: #666;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  .info-phone {
+    font-size: 13px;
+    color: #333;
+    margin-top: 1px;
+  }
+  .route-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0 12px;
+  }
+  .route-from {
+    font-size: 13px;
+    color: #333;
+  }
+  .route-arrow {
+    font-size: 22px;
+    color: #333;
+    margin: 0 8px;
+  }
+  .route-to {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+  }
+  .description-section {
+    text-align: center;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    margin: 0 12px;
+    font-size: 14px;
+    color: #333;
+  }
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    padding: 8px 12px;
+    margin: 0 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  .detail-item .detail-label {
+    font-size: 11px;
+    color: #666;
+  }
+  .detail-item .detail-value {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px 14px;
+    margin: 0 12px;
+  }
+  .footer-item {
+    text-align: left;
+  }
+  .footer-item:last-child {
+    text-align: right;
+  }
+  .footer-label {
+    font-size: 13px;
+    color: #e53e3e;
+    font-weight: bold;
+  }
+  .footer-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="label-container" id="label">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">ນ</div>
+      <div class="company-info">
+        <div class="company-name">{{ company_name | default('ສຸ່ງອາລຸນສີ່ງດ່ວນ') }}</div>
+        <div class="company-code">ໂກສາຍດ່ວນ: {{ express_code | default('') }}</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="label-text">ວັນທີສ້າງບິນ</div>
+      <div class="date-text">{{ date | default('') }}</div>
+    </div>
+  </div>
+
+  <!-- Dashed divider -->
+  <hr class="divider-dashed">
+
+  <!-- Barcode -->
+  <div class="barcode-section">
+    <svg id="barcode"></svg>
+  </div>
+  <div class="tracking-number">{{ tracking_number }}</div>
+
+  <!-- Sender / Receiver -->
+  <div class="info-grid">
+    <div class="info-cell">
+      <div class="info-label">ຜູ້ຝາກ:</div>
+      <div class="info-value">{{ sender_name }}</div>
+      <div class="info-phone">{{ sender_phone }}</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-label">ຜູ້ຮັບ:</div>
+      <div class="info-value">{{ receiver_name }}</div>
+      <div class="info-phone">{{ receiver_phone }}</div>
+    </div>
+  </div>
+
+  <!-- Route -->
+  <div class="route-section">
+    <div class="route-from">{{ from_branch }}</div>
+    <div class="route-arrow">→</div>
+    <div class="route-to">{{ to_branch }}</div>
+  </div>
+
+  <!-- Description -->
+  <div class="description-section">{{ item_description | default('') }}</div>
+
+  <!-- Quantity / Weight / Size -->
+  <div class="details-grid">
+    <div class="detail-item">
+      <div class="detail-label">ຈຳນວນ</div>
+      <div class="detail-value">{{ quantity | default(1) }}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">ນ້ຳໜັກ</div>
+      <div class="detail-value">{{ weight | default('') }}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">ຂະໝາດ</div>
+      <div class="detail-value">{{ size | default('') }}</div>
+    </div>
+  </div>
+
+  <!-- CDC / COD -->
+  <div class="footer">
+    <div class="footer-item">
+      <div class="footer-label">CDC</div>
+      <div class="footer-value">{{ cdc_amount | default(0) | string }} K</div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-label">COD</div>
+      <div class="footer-value">{{ cod_amount | default(0) | string }} K</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  try {
+    JsBarcode("#barcode", "{{ tracking_number }}", {
+      format: "CODE128",
+      width: 2,
+      height: 60,
+      displayValue: false,
+      margin: 0
+    });
+  } catch(e) {
+    console.error("Barcode error:", e);
+  }
+</script>
+</body>
+</html>
