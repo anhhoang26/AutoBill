@@ -1,16 +1,20 @@
 """
 WebSocket server for communicating with AutoBill Messenger Chrome extension.
 Sends message commands to the extension which sends them via Facebook browser session.
+
+Fixed: correlation IDs to prevent race conditions, proper async support.
 """
 
 import asyncio
 import json
 import base64
 import os
+import uuid
 import websockets
 
 connected_clients = set()
-pending_results = asyncio.Queue()
+# Map correlation_id -> Future for matching responses
+pending_requests: dict[str, asyncio.Future] = {}
 
 
 async def handler(websocket):
@@ -24,8 +28,11 @@ async def handler(websocket):
             if data.get("action") == "pong":
                 continue
             if data.get("action") == "result":
-                await pending_results.put(data)
-                print(f"[WS] Result: {data}")
+                cid = data.get("correlation_id")
+                if cid and cid in pending_requests:
+                    pending_requests[cid].set_result(data)
+                else:
+                    print(f"[WS] Unmatched result (no correlation_id): {data}")
     except Exception as e:
         print(f"[WS] Connection error: {e}")
     finally:
@@ -33,7 +40,7 @@ async def handler(websocket):
         print(f"[WS] Extension disconnected. Total clients: {len(connected_clients)}")
 
 
-async def send_message_to_extension(conversation_id, message="", image_path=None):
+async def send_message_to_extension(conversation_id, message="", image_path=None, page_id=None, timeout=30):
     """
     Send a message command to the Chrome extension.
 
@@ -41,6 +48,8 @@ async def send_message_to_extension(conversation_id, message="", image_path=None
         conversation_id: Facebook conversation ID
         message: Text message to send
         image_path: Local path to image file (will be converted to base64)
+        page_id: Facebook page ID (for sending as page)
+        timeout: Seconds to wait for response
 
     Returns:
         dict with success status
@@ -48,11 +57,17 @@ async def send_message_to_extension(conversation_id, message="", image_path=None
     if not connected_clients:
         return {"success": False, "error": "No extension connected"}
 
+    correlation_id = str(uuid.uuid4())
+
     command = {
         "action": "send_message",
         "conversation_id": conversation_id,
         "message": message,
+        "correlation_id": correlation_id,
     }
+
+    if page_id:
+        command["page_id"] = page_id
 
     # Convert image to base64 if provided
     if image_path and os.path.exists(image_path):
@@ -60,17 +75,26 @@ async def send_message_to_extension(conversation_id, message="", image_path=None
             img_data = base64.b64encode(f.read()).decode("utf-8")
             command["image_base64"] = f"data:image/png;base64,{img_data}"
 
+    # Create future for this request
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+    pending_requests[correlation_id] = future
+
     # Send to first connected client
     client = next(iter(connected_clients))
-    await client.send(json.dumps(command))
-    print(f"[WS] Sent command: send_message to {conversation_id}")
-
-    # Wait for result with timeout
     try:
-        result = await asyncio.wait_for(pending_results.get(), timeout=30)
+        await client.send(json.dumps(command))
+        print(f"[WS] Sent command: send_message to {conversation_id} (cid={correlation_id[:8]})")
+
+        # Wait for matching result
+        result = await asyncio.wait_for(future, timeout=timeout)
         return result
     except asyncio.TimeoutError:
         return {"success": False, "error": "Timeout waiting for extension response"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+    finally:
+        pending_requests.pop(correlation_id, None)
 
 
 async def start_server(host="localhost", port=8765):
@@ -81,29 +105,59 @@ async def start_server(host="localhost", port=8765):
     await asyncio.Future()  # Run forever
 
 
-# --- Integration with existing processBill.py ---
+# --- Singleton event loop for sync callers ---
 
-async def _send_via_extension(conversation_id, message, image_path):
-    """Internal async wrapper for sending."""
-    return await send_message_to_extension(conversation_id, message, image_path)
+_server_loop: asyncio.AbstractEventLoop | None = None
+_server_started = False
 
 
-def send_fb_message(conversation_id, message="", image_path=None):
+def get_server_loop():
+    """Get or create the background event loop running the WS server."""
+    global _server_loop, _server_started
+    if _server_loop is None or _server_loop.is_closed():
+        import threading
+        _server_loop = asyncio.new_event_loop()
+
+        def _run():
+            asyncio.set_event_loop(_server_loop)
+            _server_loop.run_forever()
+
+        t = threading.Thread(target=_run, daemon=True)
+        t.start()
+
+    if not _server_started:
+        asyncio.run_coroutine_threadsafe(
+            websockets.serve(handler, "localhost", 8765), _server_loop
+        ).result(timeout=5)
+        _server_started = True
+        print("[WS] Server started on ws://localhost:8765 (background thread)")
+
+    return _server_loop
+
+
+def send_fb_message(conversation_id, message="", image_path=None, page_id=None, timeout=30):
     """
-    Synchronous wrapper to send a Facebook message via the extension.
-    Call this from processBill.py when the API method fails (7-day limit).
+    Send a Facebook message via the extension. Works from both sync and async contexts.
 
     Usage:
         from ws_server import send_fb_message
-        result = send_fb_message("539060145964207_23930918266550665", "Hello!", "image_bill/bill.png")
+        result = send_fb_message("conv_id", "Hello!", "image.png")
     """
-    loop = asyncio.get_event_loop()
-    if loop.is_running():
-        # If called from within an async context
-        future = asyncio.ensure_future(_send_via_extension(conversation_id, message, image_path))
-        return future
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+
+    coro = send_message_to_extension(conversation_id, message, image_path, page_id, timeout)
+
+    if loop and loop.is_running():
+        # Called from async context - use the server's background loop
+        server_loop = get_server_loop()
+        future = asyncio.run_coroutine_threadsafe(coro, server_loop)
+        return future.result(timeout=timeout + 5)
     else:
-        return asyncio.run(_send_via_extension(conversation_id, message, image_path))
+        # Called from sync context
+        return asyncio.run(coro)
 
 
 if __name__ == "__main__":

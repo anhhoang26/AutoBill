@@ -1,16 +1,18 @@
 {
   "manifest_version": 3,
   "name": "AutoBill Messenger",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Auto send Facebook messages from local server",
   "permissions": [
     "activeTab",
     "scripting",
-    "tabs"
+    "tabs",
+    "offscreen"
   ],
   "host_permissions": [
     "https://www.facebook.com/*",
-    "https://business.facebook.com/*"
+    "https://business.facebook.com/*",
+    "https://upload.facebook.com/*"
   ],
   "background": {
     "service_worker": "background.js"

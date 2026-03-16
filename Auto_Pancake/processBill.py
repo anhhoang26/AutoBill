@@ -1,225 +1,306 @@
-import requests
-import os
+"""
+Bill processing pipeline - async with extension fallback queue.
+
+Flow:
+  1. Generate bill image (reuses shared browser)
+  2. Try sending via Pancake API
+  3. If Pancake fails, push to extension queue for retry
+  4. Update order status on success
+"""
+
+import asyncio
 import json
+import os
+import requests
 from dotenv import load_dotenv
-from uploadToR2 import *
-from createImageBill import * 
+from createImageBill import generate_image, close_browser
+
 load_dotenv(override=True)
+
 POS_PANCAKE_API_KEY = os.getenv("POS_PANCAKE_API_KEY")
 PANCAKE_ACCESS_TOKEN = os.getenv("PANCAKE_ACCESS_TOKEN")
+PANCAKE_JWT = os.getenv("PANCAKE_JWT", "")
 SHOP_ID = os.getenv("SHOP_ID")
-baseUrl = "https://pub-86abf2be138b44ed8036a90b3216cd67.r2.dev/uploads"
 
-def updateStatusOrder(billInPancake, shipFee, iter=0):
-    if iter > 5:
-        print("Failed update status bill", billInPancake["id"])
-        return False
+# --- Extension fallback queue ---
+
+_ext_queue: asyncio.Queue | None = None
+_ext_worker_task: asyncio.Task | None = None
+
+
+def get_ext_queue() -> asyncio.Queue:
+    global _ext_queue
+    if _ext_queue is None:
+        _ext_queue = asyncio.Queue()
+    return _ext_queue
+
+
+async def start_ext_worker():
+    """Background worker that processes the extension fallback queue."""
+    global _ext_worker_task
+    if _ext_worker_task and not _ext_worker_task.done():
+        return
+    _ext_worker_task = asyncio.create_task(_ext_worker_loop())
+
+
+async def _ext_worker_loop():
+    """Process extension queue items one by one."""
+    from ws_server import send_message_to_extension
+
+    queue = get_ext_queue()
+    while True:
+        item = await queue.get()
+        bill_pancake = item["bill_pancake"]
+        bill_file = item["bill_file"]
+        ship_fee = item["ship_fee"]
+
+        print(f"[EXT-Q] Processing {bill_pancake['id']} via extension...")
+
+        for attempt in range(3):
+            try:
+                result = await send_message_to_extension(
+                    bill_pancake["conversation_id"],
+                    message="",
+                    image_path=bill_file,
+                    page_id=bill_pancake.get("page_id"),
+                )
+                if isinstance(result, dict) and result.get("success"):
+                    print(f"[EXT-Q] Success: {bill_pancake['id']}")
+                    _cleanup_and_update(bill_pancake, bill_file, ship_fee)
+                    break
+                print(f"[EXT-Q] Attempt {attempt + 1} failed: {bill_pancake['id']}: {result}")
+            except Exception as e:
+                print(f"[EXT-Q] Attempt {attempt + 1} error: {bill_pancake['id']}: {e}")
+
+            if attempt < 2:
+                await asyncio.sleep(2)
+        else:
+            print(f"[EXT-Q] Gave up on {bill_pancake['id']} after 3 attempts")
+
+        queue.task_done()
+
+
+# --- Pancake API functions ---
+
+def _pancake_headers():
+    """Common headers for Pancake API calls."""
+    headers = {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        "Origin": "https://pancake.vn",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    }
+    if PANCAKE_JWT:
+        headers["Cookie"] = f"jwt={PANCAKE_JWT}"
+    return headers
+
+
+def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
+    """Upload bill image to Pancake and return response."""
+    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/contents?access_token={PANCAKE_ACCESS_TOKEN}"
+
+    for attempt in range(max_retries):
+        try:
+            with open(file_local, "rb") as f:
+                files = [("file", (os.path.basename(file_local), f, "image/png"))]
+                resp = requests.post(url, headers=_pancake_headers(), files=files, timeout=15)
+
+            if resp.status_code < 200 or resp.status_code >= 300:
+                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                continue
+
+            data = resp.json()
+            if data.get("success"):
+                return data
+            print(f"[PANCAKE] Upload not successful: {data}")
+        except Exception as e:
+            print(f"[PANCAKE] Upload error attempt {attempt + 1}: {e}")
+
+    return None
+
+
+def create_fb_ids(bill_pancake, content_id, max_retries=3):
+    """Create Facebook attachment IDs from uploaded content."""
+    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/contents/facebook?access_token={PANCAKE_ACCESS_TOKEN}&is_reusable=true&async=false"
+
+    for attempt in range(max_retries):
+        try:
+            resp = requests.post(
+                url,
+                headers=_pancake_headers(),
+                json={"content_ids": [content_id]},
+                timeout=15,
+            )
+            if resp.status_code < 200 or resp.status_code >= 300:
+                print(f"[PANCAKE] create_fb_ids failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                continue
+
+            data = resp.json()
+            if data.get("success"):
+                return data["fb_ids"][0]
+            print(f"[PANCAKE] create_fb_ids not successful: {data}")
+        except Exception as e:
+            print(f"[PANCAKE] create_fb_ids error attempt {attempt + 1}: {e}")
+
+    return None
+
+
+def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=3):
+    """Send the bill image as a Facebook message via Pancake API."""
+    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/conversations/{bill_pancake['conversation_id']}/messages?access_token={PANCAKE_ACCESS_TOKEN}"
 
     payload = {
-        "status": 2,
-        "partner_fee": shipFee
-    }
-    url = f'https://pos.pancake.vn/api/v1/shops/{SHOP_ID}/orders/{billInPancake["id"]}?api_key={POS_PANCAKE_API_KEY}'
-    response = requests.put(url=url, json=payload)
-    # print(response)
-    if response.status_code // 200 != 1:
-        print(billInPancake["id"], response.status_code)
-        updateStatusOrder(billInPancake, shipFee, iter+1)    
-    else:
-        return True
-def message(billInPancake, billShipUrl, iter=0):
-    # Error L169683TH 0
-    ""
-    print(billInPancake["id"])
-    if iter > 5:
-        print("Failed send bill: Retry many", billInPancake["id"])
-        return 
-    url = f'https://pages.fm/api/v1/pages/{billInPancake["page_id"]}/conversations/{billInPancake["conversation_id"]}/messages?access_token={PANCAKE_ACCESS_TOKEN}'
-
-    payload = json.dumps({
-        # "content_url": billShipUrl,
-        "content_url": billShipUrl,
-        "action": "reply_inbox"
-    })
-    headers = {
-        'page_id': billInPancake["page_id"],
-        'conversation_id': billInPancake["conversation_id"],
-        'Content-Type': 'application/json'
+        "action": "reply_inbox",
+        "message": "",
+        "content_id": upload_response["id"],
+        "attachment_id": fb_ids,
+        "content_url": upload_response["content_url"],
+        "width": upload_response["image_data"]["width"],
+        "height": upload_response["image_data"]["height"],
+        "send_by_platform": "web",
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
-    if response.status_code // 200 != 1:
-        print(billInPancake["id"], response.status_code)
-        return message(billInPancake, billShipUrl, iter+1)
-    res = response.json()
-    if res["success"]:
-        print("Success send billll")
-        return True
-    print("Failed send bill", res)
-    
+    for attempt in range(max_retries):
+        try:
+            resp = requests.post(url, headers=_pancake_headers(), data=payload, timeout=15)
+            if resp.status_code < 200 or resp.status_code >= 300:
+                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                continue
+
+            data = resp.json()
+            if data.get("success"):
+                print(f"[PANCAKE] Success send message {bill_pancake['id']}")
+                return True
+            print(f"[PANCAKE] send_message not successful: {data}")
+        except Exception as e:
+            print(f"[PANCAKE] send_message error attempt {attempt + 1}: {e}")
+
     return False
-def sendViaExtension(billInPancake, billFileName):
-    """Fallback: send message via Chrome extension when Pancake API fails (7-day limit)."""
+
+
+def send_via_pancake(bill_pancake, file_local):
+    """Full Pancake send pipeline: upload -> create fb_ids -> send message."""
+    upload_resp = upload_bill_to_pancake(bill_pancake, file_local)
+    if not upload_resp:
+        return False
+
+    fb_ids = create_fb_ids(bill_pancake, upload_resp["id"])
+    if not fb_ids:
+        return False
+
+    return send_message_via_pancake(bill_pancake, upload_resp, fb_ids)
+
+
+# --- Order status update ---
+
+def update_order_status(bill_pancake, ship_fee, max_retries=3):
+    """Update order status to 'shipped' in Pancake POS."""
+    url = f"https://pos.pancake.vn/api/v1/shops/{SHOP_ID}/orders/{bill_pancake['id']}?api_key={POS_PANCAKE_API_KEY}"
+    payload = {"status": 2, "partner_fee": ship_fee}
+
+    for attempt in range(max_retries):
+        try:
+            resp = requests.put(url, json=payload, timeout=10)
+            if 200 <= resp.status_code < 300:
+                return True
+            print(f"[PANCAKE] update_status failed {bill_pancake['id']}: HTTP {resp.status_code}")
+        except Exception as e:
+            print(f"[PANCAKE] update_status error attempt {attempt + 1}: {e}")
+
+    print(f"[PANCAKE] Failed update status {bill_pancake['id']}")
+    return False
+
+
+def _cleanup_and_update(bill_pancake, bill_file, ship_fee):
+    """Delete temp image and update order status."""
     try:
-        from ws_server import send_fb_message
-        conversation_id = billInPancake["conversation_id"]
-        result = send_fb_message(conversation_id, message="", image_path=billFileName)
-        if isinstance(result, dict) and result.get("success"):
-            print(f"[EXT] Success send via extension: {billInPancake['id']}")
-            return True
-        print(f"[EXT] Failed send via extension: {billInPancake['id']}", result)
-        return False
-    except Exception as e:
-        print(f"[EXT] Extension send error: {e}")
-        return False
+        if os.path.exists(bill_file):
+            os.remove(bill_file)
+    except OSError:
+        pass
+    update_order_status(bill_pancake, ship_fee)
 
-def processBill(billProcessInfo):
-    billInPancake, billInShipment, isHal = billProcessInfo[0], billProcessInfo[1], billProcessInfo[2]
-    if isHal:
-        billFileName = f'image_bill/bill_hal_{billInShipment["id"]}.png'
-        shipFee = billInShipment["total_freight"]
-        hal(billInShipment)
+
+# --- Main processing ---
+
+async def process_bill(bill_info):
+    """
+    Process a single bill: generate image -> send via Pancake -> fallback to extension queue.
+
+    Args:
+        bill_info: tuple of (bill_pancake, bill_shipment, is_hal)
+    """
+    bill_pancake, bill_shipment, is_hal = bill_info
+
+    if is_hal:
+        bill_file = f"image_bill/bill_hal_{bill_shipment['id']}.png"
+        ship_fee = bill_shipment["total_freight"]
     else:
-        billFileName = f'image_bill/bill_anousith_{billInShipment["_id"]}.png'
-        shipFee = billInShipment["packagePrice"]
-        anousith(billInShipment)
+        bill_file = f"image_bill/bill_anousith_{bill_shipment['_id']}.png"
+        ship_fee = bill_shipment["packagePrice"]
 
-    # Try Pancake API first, fallback to extension if it fails
-    sent = messageBillWithExtPancake(billInPancake, billFileName)
-    if not sent:
-        print(f"[PROCESS] Pancake API failed for {billInPancake['id']}, trying extension...")
-        sent = sendViaExtension(billInPancake, billFileName)
+    # Step 1: Generate image (async, reuses browser)
+    await generate_image(bill_shipment, is_hal)
+
+    # Step 2: Try Pancake API (run in thread to not block event loop)
+    loop = asyncio.get_running_loop()
+    sent = await loop.run_in_executor(None, send_via_pancake, bill_pancake, bill_file)
 
     if sent:
-        os.remove(billFileName)
-        updateStatusOrder(billInPancake, shipFee)
-    # if uploadFile(billFileName):
-    #     os.remove(billFileName)
-    #     if  message(billInPancake, f'{baseUrl}/{os.path.basename(billFileName)}'):
-    #         updateStatusOrder(billInPancake, shipFee)
-
-def uploadBillToPancake(billInPancake, fileLocal, iter=0):
-    if iter > 5:
-        print("Failed send bill: Retry many", billInPancake["id"])
-        return None
-    url = f'https://pancake.vn/api/v1/pages/{billInPancake["page_id"]}/contents?access_token={PANCAKE_ACCESS_TOKEN}'
-
-    payload = {}
-    files=[
-        ('file',(os.path.basename(fileLocal),open(fileLocal,'rb'),'image/png'))
-    ]
-    headers = {
-        'Accept': 'application/json',
-        'Accept-Language': 'vi,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6',
-        'Connection': 'keep-alive',
-        'Origin': 'https://pancake.vn',
-        'Referer': 'https://pancake.vn/103924851328372',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
-        'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'Cookie': '__stripe_mid=005d5d40-99f6-4f16-9378-d7a75e412797f2cbc3; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QiLCJleHAiOjE3NTU1MDkyNjAsImFwcGxpY2F0aW9uIjoxLCJ1aWQiOiJjNzkyNDNhOS1jZTdiLTQwZmEtODU4Ni03MGFlZTExM2U1NGUiLCJzZXNzaW9uX2lkIjoiMjliL2NJelQ3cG5tYTlCNWlaNStubW9HV2pYemo5U1o0cEN0OERXemtQdyIsImlhdCI6MTc0NzczMzI2MCwiZmJfaWQiOiI5OTgwNzM4MzgyMjk1MTkiLCJsb2dpbl9zZXNzaW9uIjpudWxsLCJmYl9uYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QifQ.DlaXVXqQotBrmAWf0qXV9EOOJOOTGQVezkgBHJypwws; locale=vi; _gid=GA1.2.591884371.1748182251; _ga_5N5FG6VLHC=GS2.1.s1748182548^$o362^$g0^$t1748182557^$j51^$l0^$h0^$dcuyzn3f56bMMuPScd0FTC4ZOhgXm7qxjYQ; _ga=GA1.1.2025781104.1740792750; _ga_VG3LFY1C9R=GS2.1.s1748185069^$o203^$g1^$t1748185282^$j0^$l0^$h0'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    if response.status_code // 200 != 1:
-        print("Upload bill failed", billInPancake["id"], response.status_code)
-        # return uploadBillToPancake(billInPancake, fileLocal, iter+1)
-    response = response.json()
-    if response["success"]:
-        return response
-    return uploadBillToPancake(billInPancake, fileLocal, iter+1)
-
-def createFbIds(billInPancake, contentIds, iter=0):
-    if iter > 5:
-        print("Failed create fb ids: Retry many", billInPancake["id"])
-        return None
-    url = f'https://pancake.vn/api/v1/pages/{billInPancake["page_id"]}/contents/facebook?access_token={PANCAKE_ACCESS_TOKEN}&is_reusable=true&async=false'
-    payload = json.dumps({
-        "content_ids": [contentIds]
-    })
-    headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'vi,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/json',
-        'Origin': 'https://pancake.vn',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
-        'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'Cookie': '__stripe_mid=005d5d40-99f6-4f16-9378-d7a75e412797f2cbc3; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QiLCJleHAiOjE3NTU1MDkyNjAsImFwcGxpY2F0aW9uIjoxLCJ1aWQiOiJjNzkyNDNhOS1jZTdiLTQwZmEtODU4Ni03MGFlZTExM2U1NGUiLCJzZXNzaW9uX2lkIjoiMjliL2NJelQ3cG5tYTlCNWlaNStubW9HV2pYemo5U1o0cEN0OERXemtQdyIsImlhdCI6MTc0NzczMzI2MCwiZmJfaWQiOiI5OTgwNzM4MzgyMjk1MTkiLCJsb2dpbl9zZXNzaW9uIjpudWxsLCJmYl9uYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QifQ.DlaXVXqQotBrmAWf0qXV9EOOJOOTGQVezkgBHJypwws; locale=vi; _gid=GA1.2.591884371.1748182251; _ga_5N5FG6VLHC=GS2.1.s1748182548^$o362^$g0^$t1748182557^$j51^$l0^$h0^$dcuyzn3f56bMMuPScd0FTC4ZOhgXm7qxjYQ; _ga=GA1.1.2025781104.1740792750; _ga_VG3LFY1C9R=GS2.1.s1748221643^$o207^$g1^$t1748221977^$j0^$l0^$h0'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload)
-    if response.status_code // 200 != 1:
-        print("Create fb ids failed", billInPancake["id"], response.status_code)
-        # return createFbIds(billInPancake, contentIds, iter+1)
-    res = response.json()
-    if res["success"]:
-        return res["fb_ids"][0]
-    return createFbIds(billInPancake, contentIds, iter+1)
-def sendMessageFaceBookWithPancake(billInPancake, responseUploadBill, fbIds, iter=0):
-    if iter > 5:
-        print("Failed send message: Retry many", billInPancake["id"])
-        return False
-    url = f'https://pancake.vn/api/v1/pages/{billInPancake["page_id"]}/conversations/{billInPancake["conversation_id"]}/messages?access_token={PANCAKE_ACCESS_TOKEN}'
-    payload = {
-        'action': 'reply_inbox',
-        'message': '',
-        'content_id': responseUploadBill["id"],
-        'attachment_id': fbIds,
-        'content_url': responseUploadBill["content_url"],
-        'width': responseUploadBill["image_data"]["width"],
-        'height': responseUploadBill["image_data"]["height"],
-        'send_by_platform': 'web'
-    }
-    files= []
-    headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'vi,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6',
-        'Connection': 'keep-alive',
-        'Origin': 'https://pancake.vn',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
-        'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'Cookie': '__stripe_mid=005d5d40-99f6-4f16-9378-d7a75e412797f2cbc3; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QiLCJleHAiOjE3NTU1MDkyNjAsImFwcGxpY2F0aW9uIjoxLCJ1aWQiOiJjNzkyNDNhOS1jZTdiLTQwZmEtODU4Ni03MGFlZTExM2U1NGUiLCJzZXNzaW9uX2lkIjoiMjliL2NJelQ3cG5tYTlCNWlaNStubW9HV2pYemo5U1o0cEN0OERXemtQdyIsImlhdCI6MTc0NzczMzI2MCwiZmJfaWQiOiI5OTgwNzM4MzgyMjk1MTkiLCJsb2dpbl9zZXNzaW9uIjpudWxsLCJmYl9uYW1lIjoiVGjDuXkgTGnDqm4gQ2FyZSBWaeG7h3QifQ.DlaXVXqQotBrmAWf0qXV9EOOJOOTGQVezkgBHJypwws; locale=vi; _gid=GA1.2.591884371.1748182251; _ga_5N5FG6VLHC=GS2.1.s1748182548^$o362^$g0^$t1748182557^$j51^$l0^$h0^$dcuyzn3f56bMMuPScd0FTC4ZOhgXm7qxjYQ; _ga=GA1.1.2025781104.1740792750; _ga_VG3LFY1C9R=GS2.1.s1748227845^$o208^$g1^$t1748228582^$j0^$l0^$h0'
-    }
-
-    response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    if response.status_code // 200 != 1:
-        print("Failed send message", billInPancake["id"], response.status_code)
-        return False
-        # return sendMessageFaceBookWithPancake(billInPancake, responseUploadBill, fbIds, iter+1)
-    res = response.json()
-    if res["success"]:
-        print("Success send message", billInPancake["id"])
+        _cleanup_and_update(bill_pancake, bill_file, ship_fee)
         return True
-    print("Failed send message", billInPancake["id"], res)
+
+    # Step 3: Push to extension queue for async retry
+    print(f"[PROCESS] Pancake failed for {bill_pancake['id']}, queuing for extension...")
+    queue = get_ext_queue()
+    await queue.put({
+        "bill_pancake": bill_pancake,
+        "bill_file": bill_file,
+        "ship_fee": ship_fee,
+    })
     return False
-    
-def messageBillWithExtPancake(billInPancake, fileLocal, iter=0):
-    # print(billInPancake["id"])
-    responseUploadBill = uploadBillToPancake(billInPancake, fileLocal, iter)
-    if responseUploadBill:
-        fbIds = createFbIds(billInPancake, responseUploadBill["id"], iter)
-        if fbIds:
-            return sendMessageFaceBookWithPancake(billInPancake, responseUploadBill, fbIds, iter)
-    return False
+
+
+async def process_bills_batch(bills, concurrency=5):
+    """
+    Process multiple bills concurrently.
+
+    Args:
+        bills: list of (bill_pancake, bill_shipment, is_hal) tuples
+        concurrency: max parallel bill processing tasks
+    """
+    if not bills:
+        return
+
+    # Start extension worker
+    await start_ext_worker()
+
+    sem = asyncio.Semaphore(concurrency)
+
+    async def _process_with_limit(bill):
+        async with sem:
+            try:
+                await process_bill(bill)
+            except Exception as e:
+                print(f"[PROCESS] Error processing bill: {e}")
+
+    # Run all bills concurrently (limited by semaphore)
+    await asyncio.gather(*[_process_with_limit(b) for b in bills])
+
+    # Wait for extension queue to drain
+    queue = get_ext_queue()
+    if not queue.empty():
+        print(f"[PROCESS] Waiting for {queue.qsize()} extension queue items...")
+        await queue.join()
+
+
+# --- Legacy sync entry point ---
+
+def processBill(bill_info):
+    """Sync wrapper for backwards compatibility with main.py."""
+    asyncio.run(process_bill(bill_info))
+
+
 if __name__ == "__main__":
-    billNeedProcess = json.load(open("billNeedProcess.json"))
-    for bill in billNeedProcess:
-        processBill(bill)
-        break
-    # anousith(billNeedProcess[0][1])
-    # billFileName = f'image_bill/bill_anousith_{billNeedProcess[0][1]["_id"]}.png'
-    # print(billFileName)
-    # messageBillWithExtPancake(billNeedProcess[0][0], billFileName)
+    bill_need_process = json.load(open("billNeedProcess.json"))
+    asyncio.run(process_bills_batch(bill_need_process))

@@ -1,139 +1,50 @@
 /**
- * Background Service Worker
- * Connects to local Python WebSocket server.
- * Dispatches message commands to content script on any facebook.com tab.
+ * Background Service Worker (MV3)
  *
- * Content script uses Facebook's internal API (not DOM automation)
- * so no need to navigate to specific Messenger URLs.
+ * WebSocket lives in offscreen.js (persistent).
+ * This script bridges: offscreen <-> content script on facebook.com tab.
  */
 
-const WS_URL = "ws://localhost:8765";
-let ws = null;
-let reconnectTimer = null;
 let isConnected = false;
 
-function connect() {
-  if (ws && ws.readyState === WebSocket.OPEN) return;
+// --- Offscreen document management ---
 
-  try {
-    ws = new WebSocket(WS_URL);
-
-    ws.onopen = () => {
-      isConnected = true;
-      console.log("[AutoBill] Connected to server");
-      clearReconnectTimer();
-      chrome.runtime.sendMessage({ type: "status", connected: true }).catch(() => {});
-    };
-
-    ws.onmessage = async (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        console.log("[AutoBill] Received command:", data.action);
-
-        if (data.action === "send_message") {
-          await handleSendMessage(data);
-        } else if (data.action === "ping") {
-          ws.send(JSON.stringify({ action: "pong" }));
-        }
-      } catch (e) {
-        console.error("[AutoBill] Error handling message:", e);
-        sendResult({ success: false, error: e.message });
-      }
-    };
-
-    ws.onclose = () => {
-      isConnected = false;
-      console.log("[AutoBill] Disconnected");
-      chrome.runtime.sendMessage({ type: "status", connected: false }).catch(() => {});
-      scheduleReconnect();
-    };
-
-    ws.onerror = () => ws.close();
-  } catch (e) {
-    scheduleReconnect();
+async function ensureOffscreen() {
+  const exists = await chrome.offscreen.hasDocument();
+  if (!exists) {
+    await chrome.offscreen.createDocument({
+      url: "offscreen.html",
+      reasons: ["WEB_SOCKET"],
+      justification: "Maintain persistent WebSocket connection to local server",
+    });
+    console.log("[AutoBill] Offscreen document created");
   }
 }
 
-function scheduleReconnect() {
-  clearReconnectTimer();
-  reconnectTimer = setTimeout(() => connect(), 5000);
-}
+// --- Facebook tab management ---
 
-function clearReconnectTimer() {
-  if (reconnectTimer) {
-    clearTimeout(reconnectTimer);
-    reconnectTimer = null;
-  }
-}
-
-function sendResult(result) {
-  if (ws && ws.readyState === WebSocket.OPEN) {
-    ws.send(JSON.stringify({ action: "result", ...result }));
-  }
-}
-
-/**
- * Find any facebook.com tab and send command to content script
- */
 async function findFacebookTab() {
   const tabs = await chrome.tabs.query({ url: "https://www.facebook.com/*" });
   if (tabs.length > 0) return tabs[0];
-
-  // Try business.facebook.com
   const bizTabs = await chrome.tabs.query({ url: "https://business.facebook.com/*" });
   if (bizTabs.length > 0) return bizTabs[0];
-
   return null;
 }
 
-async function handleSendMessage(data) {
-  const tab = await findFacebookTab();
-
-  if (!tab) {
-    // No FB tab open - create one and wait for it to load
-    const newTab = await chrome.tabs.create({
-      url: "https://www.facebook.com/",
-      active: false,
-    });
-    await waitForTabLoad(newTab.id);
-    await sleep(3000); // Wait for content script to init
-
-    try {
-      const result = await chrome.tabs.sendMessage(newTab.id, {
-        type: "send_fb_message",
-        ...data,
-      });
-      sendResult(result);
-    } catch (e) {
-      sendResult({ success: false, error: "Content script not ready: " + e.message });
-    }
-    return;
-  }
-
-  try {
-    const result = await chrome.tabs.sendMessage(tab.id, {
-      type: "send_fb_message",
-      ...data,
-    });
-    sendResult(result);
-  } catch (e) {
-    sendResult({ success: false, error: e.message });
-  }
-}
-
-function waitForTabLoad(tabId) {
+function waitForTabLoad(tabId, timeout = 15000) {
   return new Promise((resolve) => {
+    const timer = setTimeout(() => {
+      chrome.tabs.onUpdated.removeListener(listener);
+      resolve();
+    }, timeout);
     function listener(id, changeInfo) {
       if (id === tabId && changeInfo.status === "complete") {
         chrome.tabs.onUpdated.removeListener(listener);
+        clearTimeout(timer);
         resolve();
       }
     }
     chrome.tabs.onUpdated.addListener(listener);
-    setTimeout(() => {
-      chrome.tabs.onUpdated.removeListener(listener);
-      resolve();
-    }, 15000);
   });
 }
 
@@ -141,16 +52,62 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Handle messages from popup
+// --- Send command to content script ---
+
+async function handleSendMessage(data) {
+  let tab = await findFacebookTab();
+
+  if (!tab) {
+    const newTab = await chrome.tabs.create({
+      url: "https://www.facebook.com/",
+      active: false,
+    });
+    await waitForTabLoad(newTab.id);
+    await sleep(3000);
+    tab = newTab;
+  }
+
+  try {
+    const result = await chrome.tabs.sendMessage(tab.id, {
+      type: "send_fb_message",
+      ...data,
+    });
+    // Forward result back to offscreen -> WS server
+    chrome.runtime.sendMessage({ type: "ws_send_result", result }).catch(() => {});
+  } catch (e) {
+    const result = { success: false, error: "Content script error: " + e.message };
+    chrome.runtime.sendMessage({ type: "ws_send_result", result }).catch(() => {});
+  }
+}
+
+// --- Message router ---
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === "get_status") {
+  // From offscreen: WS command received
+  if (msg.type === "ws_command") {
+    handleSendMessage(msg.data);
+    sendResponse({ ok: true });
+  }
+  // From offscreen: connection status changed
+  else if (msg.type === "ws_status") {
+    isConnected = msg.connected;
+    // Forward to popup if open
+    chrome.runtime.sendMessage({ type: "status", connected: isConnected }).catch(() => {});
+    sendResponse({ ok: true });
+  }
+  // From popup: get status
+  else if (msg.type === "get_status") {
     sendResponse({ connected: isConnected });
-  } else if (msg.type === "reconnect") {
-    connect();
+  }
+  // From popup: reconnect
+  else if (msg.type === "reconnect") {
+    ensureOffscreen().then(() => {
+      chrome.runtime.sendMessage({ type: "ws_reconnect" }).catch(() => {});
+    });
     sendResponse({ ok: true });
   }
   return true;
 });
 
-// Auto-connect
-connect();
+// Auto-create offscreen on startup
+ensureOffscreen();
