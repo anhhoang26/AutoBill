@@ -3,7 +3,12 @@
     "allow": [
       "Bash(*)",
       "FetchWeb(*)",
-      "WebSearch(*)"
+      "WebSearch(*)",
+      "WebFetch(*)",
+      "WebFetch(domain:chromewebstore.google.com)",
+      "WebFetch(domain:www.chromeanalyzer.com)",
+      "WebFetch(domain:chrome-stats.com)",
+      "WebFetch(domain:extpose.com)"
     ]
   }
 }

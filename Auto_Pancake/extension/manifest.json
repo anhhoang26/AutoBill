@@ -1,29 +1,30 @@
 {
   "manifest_version": 3,
   "name": "AutoBill Messenger",
-  "version": "2.0.0",
+  "version": "5.2.0",
   "description": "Auto send Facebook messages from local server",
   "permissions": [
-    "activeTab",
-    "scripting",
-    "tabs",
-    "offscreen"
+    "offscreen",
+    "alarms",
+    "cookies",
+    "storage",
+    "declarativeNetRequest",
+    "scripting"
   ],
   "host_permissions": [
     "https://www.facebook.com/*",
     "https://business.facebook.com/*",
-    "https://upload.facebook.com/*"
+    "https://upload-business.facebook.com/*",
+    "https://upload.facebook.com/*",
+    "https://graph.facebook.com/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://www.facebook.com/*",
-        "https://business.facebook.com/*"
-      ],
-      "js": ["content.js"],
+      "matches": ["https://business.facebook.com/*"],
+      "js": ["docid_extractor.js"],
       "run_at": "document_idle"
     }
   ],

@@ -1,169 +1,214 @@
 """
-WebSocket server for communicating with AutoBill Messenger Chrome extension.
-Sends message commands to the extension which sends them via Facebook browser session.
+WebSocket server — cầu nối giữa Python và Chrome extension.
 
-Fixed: correlation IDs to prevent race conditions, proper async support.
+Luồng:
+  Python code  ──py_command──▶  ws_server  ──send_message──▶  extension  ──▶  Facebook API
+               ◀──result──────             ◀──result──────────
+
+Cách dùng từ Python:
+  # Async
+  from ws_server import send_message_to_extension
+  result = await send_message_to_extension(conversation_id, message, page_id=page_id)
+
+  # Sync
+  from ws_server import send_fb_message
+  result = send_fb_message(conversation_id, message, page_id=page_id)
 """
 
 import asyncio
-import json
 import base64
+import json
 import os
+import threading
 import uuid
+
 import websockets
 
-connected_clients = set()
-# Map correlation_id -> Future for matching responses
-pending_requests: dict[str, asyncio.Future] = {}
+# Extension connections
+_extension: websockets.WebSocketServerProtocol | None = None
+
+# Pending requests: correlation_id → Future
+_pending: dict[str, asyncio.Future] = {}
+
+# Background event loop (cho sync callers)
+_loop: asyncio.AbstractEventLoop | None = None
+_loop_ready = threading.Event()
+
+
+# ── Handlers ──────────────────────────────────────────────────────────────────
+
+async def _handle_extension(websocket):
+    global _extension
+    _extension = websocket
+    print(f"[WS] Extension connected")
+
+    try:
+        async for raw in websocket:
+            msg = json.loads(raw)
+
+            if msg.get("action") == "pong":
+                continue
+
+            if msg.get("action") == "result":
+                cid = msg.get("correlation_id")
+                if cid and cid in _pending:
+                    _pending[cid].set_result(msg)
+                else:
+                    print(f"[WS] Unmatched result: {msg}")
+
+    except Exception as e:
+        print(f"[WS] Extension error: {e}")
+    finally:
+        if _extension is websocket:
+            _extension = None
+        print("[WS] Extension disconnected")
+
+
+async def _handle_py_client(websocket, first_msg):
+    result = await send_message_to_extension(
+        conversation_id=first_msg.get("conversation_id"),
+        message=first_msg.get("message", ""),
+        image_path=first_msg.get("image_path"),
+        page_id=first_msg.get("page_id"),
+        timeout=first_msg.get("timeout", 30),
+    )
+    await websocket.send(json.dumps(result))
 
 
 async def handler(websocket):
-    """Handle a WebSocket connection from the Chrome extension."""
-    connected_clients.add(websocket)
-    print(f"[WS] Extension connected. Total clients: {len(connected_clients)}")
-
+    print(f"[WS] New connection from {websocket.remote_address}")
     try:
-        async for message in websocket:
-            data = json.loads(message)
-            if data.get("action") == "pong":
-                continue
-            if data.get("action") == "result":
-                cid = data.get("correlation_id")
-                if cid and cid in pending_requests:
-                    pending_requests[cid].set_result(data)
-                else:
-                    print(f"[WS] Unmatched result (no correlation_id): {data}")
+        raw = await asyncio.wait_for(websocket.recv(), timeout=10)
+    except asyncio.TimeoutError:
+        print("[WS] No hello message, closing")
+        return
     except Exception as e:
-        print(f"[WS] Connection error: {e}")
-    finally:
-        connected_clients.discard(websocket)
-        print(f"[WS] Extension disconnected. Total clients: {len(connected_clients)}")
+        print(f"[WS] Read error: {e}")
+        return
+
+    msg = json.loads(raw)
+
+    if msg.get("type") == "ext_hello":
+        print("[WS] Extension identified")
+        await _handle_extension(websocket)
+
+    elif msg.get("type") == "py_command":
+        print(f"[WS] Python command: conv={msg.get('conversation_id')}")
+        await _handle_py_client(websocket, msg)
+
+    else:
+        print(f"[WS] Unknown hello: {msg}")
 
 
-async def send_message_to_extension(conversation_id, message="", image_path=None, page_id=None, timeout=30):
-    """
-    Send a message command to the Chrome extension.
+# ── Ping loop ──────────────────────────────────────────────────────────────────
 
-    Args:
-        conversation_id: Facebook conversation ID
-        message: Text message to send
-        image_path: Local path to image file (will be converted to base64)
-        page_id: Facebook page ID (for sending as page)
-        timeout: Seconds to wait for response
+async def _ping_loop():
+    while True:
+        await asyncio.sleep(20)
+        if _extension:
+            try:
+                await _extension.send(json.dumps({"action": "ping"}))
+            except Exception:
+                pass
 
-    Returns:
-        dict with success status
-    """
-    if not connected_clients:
+
+# ── Public API ─────────────────────────────────────────────────────────────────
+
+async def send_message_to_extension(
+    conversation_id: str,
+    message: str = "",
+    image_path: str | None = None,
+    page_id: str | None = None,
+    timeout: int = 30,
+) -> dict:
+    if not _extension:
         return {"success": False, "error": "No extension connected"}
 
-    correlation_id = str(uuid.uuid4())
-
+    cid = str(uuid.uuid4())
     command = {
         "action": "send_message",
+        "correlation_id": cid,
         "conversation_id": conversation_id,
         "message": message,
-        "correlation_id": correlation_id,
     }
-
     if page_id:
         command["page_id"] = page_id
-
-    # Convert image to base64 if provided
     if image_path and os.path.exists(image_path):
         with open(image_path, "rb") as f:
-            img_data = base64.b64encode(f.read()).decode("utf-8")
-            command["image_base64"] = f"data:image/png;base64,{img_data}"
+            command["image_base64"] = "data:image/png;base64," + base64.b64encode(f.read()).decode()
+        print(f"[WS] Image attached: {image_path}")
 
-    # Create future for this request
     loop = asyncio.get_running_loop()
     future = loop.create_future()
-    pending_requests[correlation_id] = future
+    _pending[cid] = future
 
-    # Send to first connected client
-    client = next(iter(connected_clients))
     try:
-        await client.send(json.dumps(command))
-        print(f"[WS] Sent command: send_message to {conversation_id} (cid={correlation_id[:8]})")
-
-        # Wait for matching result
+        await _extension.send(json.dumps(command))
+        print(f"[WS] Sent to extension: conv={conversation_id} cid={cid[:8]}")
         result = await asyncio.wait_for(future, timeout=timeout)
+        print(f"[WS] Result: {result}")
         return result
     except asyncio.TimeoutError:
-        return {"success": False, "error": "Timeout waiting for extension response"}
+        return {"success": False, "error": "Timeout"}
     except Exception as e:
         return {"success": False, "error": str(e)}
     finally:
-        pending_requests.pop(correlation_id, None)
+        _pending.pop(cid, None)
 
 
-async def start_server(host="localhost", port=8765):
-    """Start the WebSocket server."""
-    server = await websockets.serve(handler, host, port)
-    print(f"[WS] Server started on ws://{host}:{port}")
-    print("[WS] Waiting for Chrome extension to connect...")
-    await asyncio.Future()  # Run forever
-
-
-# --- Singleton event loop for sync callers ---
-
-_server_loop: asyncio.AbstractEventLoop | None = None
-_server_started = False
-
-
-def get_server_loop():
-    """Get or create the background event loop running the WS server."""
-    global _server_loop, _server_started
-    if _server_loop is None or _server_loop.is_closed():
-        import threading
-        _server_loop = asyncio.new_event_loop()
-
-        def _run():
-            asyncio.set_event_loop(_server_loop)
-            _server_loop.run_forever()
-
-        t = threading.Thread(target=_run, daemon=True)
-        t.start()
-
-    if not _server_started:
-        asyncio.run_coroutine_threadsafe(
-            websockets.serve(handler, "localhost", 8765), _server_loop
-        ).result(timeout=5)
-        _server_started = True
-        print("[WS] Server started on ws://localhost:8765 (background thread)")
-
-    return _server_loop
-
-
-def send_fb_message(conversation_id, message="", image_path=None, page_id=None, timeout=30):
-    """
-    Send a Facebook message via the extension. Works from both sync and async contexts.
-
-    Usage:
-        from ws_server import send_fb_message
-        result = send_fb_message("conv_id", "Hello!", "image.png")
-    """
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = None
+def send_fb_message(
+    conversation_id: str,
+    message: str = "",
+    image_path: str | None = None,
+    page_id: str | None = None,
+    timeout: int = 30,
+) -> dict:
+    """Sync wrapper — dùng được từ cả sync và async context."""
+    global _loop
 
     coro = send_message_to_extension(conversation_id, message, image_path, page_id, timeout)
 
-    if loop and loop.is_running():
-        # Called from async context - use the server's background loop
-        server_loop = get_server_loop()
-        future = asyncio.run_coroutine_threadsafe(coro, server_loop)
+    # Nếu đang trong async context, chạy trên background loop
+    try:
+        running = asyncio.get_running_loop()
+    except RuntimeError:
+        running = None
+
+    if running:
+        _loop_ready.wait(timeout=5)
+        future = asyncio.run_coroutine_threadsafe(coro, _loop)
         return future.result(timeout=timeout + 5)
     else:
-        # Called from sync context
         return asyncio.run(coro)
+
+
+# ── Server ─────────────────────────────────────────────────────────────────────
+
+async def start_server(host="localhost", port=8765):
+    async with websockets.serve(handler, host, port):
+        print(f"[WS] Server started on ws://{host}:{port}")
+        asyncio.create_task(_ping_loop())
+        await asyncio.Future()
+
+
+def start_background_server(host="localhost", port=8765):
+    """Khởi động server trên background thread — cho processBill.py dùng."""
+    global _loop
+
+    def _run():
+        global _loop
+        _loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(_loop)
+        _loop_ready.set()
+        _loop.run_until_complete(start_server(host, port))
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    _loop_ready.wait(timeout=5)
+    print("[WS] Background server started")
 
 
 if __name__ == "__main__":
     print("[WS] AutoBill WebSocket Server")
-    print("[WS] 1. Start this server")
-    print("[WS] 2. Open Chrome with AutoBill Messenger extension")
-    print("[WS] 3. Login to Facebook in Chrome")
-    print("[WS] 4. Extension will auto-connect\n")
+    print("[WS] Waiting for Chrome extension...")
     asyncio.run(start_server())
