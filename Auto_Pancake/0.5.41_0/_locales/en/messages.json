@@ -1,0 +1,10 @@
+{
+   "appDescription": {
+      "description": "The description of the application",
+      "message": "Provide additional features for Cake Commerce Apps"
+   },
+   "appName": {
+      "description": "Pancake v2",
+      "message": "Pancake v2"
+   }
+}

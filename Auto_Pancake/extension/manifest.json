@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AutoBill Messenger",
-  "version": "5.2.0",
+  "version": "5.5.0",
   "description": "Auto send Facebook messages from local server",
   "permissions": [
     "offscreen",
@@ -9,6 +9,7 @@
     "cookies",
     "storage",
     "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
     "scripting"
   ],
   "host_permissions": [

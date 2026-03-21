@@ -27,6 +27,8 @@ let fbDtsg = null;
 let fbUserId = null;
 let siteData = {};
 let reqCount = 0;
+let sprinkleParamName = "jazoest";
+let sprinkleVersion = 2;
 
 // doc_id cache (Pancake: DocIdRegistry / At)
 const docIds = {};
@@ -106,15 +108,30 @@ async function ensureFbContext(pageId) {
 }
 
 function extractContextFromHtml(html) {
-  // fb_dtsg
+  // fb_dtsg — giống Pancake ctxFromHtml
   if (!fbDtsg) {
     for (const pat of [
-      /"DTSGInitialData",\[\],\{"token":"([^"]+)"/,
+      /"DTSGInitialData",\[\],\{"token":"([^"]+)"/i,
+      /"DTSGInitData",\[\],\{"token":"([^"]+)"/i,
+      /name="fb_dtsg" value="([^"]+)"/,
       /"token":"([^"]+)","ttl":\d+/,
       /"name":"fb_dtsg","value":"([^"]+)"/,
     ]) {
       const m = html.match(pat);
       if (m) { fbDtsg = m[1]; break; }
+    }
+    if (!fbDtsg) {
+      const mrcM = html.match(/"dtsg":\{"token":"([^"]+)"/);
+      if (mrcM) fbDtsg = mrcM[1];
+    }
+  }
+
+  // SprinkleConfig — Pancake sprinkle_config.param_name + version
+  if (sprinkleParamName === "jazoest") {
+    const sprinkleM = html.match(/\["SprinkleConfig",\[\],\{"param_name":"([^"]+)","version":(\d+)/);
+    if (sprinkleM) {
+      sprinkleParamName = sprinkleM[1];
+      sprinkleVersion = parseInt(sprinkleM[2], 10);
     }
   }
 
@@ -123,18 +140,21 @@ function extractContextFromHtml(html) {
     fbUserId = document.cookie.match(/c_user=(\d+)/)?.[1] || null;
   }
 
-  // SiteData (Pancake buildParams fields)
+  // SiteData
   if (!siteData.__rev) {
+    let siteJson = null;
+    const siteM = html.match(/\["SiteData",\[\],(\{[^}]+\})/);
+    if (siteM) { try { siteJson = JSON.parse(siteM[1]); } catch (_) {} }
     siteData = {
-      __rev:       (html.match(/"client_revision":(\d+)/) || [])[1] || "",
+      __rev:       String((html.match(/"client_revision":(\d+)/) || [])[1] || ""),
       __hs:        (html.match(/"haste_session":"([^"]+)"/) || [])[1] || "",
       __hsi:       (html.match(/"hsi":"([^"]+)"/) || [])[1] || "",
       __pc:        (html.match(/"pkg_cohort":"([^"]+)"/) || [])[1] || "",
       dpr:         (html.match(/"pr":(\d+(?:\.\d+)?)/) || [])[1] || "1",
       __ccg:       "EXCELLENT",
       __csr:       "",
-      __beoa:      "0",
-      __comet_req: "1",
+      __beoa:      siteJson?.be_one_ahead ? "1" : "0",
+      __comet_req: siteJson?.is_comet ? "1" : "0",
     };
   }
 
@@ -347,9 +367,18 @@ async function uploadImage(base64Data, pageId) {
 
 // ── Send message (Pancake: buildSendParams + messaging/send/) ──────────────────
 
+// Pancake generateOfflineThreadingID
+function generateOfflineThreadingId() {
+  const eBin = Date.now().toString(2);
+  const tBin = ("0000000000000000000000" + (Math.floor(4294967296 * Math.random()) >>> 0).toString(2)).slice(-22);
+  const bits = (eBin + tBin).slice(-63);
+  let n = BigInt(0);
+  for (let i = 0; i < bits.length; i++) n = n * 2n + BigInt(+bits[i]);
+  return n.toString();
+}
+
 async function sendMessage(recipientId, text, attachmentId, pageId) {
-  const ts = Date.now();
-  const tid = `${ts}${Math.floor(Math.random() * 0xFFFFFFFF)}`;
+  const tid = generateOfflineThreadingId();
 
   const r = await fetch("https://business.facebook.com/messaging/send/", {
     method: "POST",
@@ -358,6 +387,7 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
       __a: "1",
       __req: (reqCount++).toString(36),
       fb_dtsg: fbDtsg,
+      [sprinkleParamName]: calcJazoest(fbDtsg),
       ...siteData,
       body: text || "",
       offline_threading_id: tid,
@@ -377,7 +407,10 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
     credentials: "include",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "Referer": "https://business.facebook.com/latest/inbox/messenger",
+      "x-requested-with": "XMLHttpRequest",
+      "x-response-format": "JSONStream",
+      "x-msgr-region": "ATN",
+      "Referer": `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`,
     },
   });
 
@@ -410,6 +443,19 @@ async function handleSendMessage({ conversation_id, message, image_base64, page_
 }
 
 // ── Utils ──────────────────────────────────────────────────────────────────────
+
+// Pancake V1: "2" + concat char codes / V2: "2" + sum char codes
+function calcJazoest(dtsg) {
+  if (sprinkleVersion === 2) {
+    let s = 0;
+    for (let i = 0; i < dtsg.length; i++) s += dtsg.charCodeAt(i);
+    return "2" + s;
+  } else {
+    let t = "";
+    for (let i = 0; i < dtsg.length; i++) t += dtsg.charCodeAt(i);
+    return "2" + t;
+  }
+}
 
 function buildBody(params) {
   return Object.entries(params)

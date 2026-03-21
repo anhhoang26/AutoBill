@@ -1,0 +1,42 @@
+{
+   "action": {
+      "default_icon": "images/icon-128-gray.png"
+   },
+   "background": {
+      "service_worker": "scripts/background.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "scripts/contentscript.js" ],
+      "matches": [ "https://comcake.localhost:3000/*", "https://localhost:3000/*", "https://localhost:3001/*", "https://localhost:8003/*", "http://dev.pages.fm/*", "https://pages.fm/*", "https://paging.botcake.io/*", "https://botcake.io/*", "https://pancake.ph/*", "https://pancake.id/*", "https://pancake.in/*", "https://pancake.biz/*", "https://pancake.vn/*", "https://pancake.net/*", "https://pos.pages.fm/*", "https://pos.pancake.ph/*", "https://pos.pancake.id/*", "https://pos.pancake.in/*", "https://pos.pancake.biz/*", "https://pos.pancake.vn/*", "https://pos.pancake.net/*", "https://dev.pancake.vn/*", "https://dev.pancake.vn:3600/*" ],
+      "run_at": "document_end"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_appDescription__",
+   "host_permissions": [ "*://facebook.com/", "*://www.facebook.com/", "*://m.facebook.com/", "*://www.m.facebook.com/", "*://business.facebook.com/", "*://www.business.facebook.com/", "*://web.facebook.com/", "*://www.web.facebook.com/", "*://upload-business.facebook.com/", "*://www.upload-business.facebook.com/", "*://graph.facebook.com/", "*://www.graph.facebook.com/", "*://p-upload.facebook.com/", "*://www.p-upload.facebook.com/", "*://*.line.biz/", "*://*.pages.fm/", "*://*.botcake.io/", "*://*.pancake.ph/", "*://*.pancake.id/", "*://*.pancake.in/", "*://*.pancake.vn/", "*://*.pancake.net/", "*://*.pancake.biz/", "*://*.instagram.com/", "*://instagram.com/", "*://www.instagram.com/", "wss://edge-chat.facebook.com/", "wss://edge-chat.instagram.com/", "*://oa.zalo.me/", "*://zalo.me/" ],
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAranA8VQ4jdoA/7mZpIW2s9YWzHbn9RfTfDQcU/toXahfrRZT76R88f3RhmY/Dr3guu+s0pXoGb7dk2s3AwSuFjsrfvz5ay9GYgFChyEP7ozGUtkF4zwEGdpeC5Qc+q0V3F5XM5TBzhhSiBgAEp4sTsh7nbR+mVVJxA5S2NhkY6U+UpJSNnbjnfmM1udQNlOnOqy7oEcde9lxNEPBaT/mWzW3bLPK/XLhbOePZnmIZTm/GgnlYXFQRyippChG/R+vT8KcFye4VwDvkkqm1v8ALkWYBf9CQEundNiwpLRQA55dsh6Ds+Xl3f1JnQb11p5lBvAcLIrk8XbC79oKebbl9wIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "permissions": [ "cookies", "storage", "unlimitedStorage", "offscreen", "webRequest", "declarativeNetRequestWithHostAccess", "declarativeContent" ],
+   "sandbox": {
+      "pages": [ "sandbox.html" ]
+   },
+   "short_name": "Pancake v2",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.5.41",
+   "web_accessible_resources": [ {
+      "matches": [ "*://*/*" ],
+      "resources": [ "pancext.html" ]
+   }, {
+      "matches": [ "*://*/*" ],
+      "resources": [ "offscreen.html", "images/icon-128-gray.png" ]
+   }, {
+      "matches": [ "*://*/*" ],
+      "resources": [ "images/icon-128-gray.png" ]
+   } ]
+}

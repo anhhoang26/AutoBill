@@ -1,0 +1,31 @@
+<!doctype html><html><head></head><body><script type="text/javascript">function getFunction(code, argNames) {
+        var fn = window, parts = (code || '').split('.');
+        while (fn && parts.length) { fn = fn[parts.shift()]; }
+        if (typeof (fn) === 'function') { return fn; } //onSuccess="functionName"
+        if (code.toLowerCase().indexOf('function')==0) { return new Function('return (' + code + ').apply(this,arguments);')();} //onSuccess="function(data){alert(data);}"
+        argNames.push(code);
+        try {return Function.constructor.apply(null, argNames); //onSuccess="alert('hello');return false;"
+        }catch(e){alert('Error:\r\n'+code + '\r\nis not a valid callback function');}
+      }</script><script>window.addEventListener('message', function(event) {
+        var command = event.data.command;
+        switch(command) {
+          case 'runStringFunction':
+            try {
+              const response = getFunction(event.data.code, event.data.argNames);
+              event.source.postMessage({
+                command: command,
+                taskId: event.data.taskId,
+                response: response,
+                success: true
+              }, event.origin);
+            } catch(e) {
+              event.source.postMessage({
+                command: command,
+                taskId: event.data.taskId,
+                // response: response,
+                success: false
+              }, event.origin);
+            }
+            break;
+        }
+      });</script></body></html>
