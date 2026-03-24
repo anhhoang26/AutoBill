@@ -1,11 +1,15 @@
 /**
- * AutoBill Messenger - Content Script v5.0.0
+ * AutoBill Messenger - Content Script v5.5.0
  *
  * Chạy trên business.facebook.com (giống Pancake v2).
  * Lợi thế so với offscreen:
  *  - document.cookie có c_user
  *  - document.querySelectorAll('script[src]') thấy bundle đã load (browser cache)
  *  - fetch() cùng origin → cookies tự gửi
+ *
+ * NOTE: File này KHÔNG được inject qua manifest.json content_scripts.
+ * Nếu muốn dùng, cần inject thủ công hoặc thêm vào manifest.
+ * Primary path hiện tại: offscreen.js → background.js
  *
  * Flow:
  *  1. Connect WebSocket → ws_server.py
@@ -25,10 +29,16 @@ let reconnectTimer = null;
 // FB context
 let fbDtsg = null;
 let fbUserId = null;
+let lsd = "";
+let msgrRegion = "PRN";
 let siteData = {};
 let reqCount = 0;
 let sprinkleParamName = "jazoest";
 let sprinkleVersion = 2;
+// Pancake webSession.getId() format: sessionId:activityId:tabId
+const webSessionId = Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
+  Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
+  Math.floor(Math.random()*Math.pow(36,6)).toString(36).padStart(6,"0");
 
 // doc_id cache (Pancake: DocIdRegistry / At)
 const docIds = {};
@@ -126,6 +136,16 @@ function extractContextFromHtml(html) {
     }
   }
 
+  // LSD token — Pancake: ["MRequestConfig",[],{...},N].token
+  if (!lsd) {
+    const mrcM = html.match(/\["MRequestConfig",\[\],([^\]]+),\d+\]/);
+    if (mrcM) { try { lsd = JSON.parse(mrcM[1])?.token || ""; } catch (_) {} }
+    if (!lsd) {
+      const lsdM = html.match(/\["LSD",\[\],\{"token":"([^"]+)"\}/);
+      if (lsdM) lsd = lsdM[1];
+    }
+  }
+
   // SprinkleConfig — Pancake sprinkle_config.param_name + version
   if (sprinkleParamName === "jazoest") {
     const sprinkleM = html.match(/\["SprinkleConfig",\[\],\{"param_name":"([^"]+)","version":(\d+)/);
@@ -140,21 +160,51 @@ function extractContextFromHtml(html) {
     fbUserId = document.cookie.match(/c_user=(\d+)/)?.[1] || null;
   }
 
-  // SiteData
+  // msgrRegion
+  if (msgrRegion === "PRN") {
+    const mrcConfM = html.match(/\["MercuryServerRequestsConfig",\[\],\{"msgrRegion":"([^"]+)"\}/);
+    if (mrcConfM) msgrRegion = mrcConfM[1];
+    else {
+      const rmM = html.match(/"(?:regionNullable|msgrRegion)":"(\w+)"/);
+      if (rmM) msgrRegion = rmM[1];
+    }
+  }
+
+  // WebConnectionClassServerGuess → __ccg
+  let ccg = "EXCELLENT";
+  const wccM = html.match(/\["WebConnectionClassServerGuess",\[\],([^\]]+),\d+\]/);
+  if (wccM) { try { ccg = JSON.parse(wccM[1])?.connectionClass || ccg; } catch (_) {} }
+
+  // SiteData — đầy đủ như background.js / Pancake buildParams
   if (!siteData.__rev) {
-    let siteJson = null;
-    const siteM = html.match(/\["SiteData",\[\],(\{[^}]+\})/);
-    if (siteM) { try { siteJson = JSON.parse(siteM[1]); } catch (_) {} }
+    let sd = {};
+    const sdM = html.match(/\["SiteData",\[\],([^\]]+),\d+\]/);
+    if (sdM) { try { sd = JSON.parse(sdM[1]); } catch (_) {} }
+
+    const clientRevision = sd.client_revision ? String(sd.client_revision)
+      : (html.match(/client_revision":(\d+)/)?.[1] || "");
+
+    // jazoest v2 = "2" + sum(charCodes of dtsg)
+    let ttstamp = "2";
+    if (fbDtsg) {
+      for (let i = 0; i < fbDtsg.length; i++) ttstamp += fbDtsg.charCodeAt(i);
+    }
+
     siteData = {
-      __rev:       String((html.match(/"client_revision":(\d+)/) || [])[1] || ""),
-      __hs:        (html.match(/"haste_session":"([^"]+)"/) || [])[1] || "",
-      __hsi:       (html.match(/"hsi":"([^"]+)"/) || [])[1] || "",
-      __pc:        (html.match(/"pkg_cohort":"([^"]+)"/) || [])[1] || "",
-      dpr:         (html.match(/"pr":(\d+(?:\.\d+)?)/) || [])[1] || "1",
-      __ccg:       "EXCELLENT",
       __csr:       "",
-      __beoa:      siteJson?.be_one_ahead ? "1" : "0",
-      __comet_req: siteJson?.is_comet ? "1" : "0",
+      __beoa:      sd.be_one_ahead ? 1 : 0,
+      __pc:        sd.pkg_cohort || "",
+      dpr:         String(sd.pr || 1),
+      __ccg:       ccg,
+      __rev:       clientRevision,
+      __hsi:       sd.hsi ? String(sd.hsi) : "",
+      __hs:        sd.haste_session || "",
+      __comet_req: sd.is_comet ? 1 : 1, // business.facebook.com luôn là comet
+      __spin_r:    sd.__spin_r ? String(sd.__spin_r) : clientRevision,
+      __spin_b:    sd.__spin_b || "trunk",
+      __spin_t:    sd.__spin_t ? String(sd.__spin_t) : "1514187418",
+      __s:         webSessionId,
+      jazoest:     ttstamp,
     };
   }
 
@@ -380,36 +430,45 @@ function generateOfflineThreadingId() {
 async function sendMessage(recipientId, text, attachmentId, pageId) {
   const tid = generateOfflineThreadingId();
 
+  // Thứ tự giống Pancake:
+  // 1. buildSendParams: body, offline_threading_id, source, timestamp, request_user_id
+  // 2. buildParams(): __user, __a, __req, SiteData fields, fb_dtsg, lsd, jazoest
+  // 3. Facebook-specific: specific_to_list, other_user_fbid, message_id, client, action_type
   const r = await fetch("https://business.facebook.com/messaging/send/", {
     method: "POST",
     body: buildBody({
+      // buildSendParams
+      body: text || "",
+      offline_threading_id: tid,
+      source: "source:page_unified_inbox",
+      timestamp: String(Date.now()),
+      request_user_id: pageId || "",
+      // buildParams() — đầy đủ như Pancake
       __user: fbUserId || "",
       __a: "1",
       __req: (reqCount++).toString(36),
+      ...siteData,                           // __csr,__beoa,__pc,dpr,__ccg,__rev,__hsi,__hs,__comet_req,__spin_*,__s,jazoest
       fb_dtsg: fbDtsg,
-      [sprinkleParamName]: calcJazoest(fbDtsg),
-      ...siteData,
-      body: text || "",
-      offline_threading_id: tid,
-      message_id: tid,
-      source: "source:page_unified_inbox",
-      timestamp: String(ts),
+      [sprinkleParamName]: siteData.jazoest,
+      lsd: lsd,
+      // facebook-specific (sau buildParams)
       "specific_to_list[0]": `fbid:${recipientId}`,
       "specific_to_list[1]": `fbid:${pageId || fbUserId}`,
       other_user_fbid: recipientId,
+      message_id: tid,
       client: "mercury",
       action_type: "ma-type:user-generated-message",
       ephemeral_ttl_mode: "0",
       has_attachment: attachmentId ? "true" : "false",
-      request_user_id: pageId || "",
       ...(attachmentId ? { "image_ids[0]": attachmentId } : {}),
+      __usid: "",
     }),
     credentials: "include",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "x-requested-with": "XMLHttpRequest",
       "x-response-format": "JSONStream",
-      "x-msgr-region": "ATN",
+      "x-msgr-region": msgrRegion,
       "Referer": `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`,
     },
   });
@@ -437,29 +496,21 @@ async function handleSendMessage({ conversation_id, message, image_base64, page_
     return await sendMessage(recipientId, message, attachmentId, page_id);
   } catch (e) {
     console.error("[AutoBill] Error:", e.message);
-    if (/dtsg|logged|auth|session/i.test(e.message)) fbDtsg = null;
+    if (/dtsg|logged|auth|session/i.test(e.message)) {
+      fbDtsg = null;
+      lsd = "";
+      msgrRegion = "PRN";
+      siteData = {};
+    }
     return { success: false, error: e.message };
   }
 }
 
 // ── Utils ──────────────────────────────────────────────────────────────────────
 
-// Pancake V1: "2" + concat char codes / V2: "2" + sum char codes
-function calcJazoest(dtsg) {
-  if (sprinkleVersion === 2) {
-    let s = 0;
-    for (let i = 0; i < dtsg.length; i++) s += dtsg.charCodeAt(i);
-    return "2" + s;
-  } else {
-    let t = "";
-    for (let i = 0; i < dtsg.length; i++) t += dtsg.charCodeAt(i);
-    return "2" + t;
-  }
-}
-
 function buildBody(params) {
   return Object.entries(params)
-    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
     .join("&");
 }
 
@@ -475,5 +526,5 @@ function base64ToBlob(b64) {
 
 // ── Start ──────────────────────────────────────────────────────────────────────
 
-console.log("[AutoBill] Content script loaded v5.0.0");
+console.log("[AutoBill] Content script loaded v5.5.0");
 connect();

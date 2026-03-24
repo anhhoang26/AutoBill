@@ -110,13 +110,20 @@ let _sprinkleParamName = "jazoest";
 let _sprinkleVersion = 2;
 let _siteData = {};
 let _reqCount = 0;
+let _lastPageId = null;           // page_id đã dùng để fetch context
 // Pancake webSession.getId() format: sessionId:activityId:tabId
 const _webSessionId = Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
   Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
   Math.floor(Math.random()*Math.pow(36,6)).toString(36).padStart(6,"0");
 
-async function ensureFbContext(pageId) {
-  if (_fbDtsg) return;
+function _clearFbContext() {
+  _fbDtsg = null; _fbUserId = null; _lsd = "";
+  _siteData = {};
+}
+
+async function ensureFbContext(pageId, forceRefresh = false) {
+  if (_fbDtsg && !forceRefresh) return;
+  if (forceRefresh) _clearFbContext();
 
   // Pancake InboxBusiness: fetch business.facebook.com/latest/inbox/all?asset_id=...
   const url = `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`;
@@ -215,6 +222,7 @@ async function ensureFbContext(pageId) {
     jazoest:     ttstamp,
   };
 
+  _lastPageId = pageId;
   console.log(`[AutoBill:bg] dtsg=${_fbDtsg.slice(0,8)}... lsd=${_lsd ? _lsd.slice(0,6)+"..." : "MISSING"} region=${_msgrRegion} rev=${clientRevision} comet=${sd.is_comet?1:0} hsi=${sd.hsi?"ok":"MISS"}`);
 
   searchDocIds(html);
@@ -228,7 +236,53 @@ const _recipientCache = {};
 async function resolveRecipientId(threadId, pageId) {
   if (_recipientCache[threadId]) return _recipientCache[threadId];
 
-  // Thử conversation page để tìm other_user_fbid
+  // Method 1: GraphQL PagesManagerInboxAdminAssignerRootQuery (giống Pancake primary)
+  const QUERY = "PagesManagerInboxAdminAssignerRootQuery";
+  const docId = _docIds[QUERY];
+
+  if (docId) {
+    try {
+      console.log(`[AutoBill:bg] GraphQL resolve: thread=${threadId} docId=${docId}`);
+      const r = await fetch("https://business.facebook.com/api/graphql/", {
+        method: "POST",
+        body: buildBody({
+          av: pageId,
+          __user: _fbUserId || "",
+          __a: "1",
+          __req: (_reqCount++).toString(36),
+          fb_dtsg: _fbDtsg,
+          ..._siteData,
+          doc_id: docId,
+          variables: JSON.stringify({ pageID: pageId, commItemID: threadId }),
+          fb_api_caller_class: "RelayModern",
+          fb_api_req_friendly_name: QUERY,
+        }),
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Referer": `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`,
+        },
+      });
+
+      const text = await r.text();
+      console.log(`[AutoBill:bg] GraphQL ${r.status}: ${text.slice(0, 500)}`);
+
+      const json = JSON.parse(text.replace(/^for\s*\(;;\);/, ""));
+      const globalId = json?.data?.commItem?.target_id;
+
+      if (globalId && globalId !== pageId && globalId !== _fbUserId) {
+        console.log(`[AutoBill:bg] GraphQL resolved: ${threadId} → ${globalId}`);
+        _recipientCache[threadId] = globalId;
+        return globalId;
+      }
+    } catch (e) {
+      console.warn(`[AutoBill:bg] GraphQL resolve error: ${e.message}`);
+    }
+  } else {
+    console.warn(`[AutoBill:bg] ${QUERY} doc_id not found (${Object.keys(_docIds).length} total), trying HTML fallback`);
+  }
+
+  // Method 2: HTML parsing fallback (conversation page)
   try {
     const url = `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}&selected_item_id=${threadId}`;
     const r = await fetch(url, { credentials: "include" });
@@ -236,6 +290,12 @@ async function resolveRecipientId(threadId, pageId) {
     console.log(`[AutoBill:bg] Conv page ${r.status}, length=${html.length}`);
 
     searchDocIds(html);
+    if (searchDocIds(html)) await saveDocIds();
+
+    // Log tất cả matches để debug
+    const allOtherUser = [...html.matchAll(/"other_user_fbid":"(\d+)"/g)].map(m => m[1]);
+    const allTargetId = [...html.matchAll(/"target_id":"(\d+)"/g)].map(m => m[1]);
+    console.log(`[AutoBill:bg] HTML matches: other_user_fbid=[${allOtherUser}] target_id=[${allTargetId}]`);
 
     for (const pat of [
       /"other_user_fbid":"(\d+)"/,
@@ -243,9 +303,8 @@ async function resolveRecipientId(threadId, pageId) {
     ]) {
       const m = html.match(pat);
       if (m && m[1] !== pageId && m[1] !== _fbUserId) {
-        console.log(`[AutoBill:bg] Resolved PSID: ${threadId} → ${m[1]}`);
+        console.log(`[AutoBill:bg] HTML resolved: ${threadId} → ${m[1]}`);
         _recipientCache[threadId] = m[1];
-        await saveDocIds();
         return m[1];
       }
     }
@@ -360,16 +419,23 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
 // ── Main send handler ──────────────────────────────────────────────────────────
 
 async function handleSendMessage({ conversation_id, message, image_base64, page_id }) {
-  try {
-    await ensureFbContext(page_id);
-    const recipientId = await resolveRecipientId(conversation_id, page_id);
-    let attachmentId = null;
-    if (image_base64) attachmentId = await uploadImage(image_base64, page_id);
-    return await sendMessage(recipientId, message, attachmentId, page_id);
-  } catch (e) {
-    console.error("[AutoBill:bg] Error:", e.message);
-    if (/dtsg|logged|auth|session/i.test(e.message)) _fbDtsg = null;
-    return { success: false, error: e.message };
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      await ensureFbContext(page_id, /* forceRefresh */ attempt > 0);
+      const recipientId = await resolveRecipientId(conversation_id, page_id);
+      let attachmentId = null;
+      if (image_base64) attachmentId = await uploadImage(image_base64, page_id);
+      return await sendMessage(recipientId, message, attachmentId, page_id);
+    } catch (e) {
+      const isTokenError = /dtsg|logged|auth|session|1357004/i.test(e.message);
+      if (isTokenError && attempt === 0) {
+        console.warn("[AutoBill:bg] Token error, refreshing context and retrying...", e.message);
+        _clearFbContext();
+        continue;
+      }
+      console.error("[AutoBill:bg] Error:", e.message);
+      return { success: false, error: e.message };
+    }
   }
 }
 
@@ -399,12 +465,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     return true;
   }
   if (msg.type === "fb_reset") {
-    _fbDtsg = null;
-    _lsd = "";
-    _msgrRegion = "PRN";
-    _sprinkleParamName = "jazoest";
-    _sprinkleVersion = 2;
-    _siteData = {};
+    _clearFbContext();
     sendResponse({ ok: true });
   }
   if (msg.type === "get_status") {
@@ -443,4 +504,4 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 ensureOffscreen();
-console.log("[AutoBill:bg] Service worker started v5.4.1");
+console.log("[AutoBill:bg] Service worker started v5.5.0");

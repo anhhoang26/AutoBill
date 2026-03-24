@@ -22,6 +22,23 @@ PANCAKE_ACCESS_TOKEN = os.getenv("PANCAKE_ACCESS_TOKEN")
 PANCAKE_JWT = os.getenv("PANCAKE_JWT", "")
 SHOP_ID = os.getenv("SHOP_ID")
 
+
+def _get_page_id(bill_pancake):
+    """Extract page_id from bill — supports both flat 'page_id' and nested 'page.id'."""
+    return bill_pancake.get("page_id") or bill_pancake.get("page", {}).get("id")
+
+
+def _get_thread_id(bill_pancake):
+    """Extract Facebook thread_id from conversation_id.
+
+    Pancake format: '{page_id}_{thread_id}' e.g. '539060145964207_23930918266550665'
+    Extension needs just the thread_id part (after the underscore).
+    """
+    conv_id = bill_pancake.get("conversation_id", "")
+    if "_" in conv_id:
+        return conv_id.split("_", 1)[1]
+    return conv_id
+
 # --- Extension fallback queue ---
 
 _ext_queue: asyncio.Queue | None = None
@@ -59,10 +76,10 @@ async def _ext_worker_loop():
         for attempt in range(3):
             try:
                 result = await send_message_to_extension(
-                    bill_pancake["conversation_id"],
+                    _get_thread_id(bill_pancake),
                     message="",
                     image_path=bill_file,
-                    page_id=bill_pancake.get("page_id"),
+                    page_id=_get_page_id(bill_pancake),
                 )
                 if isinstance(result, dict) and result.get("success"):
                     print(f"[EXT-Q] Success: {bill_pancake['id']}")
@@ -97,7 +114,8 @@ def _pancake_headers():
 
 def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
     """Upload bill image to Pancake and return response."""
-    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/contents?access_token={PANCAKE_ACCESS_TOKEN}"
+    page_id = _get_page_id(bill_pancake)
+    url = f"https://pancake.vn/api/v1/pages/{page_id}/contents?access_token={PANCAKE_ACCESS_TOKEN}"
 
     for attempt in range(max_retries):
         try:
@@ -121,7 +139,8 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
 
 def create_fb_ids(bill_pancake, content_id, max_retries=3):
     """Create Facebook attachment IDs from uploaded content."""
-    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/contents/facebook?access_token={PANCAKE_ACCESS_TOKEN}&is_reusable=true&async=false"
+    page_id = _get_page_id(bill_pancake)
+    url = f"https://pancake.vn/api/v1/pages/{page_id}/contents/facebook?access_token={PANCAKE_ACCESS_TOKEN}&is_reusable=true&async=false"
 
     for attempt in range(max_retries):
         try:
@@ -147,7 +166,8 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
 
 def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=3):
     """Send the bill image as a Facebook message via Pancake API."""
-    url = f"https://pancake.vn/api/v1/pages/{bill_pancake['page_id']}/conversations/{bill_pancake['conversation_id']}/messages?access_token={PANCAKE_ACCESS_TOKEN}"
+    page_id = _get_page_id(bill_pancake)
+    url = f"https://pancake.vn/api/v1/pages/{page_id}/conversations/{bill_pancake['conversation_id']}/messages?access_token={PANCAKE_ACCESS_TOKEN}"
 
     payload = {
         "action": "reply_inbox",
