@@ -1,0 +1,152 @@
+[
+  {
+    "op": "Community",
+    "variables": {
+      "where": {
+        "isRead": "NEW",
+        "isPublic": 1,
+        "catalog": 20
+      },
+      "limit": 1,
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query Community($skip: Int, $orderBy: OrderByInput, $where: CommunityWhereInput, $limit: Int) {\n  community(skip: $skip, orderBy: $orderBy, where: $where, limit: $limit) {\n    total\n    data {\n      id\n      isRead\n      catalog {\n        id\n        title\n      }\n      title\n      subImages\n      description\n      files\n      videos\n      isPublic\n      createdAt\n      updatedAt\n      image\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": null,
+        "type": "CONSOLIDATE_COD",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": null,
+        "type": "ITEM_DES_BRANCH",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "SlideImages",
+    "variables": {
+      "where": {
+        "isPublic": 1,
+        "type": "POST_APP"
+      },
+      "orderBy": "createdAt_DESC",
+      "limit": 700
+    },
+    "query": "query SlideImages($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: slideImageWhereInput) {\n  slideImages(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    total\n    data {\n      type\n      isPublic\n      image\n      id\n      description\n    }\n  }\n}"
+  },
+  {
+    "op": "CustomerLogin",
+    "variables": {
+      "where": {
+        "username": "98709576",
+        "password": "98709576"
+      }
+    },
+    "query": "mutation CustomerLogin($where: CustomerLoginInput!) {\n  customerLogin(where: $where) {\n    accessToken\n    data {\n      id_list\n      full_name\n      profile_img\n      status\n      contact_info\n      address\n      village\n      district {\n        id_list\n        title\n      }\n      state {\n        provinceName\n        id_state\n      }\n      Bank_KIP\n      BANK_THB\n      BANK_USD\n      BANK_NAME\n      gender\n      isActive\n      isVerify\n    }\n  }\n}"
+  },
+  {
+    "op": "CreateCustomerLog",
+    "variables": {
+      "data": {
+        "customerId": 7715280,
+        "device_mobile": "Other"
+      }
+    },
+    "query": "mutation CreateCustomerLog($data: CustomerLogInput!) {\n  createCustomerLog(data: $data) {\n    _id\n  }\n}"
+  },
+  {
+    "op": "Community",
+    "variables": {
+      "where": {
+        "isRead": "NEW",
+        "isPublic": 1,
+        "catalog": 20
+      },
+      "limit": 1,
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query Community($skip: Int, $orderBy: OrderByInput, $where: CommunityWhereInput, $limit: Int) {\n  community(skip: $skip, orderBy: $orderBy, where: $where, limit: $limit) {\n    total\n    data {\n      id\n      isRead\n      catalog {\n        id\n        title\n      }\n      title\n      subImages\n      description\n      files\n      videos\n      isPublic\n      createdAt\n      updatedAt\n      image\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": 7715280,
+        "type": "CONSOLIDATE_COD",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": 7715280,
+        "type": "ITEM_DES_BRANCH",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "Customers",
+    "variables": {
+      "where": {
+        "id_list": 7715280
+      }
+    },
+    "query": "query Customers($where: CustomerWhereInput, $orderBy: OrderByInput, $skip: Int, $limit: Int) {\n  customers(where: $where, orderBy: $orderBy, skip: $skip, limit: $limit) {\n    data {\n      id_list\n      profile_img\n      full_name\n      gender\n      start_work_time\n      status\n      contact_info\n      address\n      village\n      Bank_KIP\n      BANK_THB\n      BANK_USD\n      BANK_NAME\n      ip_address\n      staff_branch_id\n      isActive\n      district {\n        id_list\n        title\n      }\n      state {\n        id_state\n        provinceName\n      }\n      fileCard\n      fileBankKIP\n      fileBankTHB\n      fileBankUSD\n      isVerify\n      type_bank\n      remark_reject\n      change_phone\n    }\n  }\n}"
+  },
+  {
+    "op": "SlideImages",
+    "variables": {
+      "where": {
+        "isPublic": 1,
+        "type": "POST_APP"
+      },
+      "orderBy": "createdAt_DESC",
+      "limit": 700
+    },
+    "query": "query SlideImages($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: slideImageWhereInput) {\n  slideImages(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    total\n    data {\n      type\n      isPublic\n      image\n      id\n      description\n    }\n  }\n}"
+  },
+  {
+    "op": "ItemsV2",
+    "variables": {
+      "where": {
+        "customerId": 7715280,
+        "isDeleted": 0,
+        "originReceiveDate_gte": "2026-03-01",
+        "originReceiveDate_lt": "2026-04-01",
+        "multipleItemStatus": [
+          "TRANSIT_TO_DEST_BRANCH",
+          "TRANSIT_TO_ORIGIN_BRANCH",
+          "ORIGIN_BRANCH_RECEIVED_BACKWARD",
+          "DEST_BRANCH_RECEIVED_FORWARD",
+          "ORIGIN_BRANCH_RECEIVED_FORWARD",
+          "COMPLETED"
+        ]
+      },
+      "orderBy": "originReceiveDate_DESC",
+      "skip": 0,
+      "limit": 100
+    },
+    "query": "query ItemsV2($where: ItemV2WhereInput, $skip: Int, $noLimit: Boolean, $limit: Int, $orderBy: OrderByItem) {\n  itemsV2(\n    where: $where\n    skip: $skip\n    noLimit: $noLimit\n    limit: $limit\n    orderBy: $orderBy\n  ) {\n    total\n    data {\n      _id\n      trackingId\n      itemName\n      itemValueKIP\n      itemValueTHB\n      itemValueUSD\n      realItemValueKIP\n      realItemValueTHB\n      realItemValueUSD\n      receiverName\n      receiverPhone\n      description\n      trackingPlatform\n      isSummary\n      destSendDate\n      charge_on_shop\n      itemStatus\n      contactStatus\n      originSendDate\n      receiveBackwardDate\n      width\n      weight\n      isCod\n      isExtraItem\n      packagePrice\n      isDeposit\n      originReceiveDate\n      destReceiveDate\n      sendCompleteDate\n      isCustomerCreated\n      isBackward\n      billNumber\n      providedBy {\n        _id\n      }\n      originProvinceId {\n        provinceName\n      }\n      destProvinceId {\n        provinceName\n      }\n      originBranchId {\n        branch_name\n      }\n      destBranchId {\n        branch_name\n        branch_address\n        districtName\n        contactInfo\n      }\n      customerId {\n        id_list\n        full_name\n        contact_info\n      }\n      createdBy {\n        first_name\n        phone_number\n      }\n      originReceiveBy {\n        first_name\n        phone_number\n      }\n      original_shipper {\n        _id\n        full_name\n      }\n      destination_shipper {\n        _id\n        full_name\n      }\n    }\n  }\n}"
+  }
+]

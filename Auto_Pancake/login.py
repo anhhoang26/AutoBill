@@ -19,19 +19,51 @@ def loginAnousith():
         return
     url = "https://pro.api.anousith.express/graphql"
 
-    payload = "{\"query\":\"mutation StaffLogin($where: StaffLoginInput!, $data: StaffLoginInputData) {\\n  staffLogin(where: $where, data: $data) {\\n    accessToken\\n  }\\n}\",\"variables\":{\"data\":{\"logInUrl\":\"https://nextday.anousith.express/\"},\"where\":{\"phone_number\":98735835,\"password\":\"ANS98735835\"}}}"
+    payload = json.dumps({
+        "operationName": "CustomerLogin",
+        "variables": {
+            "where": {
+                "username": "98709576",
+                "password": "98709576"
+            }
+        },
+        "query": """mutation CustomerLogin($where: CustomerLoginInput!) {
+  customerLogin(where: $where) {
+    accessToken
+    data {
+      id_list
+      full_name
+      profile_img
+      status
+      contact_info
+      address
+      village
+      district {
+        id_list
+        title
+      }
+      state {
+        provinceName
+        id_state
+      }
+      Bank_KIP
+      BANK_THB
+      BANK_USD
+      BANK_NAME
+      gender
+      isActive
+      isVerify
+    }
+  }
+}"""
+    })
     headers = {
-        'Accept': '*/*',
-        'Access-Control-Request-Headers': 'authorization,content-type',
-        'Access-Control-Request-Method': 'POST',
-        'Origin': 'https://nextday.anousith.express',
-        'Sec-Fetch-Mode': 'cors',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-        'sec-ch-ua-platform': '"Linux"',
-        'authorization': 'null',
-        'Referer': 'https://nextday.anousith.express/',
-        'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+        'sec-ch-ua-platform': '"Windows"',
+        'authorization': 'undefined',
+        'Referer': 'https://app.anousith.express/',
+        'sec-ch-ua': '"Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"',
         'sec-ch-ua-mobile': '?0',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
         'accept': '*/*',
         'content-type': 'application/json'
     }
@@ -41,9 +73,9 @@ def loginAnousith():
     if response.status_code == 200:
         response = response.json()
         print(response)
-        updateToken(response["data"]["staffLogin"]["accessToken"])
+        updateToken(response["data"]["customerLogin"]["accessToken"])
         df["anousith"] = {
-            "accessToken": response["data"]["staffLogin"]["accessToken"],
+            "accessToken": response["data"]["customerLogin"]["accessToken"],
             "lastLogin": time.time()
         }
         with open("token.json", "w") as file:
@@ -63,8 +95,8 @@ def loginHal():
     url = "https://hal.hal-logistics.la/api/sign-in"
     payload = json.dumps({
         "id": None,
-        "tel": "96018845",
-        "password": "T96018845",
+        "tel": "98709576",
+        "password": "N98709576",
         "name": None,
         "roleUser": None
     })

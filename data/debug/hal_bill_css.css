@@ -1,0 +1,33 @@
+.fa-barcode::before { content: ""; }
+.fa-barcode-alt::before { content: ""; }
+.fa-barcode-read::before { content: ""; }
+.fa-barcode-scan::before { content: ""; }
+.fa-hornbill::before { content: ""; }
+.fa-money-bill::before { content: ""; }
+.fa-money-bill-alt::before { content: ""; }
+.fa-money-bill-wave::before { content: ""; }
+.fa-money-bill-wave-alt::before { content: ""; }
+.fa-print-search::before { content: ""; }
+.fa-print-slash::before { content: ""; }
+.fa-route::before { content: ""; }
+.fa-route-highway::before { content: ""; }
+.fa-route-interstate::before { content: ""; }
+.fa-router::before { content: ""; }
+.fad.fa-barcode::after { content: "􏀪"; }
+.fad.fa-barcode-alt::after { content: "􏑣"; }
+.fad.fa-barcode-read::after { content: "􏑤"; }
+.fad.fa-barcode-scan::after { content: "􏑥"; }
+.fad.fa-money-bill::after { content: "􏃖"; }
+.fad.fa-money-bill-alt::after { content: "􏏑"; }
+.fad.fa-money-bill-wave::after { content: "􏔺"; }
+.fad.fa-money-bill-wave-alt::after { content: "􏔻"; }
+.fad.fa-print-search::after { content: "􏠚"; }
+.fad.fa-print-slash::after { content: "􏚆"; }
+.fad.fa-route::after { content: "􏓗"; }
+.fad.fa-route-highway::after { content: "􏘚"; }
+.fad.fa-route-interstate::after { content: "􏘛"; }
+.fad.fa-router::after { content: "􏣚"; }
+.pi-money-bill::before { content: ""; }
+.btn-print-all[data-v-fb999567] { height: 35px; }
+.card-bill[data-v-2f52476a] { width: 100%; min-height: 600px; }
+.card-bill[data-v-71a8905a] { width: 100%; min-height: 600px; }

@@ -10,7 +10,9 @@ Pipeline:
 """
 
 import asyncio
+import glob
 import json
+import os
 import signal
 import sys
 import time
@@ -23,9 +25,11 @@ from createImageBill import close_browser
 
 POLL_INTERVAL = 5 * 60  # 5 minutes
 RETRY_INTERVAL = 60     # 1 minute on error
+CLEANUP_INTERVAL = 12 * 3600  # 12 hours
 
 _executor = ThreadPoolExecutor(max_workers=4)
 _shutdown = False
+_last_cleanup = 0
 
 
 def _signal_handler(sig, frame):
@@ -52,9 +56,41 @@ async def fetch_data():
     return await run_in_thread(getAllBillNeedProcess)
 
 
+def cleanup_old_files():
+    """Remove orphan bill images older than 1 hour and cap JSON file sizes."""
+    # Clean orphan images in image_bill/
+    if os.path.isdir("image_bill"):
+        now = time.time()
+        for f in glob.glob("image_bill/*.png"):
+            try:
+                if now - os.path.getmtime(f) > 3600:  # older than 1 hour
+                    os.remove(f)
+                    print(f"[CLEANUP] Removed orphan image: {f}")
+            except OSError:
+                pass
+
+    # Clean output images older than 3 days
+    for d in ["../output/anousith", "../output/hal"]:
+        if os.path.isdir(d):
+            now = time.time()
+            for f in glob.glob(os.path.join(d, "*.png")):
+                try:
+                    if now - os.path.getmtime(f) > 3 * 86400:
+                        os.remove(f)
+                        print(f"[CLEANUP] Removed old output: {f}")
+                except OSError:
+                    pass
+
+
 async def pipeline_cycle():
     """Single pipeline cycle: login -> fetch -> process."""
+    global _last_cleanup
     print("-----------Start process---------")
+
+    # Cleanup every 12 hours
+    if time.time() - _last_cleanup >= CLEANUP_INTERVAL:
+        cleanup_old_files()
+        _last_cleanup = time.time()
 
     # Login (sync, quick)
     await run_in_thread(login)
@@ -71,7 +107,7 @@ async def pipeline_cycle():
         json.dump(bills, f, indent=4)
 
     # Process all bills concurrently
-    await process_bills_batch(bills, concurrency=5)
+    await process_bills_batch(bills[:1], concurrency=5)
 
 
 async def main():

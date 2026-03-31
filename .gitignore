@@ -1,6 +1,5 @@
 sessions/
 output/
-data/
 __pycache__/
 *.pyc
 .env

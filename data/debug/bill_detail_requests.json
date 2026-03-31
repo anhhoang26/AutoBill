@@ -1,0 +1,73 @@
+[
+  {
+    "op": "Community",
+    "variables": {
+      "where": {
+        "isRead": "NEW",
+        "isPublic": 1,
+        "catalog": 20
+      },
+      "limit": 1,
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query Community($skip: Int, $orderBy: OrderByInput, $where: CommunityWhereInput, $limit: Int) {\n  community(skip: $skip, orderBy: $orderBy, where: $where, limit: $limit) {\n    total\n    data {\n      id\n      isRead\n      catalog {\n        id\n        title\n      }\n      title\n      subImages\n      description\n      files\n      videos\n      isPublic\n      createdAt\n      updatedAt\n      image\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": null,
+        "type": "CONSOLIDATE_COD",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "NotiFications",
+    "variables": {
+      "where": {
+        "id_profile": null,
+        "type": "ITEM_DES_BRANCH",
+        "isRead": 0
+      },
+      "orderBy": "createdAt_DESC"
+    },
+    "query": "query NotiFications($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: NotiFicationWhereInput) {\n  notiFications(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    data {\n      description\n      id_notification\n      isRead\n      notiDate\n      readDate\n      title\n      type\n      id_profile {\n        BANK_NAME\n        BANK_THB\n        BANK_USD\n        Bank_KIP\n        id_list\n        full_name\n      }\n      createdAt\n    }\n  }\n}"
+  },
+  {
+    "op": "SlideImages",
+    "variables": {
+      "where": {
+        "isPublic": 1,
+        "type": "POST_APP"
+      },
+      "orderBy": "createdAt_DESC",
+      "limit": 700
+    },
+    "query": "query SlideImages($limit: Int, $skip: Int, $orderBy: OrderByInput, $where: slideImageWhereInput) {\n  slideImages(limit: $limit, skip: $skip, orderBy: $orderBy, where: $where) {\n    total\n    data {\n      type\n      isPublic\n      image\n      id\n      description\n    }\n  }\n}"
+  },
+  {
+    "op": "ItemsV2",
+    "variables": {
+      "where": {
+        "trackingId": "undefined",
+        "isDeleted": 0
+      },
+      "limit": 2
+    },
+    "query": "query ItemsV2($where: ItemV2WhereInput, $skip: Int, $limit: Int, $noLimit: Boolean, $orderBy: OrderByItem) {\n  itemsV2(\n    where: $where\n    skip: $skip\n    limit: $limit\n    noLimit: $noLimit\n    orderBy: $orderBy\n  ) {\n    total\n    data {\n      _id\n      trackingId\n      providedBy {\n        _id\n      }\n      itemName\n      itemValueKIP\n      itemValueTHB\n      itemValueUSD\n      realItemValueKIP\n      realItemValueTHB\n      realItemValueUSD\n      receiverName\n      receiverPhone\n      description\n      extraExpenseKIP\n      isSummary\n      charge_on_shop\n      itemStatus\n      contactStatus\n      isCustomerCreated\n      width\n      weight\n      packagePrice\n      createdDate\n      originReceiveDate\n      originSendDate\n      destReceiveDate\n      destSendDate\n      trackingPlatform\n      sendCompleteDate\n      receiveBackwardDate\n      isDeleted\n      isExtraItem\n      isBackward\n      backwardDetail\n      originBranchId {\n        branch_name\n      }\n      destBranchId {\n        branch_name\n        branch_address\n      }\n      originProvinceId {\n        provinceName\n      }\n      destProvinceId {\n        provinceName\n      }\n      customerId {\n        full_name\n        contact_info\n        id_list\n      }\n      originReceiveBy {\n        first_name\n      }\n      createdBy {\n        last_name\n        first_name\n        phone_number\n      }\n    }\n  }\n}"
+  },
+  {
+    "op": "ItemsV2",
+    "variables": {
+      "where": {
+        "trackingId": "8260891749567",
+        "isDeleted": 0
+      },
+      "limit": 2
+    },
+    "query": "query ItemsV2($where: ItemV2WhereInput, $skip: Int, $limit: Int, $noLimit: Boolean, $orderBy: OrderByItem) {\n  itemsV2(\n    where: $where\n    skip: $skip\n    limit: $limit\n    noLimit: $noLimit\n    orderBy: $orderBy\n  ) {\n    total\n    data {\n      _id\n      trackingId\n      providedBy {\n        _id\n      }\n      itemName\n      itemValueKIP\n      itemValueTHB\n      itemValueUSD\n      realItemValueKIP\n      realItemValueTHB\n      realItemValueUSD\n      receiverName\n      receiverPhone\n      description\n      extraExpenseKIP\n      isSummary\n      charge_on_shop\n      itemStatus\n      contactStatus\n      isCustomerCreated\n      width\n      weight\n      packagePrice\n      createdDate\n      originReceiveDate\n      originSendDate\n      destReceiveDate\n      destSendDate\n      trackingPlatform\n      sendCompleteDate\n      receiveBackwardDate\n      isDeleted\n      isExtraItem\n      isBackward\n      backwardDetail\n      originBranchId {\n        branch_name\n      }\n      destBranchId {\n        branch_name\n        branch_address\n      }\n      originProvinceId {\n        provinceName\n      }\n      destProvinceId {\n        provinceName\n      }\n      customerId {\n        full_name\n        contact_info\n        id_list\n      }\n      originReceiveBy {\n        first_name\n      }\n      createdBy {\n        last_name\n        first_name\n        phone_number\n      }\n    }\n  }\n}"
+  }
+]

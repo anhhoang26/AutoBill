@@ -1,0 +1,2242 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAL Express Laos</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link href="/fontawesome-pro-5.12.0/css/all.min.css" rel="stylesheet">
+  <script type="module" crossorigin="" src="/assets/index.ae22b4e4.js"></script>
+  <link rel="stylesheet" href="/assets/index.f730922f.css">
+<style type="text/css">
+.p-card-header img {
+    width: 100%;
+}
+</style><style type="text/css">
+.p-menubar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-menubar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.p-menubar .p-menuitem-link {
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+.p-menubar .p-menuitem-text {
+    line-height: 1;
+}
+.p-menubar .p-menuitem {
+    position: relative;
+}
+.p-menubar-root-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-menubar-root-list > li ul {
+    display: none;
+    z-index: 1;
+}
+.p-menubar-root-list > .p-menuitem-active > .p-submenu-list {
+    display: block;
+}
+.p-menubar .p-submenu-list {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list  {
+    display: block;
+    left: 100%;
+    top: 0;
+}
+.p-menubar .p-submenu-list .p-menuitem-link .p-submenu-icon {
+    margin-left: auto;
+}
+.p-menubar .p-menubar-custom,
+.p-menubar .p-menubar-end {
+    margin-left: auto;
+    -ms-flex-item-align: center;
+        align-self: center;
+}
+.p-menubar-button {
+    display: none;
+    cursor: pointer;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-decoration: none;
+}
+</style><style type="text/css">
+.p-avatar {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+.p-avatar.p-avatar-image {
+    background-color: transparent;
+}
+.p-avatar.p-avatar-circle {
+    border-radius: 50%;
+}
+.p-avatar-circle img {
+    border-radius: 50%;
+}
+.p-avatar .p-avatar-icon {
+    font-size: 1rem;
+}
+.p-avatar img {
+    width: 100%;
+    height: 100%;
+}
+</style><style type="text/css">
+.p-breadcrumb {
+    overflow-x: auto;
+}
+.p-breadcrumb ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+}
+.p-breadcrumb .p-menuitem-text {
+    line-height: 1;
+}
+.p-breadcrumb .p-menuitem-link {
+    text-decoration: none;
+}
+.p-breadcrumb::-webkit-scrollbar {
+    display: none;
+}
+</style><style type="text/css">
+.p-toolbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.p-toolbar-group-left,
+.p-toolbar-group-right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+</style><style type="text/css">
+.p-calendar {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    max-width: 100%;
+}
+.p-calendar .p-inputtext {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    width: 1%;
+}
+.p-calendar-w-btn .p-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.p-calendar-w-btn .p-datepicker-trigger {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Fluid */
+.p-fluid .p-calendar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.p-fluid .p-calendar .p-inputtext {
+    width: 1%;
+}
+
+/* Datepicker */
+.p-calendar .p-datepicker {
+    min-width: 100%;
+}
+.p-datepicker {
+	width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.p-datepicker-inline {
+    display: inline-block;
+    position: static;
+    overflow-x: auto;
+}
+
+/* Header */
+.p-datepicker-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+.p-datepicker-header .p-datepicker-title {
+    margin: 0 auto;
+}
+.p-datepicker-prev,
+.p-datepicker-next {
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Multiple Month DatePicker */
+.p-datepicker-multiple-month .p-datepicker-group-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.p-datepicker-multiple-month .p-datepicker-group-container .p-datepicker-group {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+
+/* DatePicker Table */
+.p-datepicker table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.p-datepicker td > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    cursor: pointer;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Month Picker */
+.p-monthpicker-month {
+    width: 33.3%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Year Picker */
+.p-yearpicker-year {
+    width: 50%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+/*  Button Bar */
+.p-datepicker-buttonbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+/* Time Picker */
+.p-timepicker {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-timepicker button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+.p-timepicker > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+/* Touch UI */
+.p-datepicker-touch-ui,
+.p-calendar .p-datepicker-touch-ui {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 80vw;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+</style><style type="text/css">
+.p-virtualscroller {
+    position: relative;
+    overflow: auto;
+    contain: strict;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    will-change: scroll-position;
+    outline: 0 none;
+}
+.p-virtualscroller-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    contain: content;
+    min-height: 100%;
+    min-width: 100%;
+    will-change: transform;
+}
+.p-virtualscroller-spacer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 1px;
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    pointer-events: none;
+}
+.p-virtualscroller .p-virtualscroller-loader {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.p-virtualscroller-loader.p-component-overlay {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+</style><style type="text/css">
+.p-dropdown {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+.p-dropdown-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+}
+.p-dropdown-trigger {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
+.p-dropdown-label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    width: 1%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.p-dropdown-label-empty {
+    overflow: hidden;
+    opacity: 0;
+}
+input.p-dropdown-label  {
+    cursor: default;
+}
+.p-dropdown .p-dropdown-panel {
+    min-width: 100%;
+}
+.p-dropdown-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.p-dropdown-items-wrapper {
+    overflow: auto;
+}
+.p-dropdown-item {
+    cursor: pointer;
+    font-weight: normal;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+.p-dropdown-item-group {
+    cursor: auto;
+}
+.p-dropdown-items {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.p-dropdown-filter {
+    width: 100%;
+}
+.p-dropdown-filter-container {
+    position: relative;
+}
+.p-dropdown-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+}
+.p-fluid .p-dropdown {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.p-fluid .p-dropdown .p-dropdown-label {
+    width: 1%;
+}
+</style><style type="text/css">
+.p-inputnumber {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+.p-inputnumber-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+}
+.p-inputnumber-buttons-stacked .p-button.p-inputnumber-button .p-button-label,
+.p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button .p-button-label {
+    display: none;
+}
+.p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0;
+}
+.p-inputnumber-buttons-stacked .p-inputnumber-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0;
+}
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-button.p-inputnumber-button {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+.p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-up {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    border-radius: 0;
+}
+.p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-down {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.p-inputnumber-buttons-vertical {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 100%;
+}
+.p-inputnumber-buttons-vertical .p-inputnumber-input {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    border-radius: 0;
+    text-align: center;
+}
+.p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    width: 100%;
+}
+.p-inputnumber-input {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+.p-fluid .p-inputnumber {
+    width: 100%;
+}
+.p-fluid .p-inputnumber .p-inputnumber-input {
+    width: 1%;
+}
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-input {
+    width: 100%;
+}
+</style><style type="text/css">
+.p-paginator {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.p-paginator-left-content {
+	margin-right: auto;
+}
+.p-paginator-right-content {
+	margin-left: auto;
+}
+.p-paginator-page,
+.p-paginator-next,
+.p-paginator-last,
+.p-paginator-first,
+.p-paginator-prev,
+.p-paginator-current {
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    line-height: 1;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    overflow: hidden;
+    position: relative;
+}
+.p-paginator-element:focus {
+    z-index: 1;
+    position: relative;
+}
+</style><style type="text/css">
+.p-datatable {
+    position: relative;
+}
+.p-datatable table {
+    border-collapse: collapse;
+    min-width: 100%;
+    table-layout: fixed;
+}
+.p-datatable .p-sortable-column {
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+.p-datatable .p-sortable-column .p-column-title,
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-datatable .p-sortable-column .p-sortable-column-badge {
+    vertical-align: middle;
+}
+.p-datatable .p-sortable-column .p-sortable-column-badge {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-datatable-responsive-scroll > .p-datatable-wrapper {
+    overflow-x: auto;
+}
+.p-datatable-responsive-scroll > .p-datatable-wrapper > table,
+.p-datatable-auto-layout > .p-datatable-wrapper > table {
+    table-layout: auto;
+}
+.p-datatable-hoverable-rows .p-selectable-row {
+    cursor: pointer;
+}
+
+/* Scrollable */
+.p-datatable-scrollable .p-datatable-wrapper {
+    position: relative;
+    overflow: auto;
+}
+.p-datatable-scrollable .p-datatable-thead,
+.p-datatable-scrollable .p-datatable-tbody,
+.p-datatable-scrollable .p-datatable-tfoot {
+    display: block;
+}
+.p-datatable-scrollable .p-datatable-thead > tr,
+.p-datatable-scrollable .p-datatable-tbody > tr,
+.p-datatable-scrollable .p-datatable-tfoot > tr {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    width: 100%;
+}
+.p-datatable-scrollable .p-datatable-thead > tr > th,
+.p-datatable-scrollable .p-datatable-tbody > tr > td,
+.p-datatable-scrollable .p-datatable-tfoot > tr > td {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 0px;
+            flex: 1 1 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-datatable-scrollable .p-datatable-thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.p-datatable-scrollable .p-datatable-frozen-tbody {
+    position: sticky;
+    z-index: 1;
+}
+.p-datatable-scrollable .p-datatable-tfoot {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+.p-datatable-scrollable .p-frozen-column {
+    position: sticky;
+    background: inherit;
+}
+.p-datatable-scrollable th.p-frozen-column {
+    z-index: 1;
+}
+.p-datatable-scrollable-both .p-datatable-thead > tr > th,
+.p-datatable-scrollable-both .p-datatable-tbody > tr > td,
+.p-datatable-scrollable-both .p-datatable-tfoot > tr > td,
+.p-datatable-scrollable-horizontal .p-datatable-thead > tr > th
+.p-datatable-scrollable-horizontal .p-datatable-tbody > tr > td,
+.p-datatable-scrollable-horizontal .p-datatable-tfoot > tr > td {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+}
+.p-datatable-flex-scrollable {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 100%;
+}
+.p-datatable-flex-scrollable .p-datatable-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    height: 100%;
+}
+.p-datatable-scrollable .p-rowgroup-header {
+    position: sticky;
+    z-index: 1;
+}
+.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead,
+.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr,
+.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr {
+    display: table-row;
+}
+.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr > th,
+.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr > td {
+    display: table-cell;
+}
+.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {
+    display: inline-block; /* For Safari */
+}
+
+/* Resizable */
+.p-datatable-resizable > .p-datatable-wrapper {
+    overflow-x: auto;
+}
+.p-datatable-resizable .p-datatable-thead > tr > th,
+.p-datatable-resizable .p-datatable-tfoot > tr > td,
+.p-datatable-resizable .p-datatable-tbody > tr > td {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.p-datatable-resizable .p-resizable-column:not(.p-frozen-column) {
+    background-clip: padding-box;
+    position: relative;
+}
+.p-datatable-resizable-fit .p-resizable-column:last-child .p-column-resizer {
+    display: none;
+}
+.p-datatable .p-column-resizer {
+    display: block;
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: .5rem;
+    height: 100%;
+    padding: 0px;
+    cursor:col-resize;
+    border: 1px solid transparent;
+}
+.p-datatable .p-column-header-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-datatable .p-column-resizer-helper {
+    width: 1px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+}
+.p-datatable .p-row-editor-init,
+.p-datatable .p-row-editor-save,
+.p-datatable .p-row-editor-cancel {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Expand */
+.p-datatable .p-row-toggler {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Reorder */
+.p-datatable-reorder-indicator-up,
+.p-datatable-reorder-indicator-down {
+    position: absolute;
+    display: none;
+}
+.p-reorderable-column,
+.p-datatable-reorderablerow-handle {
+    cursor: move;
+}
+
+/* Loader */
+.p-datatable .p-datatable-loading-overlay {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    z-index: 2;
+}
+
+/* Filter */
+.p-column-filter-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+}
+.p-column-filter-menu {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    margin-left: auto;
+}
+.p-column-filter-row .p-column-filter-element {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    width: 1%;
+}
+.p-column-filter-menu-button,
+.p-column-filter-clear-button {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+.p-column-filter-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.p-column-filter-row-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.p-column-filter-row-item {
+    cursor: pointer;
+}
+.p-column-filter-add-button,
+.p-column-filter-remove-button {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-column-filter-add-button .p-button-label,
+.p-column-filter-remove-button .p-button-label {
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+}
+.p-column-filter-buttonbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+.p-column-filter-buttonbar .p-button:not(.p-button-icon-only) {
+    width: auto;
+}
+
+/* Responsive */
+.p-datatable .p-datatable-tbody > tr > td > .p-column-title {
+    display: none;
+}
+
+/* VirtualScroller */
+.p-datatable .p-virtualscroller-loading {
+    -webkit-transform: none !important;
+            transform: none !important;
+    min-height: 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+</style><style type="text/css">
+.p-password {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+.p-password-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.p-password .p-password-panel {
+    min-width: 100%;
+}
+.p-password-meter {
+    height: 10px;
+}
+.p-password-strength {
+    height: 100%;
+    width: 0;
+    -webkit-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+}
+.p-fluid .p-password {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+</style><style type="text/css">
+.p-toast {
+    position: fixed;
+    width: 25rem;
+}
+.p-toast-message-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+.p-toast-message-text {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+.p-toast-top-right {
+	top: 20px;
+	right: 20px;
+}
+.p-toast-top-left {
+	top: 20px;
+	left: 20px;
+}
+.p-toast-bottom-left {
+	bottom: 20px;
+	left: 20px;
+}
+.p-toast-bottom-right {
+	bottom: 20px;
+	right: 20px;
+}
+.p-toast-top-center {
+	top: 20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+.p-toast-bottom-center {
+	bottom: 20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+.p-toast-center {
+	left: 50%;
+	top: 50%;
+    min-width: 20vw;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+.p-toast-icon-close {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+.p-toast-icon-close.p-link {
+	cursor: pointer;
+}
+
+/* Animations */
+.p-toast-message-enter-from {
+    opacity: 0;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+}
+.p-toast-message-leave-from {
+    max-height: 1000px;
+}
+.p-toast .p-toast-message.p-toast-message-leave-to {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+.p-toast-message-enter-active {
+    -webkit-transition: transform .3s, opacity .3s;
+    -webkit-transition: opacity .3s, -webkit-transform .3s;
+    transition: opacity .3s, -webkit-transform .3s;
+    transition: transform .3s, opacity .3s;
+    transition: transform .3s, opacity .3s, -webkit-transform .3s;
+}
+.p-toast-message-leave-active {
+    -webkit-transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;
+    transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;
+}
+</style><style type="text/css">
+.p-tabview-nav-container {
+    position: relative;
+}
+.p-tabview-scrollable .p-tabview-nav-container {
+    overflow: hidden;
+}
+.p-tabview-nav-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-scroll-chaining: contain auto;
+        overscroll-behavior: contain auto;
+}
+.p-tabview-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+.p-tabview-nav-link {
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+}
+.p-tabview-ink-bar {
+    display: none;
+    z-index: 1;
+}
+.p-tabview-nav-link:focus {
+    z-index: 1;
+}
+.p-tabview-title {
+    line-height: 1;
+    white-space: nowrap;
+}
+.p-tabview-nav-btn {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-tabview-nav-prev {
+    left: 0;
+}
+.p-tabview-nav-next {
+    right: 0;
+}
+.p-tabview-nav-content::-webkit-scrollbar {
+    display: none;
+}
+</style><style type="text/css">
+.p-skeleton {
+    position: relative;
+    overflow: hidden;
+}
+.p-skeleton::after {
+    content: "";
+    -webkit-animation: p-skeleton-animation 1.2s infinite;
+            animation: p-skeleton-animation 1.2s infinite;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    z-index: 1;
+}
+.p-skeleton.p-skeleton-circle {
+    border-radius: 50%;
+}
+.p-skeleton-none::after {
+   -webkit-animation: none;
+           animation: none;
+}
+@-webkit-keyframes p-skeleton-animation {
+from {
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+}
+to {
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+}
+}
+@keyframes p-skeleton-animation {
+from {
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+}
+to {
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+}
+}
+</style><style type="text/css">
+.p-tabmenu {
+    overflow-x: auto;
+}
+.p-tabmenu-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+}
+.p-tabmenu-nav a {
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    text-decoration: none;
+    text-decoration: none;
+    overflow: hidden;
+}
+.p-tabmenu-nav a:focus {
+    z-index: 1;
+}
+.p-tabmenu-nav .p-menuitem-text {
+    line-height: 1;
+}
+.p-tabmenu-ink-bar {
+    display: none;
+    z-index: 1;
+}
+.p-tabmenu::-webkit-scrollbar {
+    display: none;
+}
+</style><style type="text/css">
+.p-timeline {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.p-timeline-left .p-timeline-event-opposite {
+    text-align: right;
+}
+.p-timeline-left .p-timeline-event-content {
+    text-align: left;
+}
+.p-timeline-right .p-timeline-event {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+}
+.p-timeline-right .p-timeline-event-opposite {
+    text-align: left;
+}
+.p-timeline-right .p-timeline-event-content {
+    text-align: right;
+}
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+}
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(odd) .p-timeline-event-opposite {
+    text-align: right;
+}
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(odd) .p-timeline-event-content {
+    text-align: left;
+}
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) .p-timeline-event-opposite {
+    text-align: left;
+}
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) .p-timeline-event-content {
+    text-align: right;
+}
+.p-timeline-event {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    min-height: 70px;
+}
+.p-timeline-event:last-child {
+    min-height: 0;
+}
+.p-timeline-event-opposite {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding: 0 1rem;
+}
+.p-timeline-event-content {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding: 0 1rem;
+}
+.p-timeline-event-separator {
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.p-timeline-event-marker {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: baseline;
+        align-self: baseline;
+}
+.p-timeline-event-connector {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+}
+.p-timeline-horizontal {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+.p-timeline-horizontal .p-timeline-event {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+.p-timeline-horizontal .p-timeline-event:last-child {
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0;
+}
+.p-timeline-horizontal .p-timeline-event-separator {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+.p-timeline-horizontal .p-timeline-event-connector  {
+    width: 100%;
+}
+.p-timeline-bottom .p-timeline-event {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+}
+.p-timeline-horizontal.p-timeline-alternate .p-timeline-event:nth-child(even) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+}
+</style><style type="text/css">
+.p-fieldset-legend > a,
+.p-fieldset-legend > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-fieldset-toggleable .p-fieldset-legend a {
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+}
+.p-fieldset-legend-text {
+    line-height: 1;
+}
+</style><style type="text/css">
+.p-sidebar {
+    position: fixed;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.p-sidebar-content {
+    position: relative;
+    overflow-y: auto;
+}
+.p-sidebar-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+}
+.p-sidebar-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.p-sidebar-left {
+    top: 0;
+    left: 0;
+    width: 20rem;
+    height: 100%;
+}
+.p-sidebar-right {
+    top: 0;
+    right: 0;
+    width: 20rem;
+    height: 100%;
+}
+.p-sidebar-top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10rem;
+}
+.p-sidebar-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10rem;
+}
+.p-sidebar-full {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transition: none;
+    transition: none;
+}
+.p-sidebar-left.p-sidebar-enter-from,
+.p-sidebar-left.p-sidebar-leave-to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+.p-sidebar-right.p-sidebar-enter-from,
+.p-sidebar-right.p-sidebar-leave-to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+}
+.p-sidebar-top.p-sidebar-enter-from,
+.p-sidebar-top.p-sidebar-leave-to {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+}
+.p-sidebar-bottom.p-sidebar-enter-from,
+.p-sidebar-bottom.p-sidebar-leave-to {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+}
+.p-sidebar-full.p-sidebar-enter-from,
+.p-sidebar-full.p-sidebar-leave-to {
+    opacity: 0;
+}
+.p-sidebar-full.p-sidebar-enter-active,
+.p-sidebar-full.p-sidebar-leave-active {
+    -webkit-transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.p-sidebar-left.p-sidebar-sm,
+.p-sidebar-right.p-sidebar-sm {
+    width: 20rem;
+}
+.p-sidebar-left.p-sidebar-md,
+.p-sidebar-right.p-sidebar-md {
+    width: 40rem;
+}
+.p-sidebar-left.p-sidebar-lg,
+.p-sidebar-right.p-sidebar-lg {
+    width: 60rem;
+}
+.p-sidebar-top.p-sidebar-sm,
+.p-sidebar-bottom.p-sidebar-sm {
+    height: 10rem;
+}
+.p-sidebar-top.p-sidebar-md,
+.p-sidebar-bottom.p-sidebar-md {
+    height: 20rem;
+}
+.p-sidebar-top.p-sidebar-lg,
+.p-sidebar-bottom.p-sidebar-lg {
+    height: 30rem;
+}
+@media screen and (max-width: 64em) {
+.p-sidebar-left.p-sidebar-lg,
+    .p-sidebar-left.p-sidebar-md,
+    .p-sidebar-right.p-sidebar-lg,
+    .p-sidebar-right.p-sidebar-md {
+        width: 20rem;
+}
+}
+</style><style type="text/css">
+.p-dialog-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    pointer-events: none;
+}
+.p-dialog-mask.p-component-overlay {
+    pointer-events: auto;
+}
+.p-dialog {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    pointer-events: auto;
+    max-height: 90%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+}
+.p-dialog-content {
+    overflow-y: auto;
+}
+.p-dialog-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
+.p-dialog-footer {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
+.p-dialog .p-dialog-header-icons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-dialog .p-dialog-header-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fluid */
+.p-fluid .p-dialog-footer .p-button {
+    width: auto;
+}
+
+/* Animation */
+/* Center */
+.p-dialog-enter-active {
+    -webkit-transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
+    transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+.p-dialog-leave-active {
+    -webkit-transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.p-dialog-enter-from,
+.p-dialog-leave-to {
+    opacity: 0;
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+}
+
+/* Top, Bottom, Left, Right, Top* and Bottom* */
+.p-dialog-top .p-dialog,
+.p-dialog-bottom .p-dialog,
+.p-dialog-left .p-dialog,
+.p-dialog-right .p-dialog,
+.p-dialog-topleft .p-dialog,
+.p-dialog-topright .p-dialog,
+.p-dialog-bottomleft .p-dialog,
+.p-dialog-bottomright .p-dialog {
+    margin: .75rem;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+            transform: translate3d(0px, 0px, 0px);
+}
+.p-dialog-top .p-dialog-enter-active,
+.p-dialog-top .p-dialog-leave-active,
+.p-dialog-bottom .p-dialog-enter-active,
+.p-dialog-bottom .p-dialog-leave-active,
+.p-dialog-left .p-dialog-enter-active,
+.p-dialog-left .p-dialog-leave-active,
+.p-dialog-right .p-dialog-enter-active,
+.p-dialog-right .p-dialog-leave-active,
+.p-dialog-topleft .p-dialog-enter-active,
+.p-dialog-topleft .p-dialog-leave-active,
+.p-dialog-topright .p-dialog-enter-active,
+.p-dialog-topright .p-dialog-leave-active,
+.p-dialog-bottomleft .p-dialog-enter-active,
+.p-dialog-bottomleft .p-dialog-leave-active,
+.p-dialog-bottomright .p-dialog-enter-active,
+.p-dialog-bottomright .p-dialog-leave-active {
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.p-dialog-top .p-dialog-enter-from,
+.p-dialog-top .p-dialog-leave-to {
+    -webkit-transform: translate3d(0px, -100%, 0px);
+            transform: translate3d(0px, -100%, 0px);
+}
+.p-dialog-bottom .p-dialog-enter-from,
+.p-dialog-bottom .p-dialog-leave-to {
+    -webkit-transform: translate3d(0px, 100%, 0px);
+            transform: translate3d(0px, 100%, 0px);
+}
+.p-dialog-left .p-dialog-enter-from,
+.p-dialog-left .p-dialog-leave-to,
+.p-dialog-topleft .p-dialog-enter-from,
+.p-dialog-topleft .p-dialog-leave-to,
+.p-dialog-bottomleft .p-dialog-enter-from,
+.p-dialog-bottomleft .p-dialog-leave-to {
+    -webkit-transform: translate3d(-100%, 0px, 0px);
+            transform: translate3d(-100%, 0px, 0px);
+}
+.p-dialog-right .p-dialog-enter-from,
+.p-dialog-right .p-dialog-leave-to,
+.p-dialog-topright .p-dialog-enter-from,
+.p-dialog-topright .p-dialog-leave-to,
+.p-dialog-bottomright .p-dialog-enter-from,
+.p-dialog-bottomright .p-dialog-leave-to {
+    -webkit-transform: translate3d(100%, 0px, 0px);
+            transform: translate3d(100%, 0px, 0px);
+}
+
+/* Maximize */
+.p-dialog-maximized {
+    -webkit-transition: none;
+    transition: none;
+    -webkit-transform: none;
+            transform: none;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0px !important;
+    left: 0px !important;
+    max-height: 100%;
+    height: 100%;
+}
+.p-dialog-maximized .p-dialog-content {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+}
+
+/* Position */
+.p-dialog-left {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+}
+.p-dialog-right {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+}
+.p-dialog-top {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+.p-dialog-topleft {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+.p-dialog-topright {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+.p-dialog-bottom {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+.p-dialog-bottomleft {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+.p-dialog-bottomright {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+.p-confirm-dialog .p-dialog-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+</style><style type="text/css">
+.p-scrollpanel-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    float: left;
+}
+.p-scrollpanel-content {
+    height: calc(100% + 18px);
+    width: calc(100% + 18px);
+    padding: 0 18px 18px 0;
+    position: relative;
+    overflow: scroll;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.p-scrollpanel-bar {
+    position: relative;
+    background: #c1c1c1;
+    border-radius: 3px;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-transition: opacity 0.25s linear;
+    transition: opacity 0.25s linear;
+}
+.p-scrollpanel-bar-y {
+    width: 9px;
+    top: 0;
+}
+.p-scrollpanel-bar-x {
+    height: 9px;
+    bottom: 0;
+}
+.p-scrollpanel-hidden {
+    visibility: hidden;
+}
+.p-scrollpanel:hover .p-scrollpanel-bar,
+.p-scrollpanel:active .p-scrollpanel-bar {
+    opacity: 1;
+}
+.p-scrollpanel-grabbed {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+</style><style type="text/css">
+.p-divider-horizontal {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    position: relative;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-divider-horizontal:before {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    content: "";
+}
+.p-divider-horizontal.p-divider-left {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+}
+.p-divider-horizontal.p-divider-right {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+}
+.p-divider-horizontal.p-divider-center {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-divider-content {
+    z-index: 1;
+}
+.p-divider-vertical {
+    min-height: 100%;
+    margin: 0 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+.p-divider-vertical:before {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    content: "";
+}
+.p-divider-vertical.p-divider-top {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+.p-divider-vertical.p-divider-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.p-divider-vertical.p-divider-bottom {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+.p-divider-solid.p-divider-horizontal:before {
+    border-top-style: solid;
+}
+.p-divider-solid.p-divider-vertical:before {
+    border-left-style: solid;
+}
+.p-divider-dashed.p-divider-horizontal:before {
+    border-top-style: dashed;
+}
+.p-divider-dashed.p-divider-vertical:before {
+    border-left-style: dashed;
+}
+.p-divider-dotted.p-divider-horizontal:before {
+    border-top-style: dotted;
+}
+.p-divider-dotted.p-divider-horizontal:before {
+    border-left-style: dotted;
+}
+</style><style type="text/css">
+.p-confirm-popup {
+    position: absolute;
+    margin-top: 10px;
+    top: 0;
+    left: 0;
+}
+.p-confirm-popup-flipped {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Animation */
+.p-confirm-popup-enter-from {
+    opacity: 0;
+    -webkit-transform: scaleY(0.8);
+            transform: scaleY(0.8);
+}
+.p-confirm-popup-leave-to {
+    opacity: 0;
+}
+.p-confirm-popup-enter-active {
+    -webkit-transition: opacity .12s cubic-bezier(0, 0, 0.2, 1), -webkit-transform .12s cubic-bezier(0, 0, 0.2, 1);
+    transition: opacity .12s cubic-bezier(0, 0, 0.2, 1), -webkit-transform .12s cubic-bezier(0, 0, 0.2, 1);
+    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1), -webkit-transform .12s cubic-bezier(0, 0, 0.2, 1);
+}
+.p-confirm-popup-leave-active {
+    -webkit-transition: opacity .1s linear;
+    transition: opacity .1s linear;
+}
+.p-confirm-popup:after, .p-confirm-popup:before {
+	bottom: 100%;
+	left: calc(var(--overlayArrowLeft, 0) + 1.25rem);
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.p-confirm-popup:after {
+	border-width: 8px;
+	margin-left: -8px;
+}
+.p-confirm-popup:before {
+	border-width: 10px;
+	margin-left: -10px;
+}
+.p-confirm-popup-flipped:after, .p-confirm-popup-flipped:before {
+    bottom: auto;
+    top: 100%;
+}
+.p-confirm-popup.p-confirm-popup-flipped:after {
+    border-bottom-color: transparent;
+}
+.p-confirm-popup.p-confirm-popup-flipped:before {
+    border-bottom-color: transparent
+}
+.p-confirm-popup .p-confirm-popup-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+</style><link rel="modulepreload" as="script" crossorigin="" href="/assets/parcelOut.6e02585b.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/TabStatus.80b776ad.js"><link rel="stylesheet" href="/assets/TabStatus.02d10a91.css"><link rel="modulepreload" as="script" crossorigin="" href="/assets/printPreorder.ae4447ee.js"><link rel="stylesheet" href="/assets/printPreorder.09fad1d7.css"><link rel="modulepreload" as="script" crossorigin="" href="/assets/skeletonCardOrderDetail.960c89a1.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/_plugin-vue_export-helper.cdc0426e.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/smLogo.4af2b227.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/delete.8d0959a0.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/message.d001f8e8.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/SearchPage.b36eb6ec.js"><link rel="stylesheet" href="/assets/SearchPage.fd1a6f43.css"><link rel="modulepreload" as="script" crossorigin="" href="/assets/skeletonSearchBranch.590ae0b4.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/index.8938afd2.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/custom-eventsource.86a61b66.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/skeletonTable.d7f5b1bb.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/cardParcelDetail.2cf21892.js"><link rel="modulepreload" as="script" crossorigin="" href="/assets/cursorPaginate.40b91728.js"><link rel="stylesheet" href="/assets/cursorPaginate.0f22a98a.css"><style type="text/css">
+.p-progress-spinner {
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+.p-progress-spinner::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+.p-progress-spinner-svg {
+    -webkit-animation: p-progress-spinner-rotate 2s linear infinite;
+            animation: p-progress-spinner-rotate 2s linear infinite;
+    height: 100%;
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.p-progress-spinner-circle {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: 0;
+    stroke: #d62d20;
+    -webkit-animation: p-progress-spinner-dash 1.5s ease-in-out infinite, p-progress-spinner-color 6s ease-in-out infinite;
+            animation: p-progress-spinner-dash 1.5s ease-in-out infinite, p-progress-spinner-color 6s ease-in-out infinite;
+    stroke-linecap: round;
+}
+@-webkit-keyframes p-progress-spinner-rotate {
+100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+}
+}
+@keyframes p-progress-spinner-rotate {
+100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+}
+}
+@-webkit-keyframes p-progress-spinner-dash {
+0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+}
+50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+}
+100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+}
+}
+@keyframes p-progress-spinner-dash {
+0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+}
+50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+}
+100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+}
+}
+@-webkit-keyframes p-progress-spinner-color {
+100%,
+    0% {
+        stroke: #d62d20;
+}
+40% {
+        stroke: #0057e7;
+}
+66% {
+        stroke: #008744;
+}
+80%,
+    90% {
+        stroke: #ffa700;
+}
+}
+@keyframes p-progress-spinner-color {
+100%,
+    0% {
+        stroke: #d62d20;
+}
+40% {
+        stroke: #0057e7;
+}
+66% {
+        stroke: #008744;
+}
+80%,
+    90% {
+        stroke: #ffa700;
+}
+}
+</style><style type="text/css">
+                        @media screen and (max-width: 960px) {
+                            .p-dialog[pv_id_4] {
+                                width: 75vw !important;
+                            }
+                        }
+                    
+                        @media screen and (max-width: 640px) {
+                            .p-dialog[pv_id_4] {
+                                width: 90vw !important;
+                            }
+                        }
+                    </style><style type="text/css">
+                        @media screen and (max-width: 960px) {
+                            .p-dialog[pv_id_5] {
+                                width: 75vw !important;
+                            }
+                        }
+                    
+                        @media screen and (max-width: 640px) {
+                            .p-dialog[pv_id_5] {
+                                width: 90vw !important;
+                            }
+                        }
+                    </style><style type="text/css">
+                        @media screen and (max-width: 860px) {
+                            .p-dialog[pv_id_6] {
+                                width: 75vw !important;
+                            }
+                        }
+                    
+                        @media screen and (max-width: 640px) {
+                            .p-dialog[pv_id_6] {
+                                width: 90vw !important;
+                            }
+                        }
+                    </style><style type="text/css">
+@media screen and (max-width: 960px) {
+    .p-datatable[pv_id_8] .p-datatable-thead > tr > th,
+    .p-datatable[pv_id_8] .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .p-datatable[pv_id_8] .p-datatable-tbody > tr > td {
+        display: flex;
+        width: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .p-datatable[pv_id_8] .p-datatable-tbody > tr > td:not(:last-child) {
+        border: 0 none;
+    }
+
+    .p-datatable[pv_id_8].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    .p-datatable[pv_id_8] .p-datatable-tbody > tr > td > .p-column-title {
+        display: block;
+    }
+}
+</style></head>
+<body>
+<div id="app" data-v-app=""><div class="container w-full max-w-screen min-h-screen"><div class="nav--shadow z-5 flex justify-content-center align-content-center bg-white fixed w-screen h-5rem"><div class="p-menubar p-component nav--top fixed h-5rem bg-white"><div class="p-menubar-start"><div class="p-avatar p-component p-avatar-image p-avatar-circle p-avatar-lg mr-2"><img src="/assets/hallogo.92db0521.png"></div></div><a tabindex="0" class="p-menubar-button"><i class="pi pi-bars"></i></a><ul class="p-menubar-root-list" role="menubar"><li role="none" class="p-menuitem"><a href="/dashboard/customer" class="custom-menu-item"><i class="far fa-chart-pie mr-2"></i> ຫນ້າຫຼັກ</a><!----></li><!----><li role="none" class="p-menuitem"><a href="/list-cod-customer" class="custom-menu-item"><i class="fal fa-clipboard-list mr-2"></i> ເບິ່ງລາຍການ COD</a><!----></li><!----><li role="none" class="p-menuitem"><a href="/parcel/shipment/status/in?tab=0&amp;status=processing" class="custom-menu-item"><i class="fal fa-clipboard-list mr-2"></i> ພັດສະດຸຂາເຂົ້າ</a><!----></li><!----><li role="none" class="p-menuitem"><a aria-current="page" href="/parcel/shipment/status/out?tab=0&amp;status=processing" class="router-link-active router-link-exact-active custom-menu-item active-menu"><i class="fal fa-clipboard-list mr-2"></i> ພັດສະດຸຂາອອກ</a><!----></li><!----><li role="none" class="p-menuitem"><a href="/dashboard/search" class="custom-menu-item"><i class="fal fa-search mr-2"></i> ຄົ້ນຫາຂໍ້ມູນສາຂາ</a><!----></li><!----><li role="none" class="p-menuitem"><a aria-current="page" href="/parcel/shipment/status/out?tab=5&amp;status=pending" class="router-link-active router-link-exact-active custom-menu-item"><i class="fal fa-clipboard-list mr-2"></i> ບິນສ້າງເອງ</a><!----></li><!----><li role="none" class="p-menuitem"><!----><!----></li><!----></ul><div class="p-menubar-end"><div class="user-profile-section"><div class="p-avatar p-component p-avatar-circle mr-2 cursor-pointer" style="background-color: rgb(33, 150, 243); color: rgb(255, 255, 255);"><span class="p-avatar-text">N</span></div><div class="user-info"><div class="user-name"><i class="far fa-user mr-1"></i><span class="info-label">ຊື້ຜູ້ໃຊ້:</span> NGOC</div><div class="user-tel"><i class="far fa-phone mr-1"></i><span class="info-label">ເບີໂທ:</span> 98709576</div></div><i class="pi pi-angle-down ml-2"></i><!----></div></div></div></div><div class="card max-w-screen min-h-screen flex justify-content-center align-content-center"><div class="layout-main card w-full bg-gray-100"><div class="grid"><div class="col-12 md:col-12 lg:col-12 h-auto min-h-screen max-w-screen"><div class="card w-12 bg-white mt-2 p-4"><div class="p-tabmenu p-component"><ul class="p-tabmenu-nav p-reset" role="tablist"><li class="p-tabmenuitem" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ກຳລັງຈັດສົ່ງ</span></a></li><li class="p-tabmenuitem" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ຮອດສາຂາປາຍທາງ</span></a></li><li class="p-tabmenuitem" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ຈັດສົ່ງສຳເລັດ</span></a></li><li class="p-tabmenuitem p-highlight" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ຕີກັບ</span></a></li><li class="p-tabmenuitem" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ຕີກັບສົ່ງສຳເລັດ</span></a></li><li class="p-tabmenuitem" role="tab"><a class="p-menuitem-link" role="presentation" tabindex="0"><!----><span class="p-menuitem-text">ບິນສ້າງເອງ</span></a></li><li class="p-tabmenu-ink-bar" style="width: 66px; left: 338.156px;"></li></ul></div><div class="p-toolbar p-component mt-3 mb-2" role="toolbar" data-v-fb999567=""><div class="p-toolbar-group-left"><div class="flex justify-content-between w-full" data-v-fb999567=""><div class="flex justify-content-start align-items-center" data-v-fb999567=""><div class="pr-2 text-black-alpha-80 text-xl" data-v-fb999567=""><i class="fal fa-boxes" data-v-fb999567=""></i></div><h2 class="text-xl font-medium text-black-alpha-80" data-v-fb999567=""> ຂໍ້ມູນພັດສະດຸຂາອອກ <span class="text-2xl font-bold text-red-700" data-v-fb999567="">( 88 ຕີກັບ )</span></h2><!----><!----><!----></div></div></div><div class="p-toolbar-group-right"><div class="flex pr-4" data-v-fb999567=""><input class="p-inputtext p-component base-height" placeholder="ຄົ້ນຫາຂໍ້ມູນ" data-v-fb999567="" style=""><span id="icon" class="p-calendar p-component p-inputwrapper p-calendar-w-btn p-inputwrapper-filled w-16 ml-2 base-height" data-v-fb999567=""><input type="text" role="combobox" class="p-inputtext p-component" placeholder="ມື້ເລີ່ມຕົ້ນ" aria-autocomplete="none" aria-haspopup="dialog" aria-expanded="false" aria-controls="pv_id_1_panel" inputmode="none" tabindex="0" style=""><button class="p-button p-component p-button-icon-only p-datepicker-trigger" type="button" aria-label="Choose Date" aria-haspopup="dialog" aria-expanded="false" aria-controls="pv_id_1_panel"><!----><span class="pi pi-calendar p-button-icon"></span><span class="p-button-label">&nbsp;</span><!----></button></span><span id="icon" class="p-calendar p-component p-inputwrapper p-calendar-w-btn p-inputwrapper-filled w-16 ml-2 base-height" data-v-fb999567=""><input type="text" role="combobox" class="p-inputtext p-component" placeholder="ມື້ສິ້ນສຸດ" aria-autocomplete="none" aria-haspopup="dialog" aria-expanded="false" aria-controls="pv_id_2_panel" inputmode="none" tabindex="0" style=""><button class="p-button p-component p-button-icon-only p-datepicker-trigger" type="button" aria-label="Choose Date" aria-haspopup="dialog" aria-expanded="false" aria-controls="pv_id_2_panel"><!----><span class="pi pi-calendar p-button-icon"></span><span class="p-button-label">&nbsp;</span><!----></button></span><button class="p-button p-component ml-2 base-height" type="button" aria-label="Search" data-v-fb999567=""><!----><span class="pi pi-search p-button-icon p-button-icon-left"></span><span class="p-button-label">Search</span><!----></button><button class="p-button p-component p-button-icon-only p-button-outlined ml-2 base-height" type="button" data-v-fb999567=""><!----><span class="pi pi-times p-button-icon"></span><span class="p-button-label">&nbsp;</span><!----></button></div><div class="p-dataview-layout-options p-selectbutton p-buttonset flex mr-2 whitespace-no-wrap min-w-min" data-v-fb999567=""><button class="p-button p-button-icon-only p-highlight" type="button"><i class="pi pi-bars"></i></button><button class="p-button p-button-icon-only" type="button"><i class="pi pi-th-large"></i></button></div><div class="flex justify-content-end" data-v-fb999567=""><div class="flex justify-content-start" data-v-fb999567=""><button class="p-button p-component btn-create px-3 bg-green-500 border-none mr-2" type="button" data-v-fb999567=""><span class="pr-2" data-v-fb999567=""><i class="fas fa-external-link" data-v-fb999567=""></i> Export Excel </span></button></div><div class="flex justify-content-end align-items-center" data-v-fb999567=""><!----><!----><!----></div></div></div></div><div data-v-fb999567=""><div class="p-datatable p-component p-datatable-responsive-stack mt-2" data-scrollselectors=".p-datatable-wrapper" data-v-fb999567="" pv_id_8=""><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><div class="p-datatable-wrapper"><table role="table" class="p-datatable-table"><thead class="p-datatable-thead" role="rowgroup"><tr role="row"><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ລຳດັບ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ເລກບິນ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ປະເພດພັດສະດຸ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ລາຄາ COD (ກີບ)</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ສາຂາປາຍທາງ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="" role="cell"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><!----><!----><!----><!----></div></th><th class="p-sortable-column" tabindex="0" role="cell" aria-sort="none"><!----><div class="p-column-header-content"><!----><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="p-sortable-column-icon pi pi-fw pi-sort-alt"></span><!----><!----><!----></div></th><th class="" role="cell"><!----><div class="p-column-header-content"><!----><!----><!----><!----><!----><!----></div></th></tr><!----></thead><!----><tbody class="p-datatable-tbody" role="rowgroup"><!----><tr class="" role="row" draggable="false"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>1</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE88796491095</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເກີບເດັກນ້ອຍ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;119,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນາໄຊ <span data-v-fb999567="">(52419866)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L59347HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-28</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>2</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE43991202863</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມກັນແດດ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;33,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;539,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ມຸນລະປາໂມກ <span data-v-fb999567="">(52426944)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L56450HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-27</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>3</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE04611782494</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ລິບສະຕິກ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;199,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ສີເກີດ <span data-v-fb999567="">(52419223)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L63297HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-27</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>4</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE05787894410</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ໝໍ້ໄຟຟ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;19,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;228,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ບ້ານຖິ່ນຕົມ(ມ.ຫາດຊາຍຟອງ) <span data-v-fb999567="">(52421796)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L53961HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-26</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>5</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE58579726061</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງຂຽນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;600,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຜາເມືອງ <span data-v-fb999567="">(52428534)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L62901HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-26</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>6</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE71527066977</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງຕົບແຕ່ງ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;43,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;400,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຊຽງແມນ <span data-v-fb999567="">(52423184)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L61470HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-24</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>7</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE59616454406</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ກິ໋ບ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທາດຫຼວງ <span data-v-fb999567="">(52415528)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L56209HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-24</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>8</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE11393187600</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ສໍຂຽນຄິ້ວ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;43,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;1,739,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ພະບາດໃຕ້ <span data-v-fb999567="">(52423132)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L60369HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-24</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>9</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE68549596721</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມທາໜ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;600,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ສອນໄຊ <span data-v-fb999567="">(52424879)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L61063HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-24</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>10</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE43632843119</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນ້ຳຫອມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;20,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;198,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທ່າລາດ <span data-v-fb999567="">(52426199)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54750HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-23</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>11</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE52795183269</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ບັດອອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;22,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ບຸນເໜືອ <span data-v-fb999567="">(52421876)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55675HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-23</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>12</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE23310247920</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອາໄລ່ລົດຈັກ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;1,209,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ປາກກະດິງເໜືອ <span data-v-fb999567="">(52428713)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L58795HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-21</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>13</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE11344384587</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຢາສະຜົມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;17,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;199,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໄຊຊະນະ(ມ.ປາກແບ່ງ) <span data-v-fb999567="">(52422745)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L56740HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-21</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>14</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE14654285529</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ໝາກເຜັດບົດ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;19,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;200,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນ້ຳແງ້ນ <span data-v-fb999567="">(52422326)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L51516HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-20</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>15</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE58826069902</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມທາໜ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;169,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຫາດກ້ຽງ <span data-v-fb999567="">(52416348)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L56346HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-20</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>16</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE31290791164</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງລອນຜົມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ພະບາດໃຕ້ <span data-v-fb999567="">(52423132)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L53486HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-20</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>17</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE19748983602</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ສະອິ້ວ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຫາດກ້ຽງ <span data-v-fb999567="">(52416348)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54000HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-20</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>18</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE39807906546</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ມາສໜ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;260,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂນນສະອາດ <span data-v-fb999567="">(52416168)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54223HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>19</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE31154289738</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນ້ຳຕານກ້ອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;119,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນາຄວາຍໃຕ້ <span data-v-fb999567="">(52421215)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L51958HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>20</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE81942105578</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຂົ້າສານ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;149,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂນນຂີ້ເຫລັກ(ຕາດທອງ) <span data-v-fb999567="">(52417574)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52169HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>21</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE72586871900</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຟອຍ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂຄກໃຫຍ່(ສະຖານີລົດໄຟ) <span data-v-fb999567="">(52415828)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52761HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>22</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE78596178992</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ໝໍ້ໄຟຟ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທ່າງອນ <span data-v-fb999567="">(52415743)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52996HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>23</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE19048207019</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອາໄລ່ລົດໃຫຍ່</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;22,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;439,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທົ່ງປົ່ງ <span data-v-fb999567="">(52417464)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55325HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>24</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE73087920225</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນົມຜົງ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໜອງດ້ວງໃຕ້ <span data-v-fb999567="">(52417677)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52095HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>25</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE52245445657</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ໜັງສືພິມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂນນສະອາດ <span data-v-fb999567="">(52416168)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52243HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>26</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE75321838719</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ໝອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂນນຂີ້ເຫລັກ(ຕາດທອງ) <span data-v-fb999567="">(52417574)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L52880HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>27</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE40274862175</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນ້ຳຢາເຊັດແວ່ນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;17,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນາຄວາຍກາງ <span data-v-fb999567="">(52419875)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L53102HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>28</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE69918013765</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຈອງ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທ່າລາດ <span data-v-fb999567="">(52426199)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L53241HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>29</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE39305880978</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມນວດ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;499,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ທາງແບ່ງບ້ານທວາຍ <span data-v-fb999567="">(52428469)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54277HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-18</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>30</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE85358175830</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນ້ຳຫອມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;50,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;1,198,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ເຊບັ້ງຫຽງ <span data-v-fb999567="">(52425428)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L50945HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>31</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE84062466086</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ນ້ຳຢາບ້ວນປາກ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໜອງສະ <span data-v-fb999567="">(52419153)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L51939HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>32</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE63500457884</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງຂຽນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຜາສຸກ <span data-v-fb999567="">(52423422)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L56047HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>33</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE82330714400</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ມີດ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ພູເຫຼັກຈະເລີນ <span data-v-fb999567="">(52423351)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55911HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>34</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE45092093097</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອາຍຊາໂດ້</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນ້ຳເດື່ອ <span data-v-fb999567="">(52428918)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55681HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>35</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE90302324783</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງໃຊ້ເດັກອ່ອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂພນງາມ(ຊະນະຄາມ) <span data-v-fb999567="">(52426483)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55805HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-17</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>36</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE83211809920</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງໃຊ້ຫ້ອງນໍ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;20,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;479,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ມຸນລະປາໂມກ <span data-v-fb999567="">(52426944)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55562HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>37</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE38770837961</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອຸປະກອນເສີມໂທລະສັບ/ຄອມ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;22,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;799,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໂພນພະເນົາ <span data-v-fb999567="">(52415518)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L53023HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>38</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE82262583634</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມທາໜ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ບ້ານຫຼວງ <span data-v-fb999567="">(52422278)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54026HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>39</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE38238150400</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງໃຊ້ເດັກອ່ອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;119,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ເພຍໃໝ່ <span data-v-fb999567="">(52427861)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54328HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>40</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE52843170480</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມທາໜ້າ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;119,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ບາຈຽງຫຼັກ14ໃຕ້ <span data-v-fb999567="">(52426914)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55180HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>41</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE58026686188</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງຂຽນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;600,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ສີເກີດ <span data-v-fb999567="">(52419223)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L55221HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>42</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE67090136851</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ເຄື່ອງໃຊ້ຄົວເຮືອນ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;22,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;900,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ລະຄອນເພັງ <span data-v-fb999567="">(52427731)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L49807HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>43</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE64563189540</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ຄີມກັນແດດ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;199,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນາສະກາງ (ຊຳເຫນືອ) <span data-v-fb999567="">(52423551)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L54993HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>44</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE02974722441</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;7,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ໜອງສະ <span data-v-fb999567="">(52419153)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L49014HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>45</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE85956858086</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ຂີ້ນາກ <span data-v-fb999567="">(52426891)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L49347HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>46</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE09613709066</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ມຸນລະປາໂມກ <span data-v-fb999567="">(52426944)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L50127HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>47</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE93540725343</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ພະບາດໃຕ້ <span data-v-fb999567="">(52423132)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L50240HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>48</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE23103345072</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;99,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ດອນສະອາດ (ເມືອງຫຼາ) <span data-v-fb999567="">(52422775)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L50284HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>49</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE61393799115</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;189,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ສົບເລົາ(ນ້ຳເນີນ) <span data-v-fb999567="">(52423563)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L50992HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----><!----><tr class="" role="row"><td class="" role="cell"><span class="p-column-title">ລຳດັບ</span>50</td><td class="" role="cell"><span class="p-column-title">ເລກບິນ</span>VTE15598760866</td><td class="" role="cell"><span class="p-column-title">ປະເພດພັດສະດຸ</span>ອື່ນໆ</td><td class="" role="cell"><span class="p-column-title">ລາຄາຂົນສົ່ງ (ກີບ)</span>LAK&nbsp;8,000</td><td class="" role="cell"><span class="p-column-title">ລາຄາ COD (ກີບ)</span>LAK&nbsp;129,000</td><td class="" role="cell"><span class="p-column-title">ສາຂາຕົ້ນທາງ</span><span data-v-fb999567="">ນາກະສັງ <span data-v-fb999567="">(52426936)</span></span></td><td class="" role="cell"><span class="p-column-title">ສາຂາປາຍທາງ</span><span data-v-fb999567="">DP_LAK7(NND Global) <span data-v-fb999567="">(2091105672)</span></span></td><td class="" role="cell"><span class="p-column-title">ເລກບິນຈາກລະບົບລູກຄ້າ</span><span data-v-fb999567="">L51323HN</span></td><td class="" role="cell"><span class="p-column-title">ມື້ສ້າງບິນ</span><span class="white-space-nowrap" data-v-fb999567="">2026-03-16</span></td><td class="" role="cell"><span class="p-column-title"></span><div class="standard-icon" data-v-fb999567=""><i class="fas fa-eye" data-v-fb999567=""></i></div></td></tr><!----><!----></tbody><!----></table></div><!----><!----><div class="p-column-resizer-helper" style="display: none;"></div><!----><!----></div></div><div hidden="" data-v-fb999567=""><div id="printPreOrder" data-v-fb999567=""><div class="print-pre-container"><div class="print-header"><div class="print-header-left"><div class="logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABa9JREFUeNrsnd1x4joYhgVDAZTgc8fdcSqI6SBbQdgKNqkgUAGbCmArWFIBpIKwd75bnwrWHWSt8eddwpEwliXrk/0+Mx4yhEE/r74fybIQAgAAAAAAAAAAAAAAAAAAoAUjdAE/UiHeNf9azYRYKj6fnL2VFZ/L5B8TdGcv2J8PBEEDYYy+6TcQGAKDkEEM5slB836menOGZBnTpBCmDpEoL8m0uGLNiP8zRQAMBU5L8RIS8FZ8FLYJR3JpP+QAmOndHgTuQNSYRL0/s0wXse2luHZtrDwt553JtWUWZc0Hl2SRpS46EPWUhK51Wlr4M4mde2h/oligUDFv430mHhom3e0TiesTOag2JPZWih1K7E71A+PbrGxL9wIzEvYc6Uke5EVCrwIQWhceXjtf6JCuuLjWxZ8/GYp7jqzfW1HfJYWQ4Bk7FveOhH0IqE+m5GniPgg8cWW1FN/uMBPtmcA05dmLnrg4CPxR3AVZLnBIk7XniUVxNwEkUZyQmfrqys/5teABivvYIATlGiuUwi3Zu+iW4srGH2vmdhxd5HEQMbiBuLJDXug1u9RB6d87RdXNhgQJmzkjh+JWMab1Wm/6d826Syuf9+EO1KhFh28uCPvZRefQAv26o0WIuaM2xNSGpmHB6I7UxLCTdeIq9+1ajH2yw2/SsoynQI1q2qUnGjcUV1buuyZZms86yApJaFnOXHi4zRcaTdeiN4qEJ/cRr6g8iGxLYIq7d5pY5WXaQOV+howtBSbXrEoMHn3PCYvyd8XLV0jZzoLXCtcs9xqx6NhZubKUQU4DgWknhmq+u2LWlhXkNLNg1ZSI3TZU2osEK24i8Ml21nOembbnGZJ+pG6h44vivYwSmzZENHCi8+8WpWcwtcSdMFglGqTAF2JvG9dcLdMlNZ/bUkxtJLS8BUf7nWNIW2/BC837L4ZlLcT1uz2qObdcyGg6DTtwFphyl86eKLkUg+817x8di1shp2Ume7v+g93WCEzJVaRzgwbx1jQuVpvSm3CErPUWbNN6n0S7G/b3kMl+DNYlQbmBBS4sZNxTwf+mwqX71NIwHlkITNmzrSQlsfQ9seC/uyK+0N7El8BjTUVtNhrYHeytBb6FFv0WGFbnhn8hcL+JuAiMPcjukjC/AqcBPV0QKFMOFgx6ZMVjDnECQGAAFw0gMAQGEBgELXCGLoHAAC4aaDh6FXioh2Z3SM7BgvG8bU+sVycwdiW6IYPA/eYHF4FfoYUTDrBgCOxeYHpyASL3QNxL82BMl+zywk3gb9DEata789UI5aMr8uScVH10XghzZBvh5WjwkN30Qn0yVgKTyEG6aXnwaVrWPWnxNSYHuuj2W3k9VqKva9FtOnVncESFznpzn+45JIHjhlYsO3Vr6N5NTs5LLsTeHALX0/ixj1kpVJOD2uSAmBuebX1r0dUPUmCjeEon4P0j9GdoZfS/m1l5xnVusX5bMYD768vierd0JUzbGGvqG3GoXEhJFtejHL5oXHPvrde2BbOxihMiRR1/CkYP8IU2TeL2q2rKI5bFgDZN2LZgeS2YtO1OUbfvYmC4EPiX8P+Qekz1YOuaQxa4EtlXZ8py3xR1YnkyQqhLlVUnxx4sV1WuXFQZ5D10VxZ8asld/Qj1QuGW38XAjy92LfBpchM5tNq9ptzB/1ZyVwKfdnhiMUve15QlIHC3Ap9mtGtyq9fE6ern5h7IG/y6YiAFwaSnAysS/z+GOFckQpGBa/8qPJ07CYGvs9I2yGx5G1KjhyRwG7Li+hTiVAiPj9Yjd2XcCOwVV5JckbBwvbqcYwcf+zaBiav6rUZwRWa7Zy7sRuAwOCsrQxsIOwyLXtKihK/FkAe44u6sWsa9N8eivtGgGsyh5yOGdaoWJKQIt/RqYmXVytUrvR7EAM8fGQVU10Tzd8XhTFgAAAAAAAAAAAAAAAAAPPgtwAALt/fewQFcRgAAAABJRU5ErkJggg==" alt=""></div><div class="title-logo"><div class="main-title"> ຮຸ່ງອາລຸນຂົນສົ່ງດ່ວນ </div><div class="sm-title"> ໂທສາຍດ່ວນ : 1419 </div></div></div><div class="print-header-right"><div class="date-title"> ວັນທີສ້າງບິນ </div><div class="date-time"></div></div></div><div class="print-content"><div><svg class="vue3-barcode-element" style="display: none;"></svg><div style=""></div></div></div></div></div></div><div hidden="" data-v-fb999567=""><div id="printGroupPreOrder" data-v-fb999567=""></div></div><div data-v-fb999567=""><!----></div><!----><div class="w-12 h-4rem flex justify-content-between align-items-center" data-v-0fa41b7d="" data-v-fb999567=""><button class="p-button p-component p-disabled p-button-sm btn-pre p-button-secondary" type="button" disabled="" data-v-0fa41b7d=""><span class="mr-2" data-v-0fa41b7d=""><i class="fas fa-angle-double-left" data-v-0fa41b7d=""></i></span> ກັບຄືນ </button><button class="p-button p-component btn-next p-button-sm p-button-secondary" type="button" data-v-0fa41b7d=""> ໜ້າຕໍ່ໄປ <span class="ml-2" data-v-0fa41b7d=""><i class="fas fa-angle-double-right" data-v-0fa41b7d=""></i></span></button></div><div data-v-572940e1="" data-v-9c8b70cf=""></div><!----></div></div></div></div></div></div><!----></div>
+
+
+
+<div class="p-toast p-component p-toast-bottom-left p-ripple-disabled"><div></div></div><!----><!----></body></html>

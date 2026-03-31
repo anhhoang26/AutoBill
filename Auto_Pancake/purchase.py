@@ -4,14 +4,13 @@ import time
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
-load_dotenv(override=True)
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env.example"), override=True)
 POS_PANCAKE_API_KEY = os.getenv("POS_PANCAKE_API_KEY")
 PANCAKE_ACCESS_TOKEN = os.getenv("PANCAKE_ACCESS_TOKEN")
 SHOP_ID = os.getenv("SHOP_ID")
 def getShipmentAnousith(accessToken, skip, limit, iter=0):
-    today = datetime.now().strftime("%Y-%m-%d")
     before = (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
-    after = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
     if iter > 6:
         return []
     iter += 1
@@ -19,124 +18,94 @@ def getShipmentAnousith(accessToken, skip, limit, iter=0):
     payload = {
     "operationName": "ItemsV2",
     "variables": {
-        # "where": {
-        # "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
-        # "originBranchId": 338,
-        # "customerId": "6936939"
-        # },
-        # "orderBy": "originReceiveDate_DESC",
-        # "skip": skip,
-        # "limit": limit
         "where": {
-            "multipleItemStatus": [
-            "TRANSIT_TO_DEST_BRANCH",
-            "TRANSIT_TO_ORIGIN_BRANCH",
-            "DEST_BRANCH_RECEIVED_FORWARD",
-            "ORIGIN_BRANCH_RECEIVED_BACKWARD",
-            "DEST_BRANCH_RECEIVED_BACKWARD",
-            "ORIGIN_BRANCH_RECEIVED_FORWARD",
-            "COMPLETED"
-            ],
+            "customerId": 7715280,
+            "isDeleted": 0,
             "originReceiveDate_gte": before,
-            "originReceiveDate_lt": after,
-            "searchMultipleCOD": [
-            "0",
-            "1"
+            "originReceiveDate_lt": tomorrow,
+            "multipleItemStatus": [
+                "TRANSIT_TO_DEST_BRANCH",
+                "TRANSIT_TO_ORIGIN_BRANCH",
+                "DEST_BRANCH_RECEIVED_FORWARD",
+                "ORIGIN_BRANCH_RECEIVED_BACKWARD",
+                "DEST_BRANCH_RECEIVED_BACKWARD",
+                "ORIGIN_BRANCH_RECEIVED_FORWARD",
+                "COMPLETED"
             ],
-            "customerId": 6936939,
-            "isDeleted": 0
         },
         "orderBy": "originReceiveDate_DESC",
         "skip": skip,
         "limit": limit
     },
-    
-    "query": '''query ItemsV2($where: ItemV2WhereInput, $orderBy: OrderByItem, $skip: Int, $limit: Int) {
-        itemsV2(where: $where, orderBy: $orderBy, skip: $skip, limit: $limit) {
-            total
-            data {
-            _id
-            trackingId
-            itemName
-            itemValueKIP
-            itemValueTHB
-            itemValueUSD
-            receiverName
-            receiverPhone
-            originReceiveDate
-            charge_on_shop
-            width
-            weight
-            packagePrice
-            itemStatus
-            isInsurance
-            priceItem
-            insuranceAmount
-            isOvertime
-            customerId {
-                id_list
-                full_name
-                contact_info
-            }
-            destProvinceId {
-                provinceName
-            }
-            originBranchId {
-                branch_name
-            }
-            originProvinceId {
-                provinceName
-            }
-            destBranchId {
-                districtName
-                branch_name
-            }
-            updatedBy
-            updatedDate
-            }
-        }
-    }'''
+    "query": "query ItemsV2($where: ItemV2WhereInput, $skip: Int, $limit: Int, $noLimit: Boolean, $orderBy: OrderByItem) {\n  itemsV2(where: $where, skip: $skip, limit: $limit, noLimit: $noLimit, orderBy: $orderBy) {\n    total\n    data {\n      _id\n      trackingId\n      itemName\n      itemValueKIP\n      itemValueTHB\n      itemValueUSD\n      realItemValueKIP\n      realItemValueTHB\n      realItemValueUSD\n      receiverName\n      receiverPhone\n      description\n      trackingPlatform\n      isSummary\n      destSendDate\n      charge_on_shop\n      itemStatus\n      contactStatus\n      originSendDate\n      receiveBackwardDate\n      width\n      weight\n      isCod\n      isExtraItem\n      packagePrice\n      isDeposit\n      originReceiveDate\n      destReceiveDate\n      sendCompleteDate\n      isCustomerCreated\n      isBackward\n      billNumber\n      providedBy {\n        _id\n      }\n      originProvinceId {\n        provinceName\n      }\n      destProvinceId {\n        provinceName\n      }\n      originBranchId {\n        branch_name\n      }\n      destBranchId {\n        branch_name\n        branch_address\n        districtName\n        contactInfo\n      }\n      customerId {\n        id_list\n        full_name\n        contact_info\n      }\n      createdBy {\n        first_name\n        phone_number\n      }\n      originReceiveBy {\n        first_name\n        phone_number\n      }\n    }\n  }\n}"
     }
     headers = {
         "content-type": "application/json",
-        "Accept-Language": "vi-VN,vi;q=0.9",
-        "Connection": "keep-alive",
-        "Origin": "https://nextday.anousith.express",
-        "Referer": "https://nextday.anousith.express/",
-        "Sec-Fetch-Dest": "empty",
-        "Sec-Fetch-Mode": "cors",
-        "Sec-Fetch-Site": "same-site",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
         "accept": "*/*",
-        "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNDE0NCwiZmlyc3RfbmFtZSI6IuC6m-C6teC7iCAiLCJsYXN0X25hbWUiOiLguoLgurHgupTgupfgurTguo3gurAiLCJwcm9maWxlX3BpY3R1cmUiOiJ1bmRlZmluZWQiLCJwaG9uZV9udW1iZXIiOjc2MDk2MTkzLCJ1c2VybmFtZSI6Ijc2MDk2MTkzIiwiZW1haWwiOiIiLCJyb2xlIjoiQ1VTVE9NRVJfU0VSVklDRSIsImFuc1N0YWZmIjowLCJmcmFuY2hpc2VDb21taXNzaW9uIjowLCJicmFuY2hfaWQiOnsicHVibGljIjoxLCJpZF9icmFuY2giOjMzOCwiYnJhbmNoX25hbWUiOiLguqrgurLguoLgurIg4LqI4Lqw4LuA4Lql4Lq14LqZ4LuE4LqKKOC7gOC6guC6lOC7gOC6p-C6teC6meC6hOC6sykiLCJhZGRyZXNzX2luZm8iOiLguprgu4ngurLgupkg4LqI4Lqw4LuA4Lql4Lq14LqZ4LuE4LqKIOC7gOC6oeC6t-C6reC6h-C7hOC6iuC6l-C6suC6meC6tSDgupngurDguoTguq3gupnguqvgurzguqfguofguqfgur3guofguojgurHgupkgMDIwOTIxMzY4ODIifSwiY2VudGVyIjp7InN0X2lkIjpudWxsLCJjZW50ZXJOYW1lIjpudWxsfSwicHJvdmluY2UiOnsiaWRfc3RhdGUiOjEsInByb3ZpbmNlTmFtZSI6IuC6meC6sOC6hOC6reC6meC6q-C6vOC6p-C6h-C6p-C6veC6h-C6iOC6seC6mSJ9LCJoaWtfdmlzaW9uIjoiQUxMIiwiaWF0IjoxNzM5MzQ4OTU3LCJleHAiOjE3Mzk0MzUzNTd9.jJLKvhpt9tXA5xSzDXyAChBianavoYyGa4Abambaow4",
-        "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+        "authorization": accessToken,
+        "Referer": "https://app.anousith.express/",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"",
         "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"Linux\""
     }
 
-    response = requests.post(url, json=payload, headers=headers)    
+    response = requests.post(url, json=payload, headers=headers)
     if response.status_code == 200:
-        response = response.json()
-        # print(response)
-        return response["data"]["itemsV2"]["data"]
+        result = response.json()
+        if result.get("data") and result["data"].get("itemsV2"):
+            return result["data"]["itemsV2"]["data"]
+        print(f"[ANOUSITH] API returned error: {json.dumps(result.get('errors', []), ensure_ascii=False)[:300]}")
+        return []
     else:
-        print(response.text)  
+        print(response.text)
         time.sleep(60)
         print("Try get purchase")
         return getShipmentAnousith(accessToken, skip, limit, iter)
         
+def _purge_old_bills(bills, date_key, max_days=3):
+    """Remove bills older than max_days based on date_key field."""
+    cutoff = (datetime.now() - timedelta(days=max_days)).isoformat()
+    kept = [b for b in bills if (b.get(date_key) or "") >= cutoff]
+    removed = len(bills) - len(kept)
+    if removed:
+        print(f"[CLEANUP] Purged {removed} bills older than {max_days} days")
+    return kept
+
 def getAllShipmentAnousith(accessToken):
-    listPurchases = []
-    total = 0
-    while True:
-        inAPage = getShipmentAnousith(accessToken, len(listPurchases), 100)
-        if len(inAPage) == 0:
+    # Load existing bills for dedup
+    existing_ids = set()
+    if os.path.exists("listShipmentAnousith.json"):
+        try:
+            existing = json.load(open("listShipmentAnousith.json", "r", encoding="utf-8"))
+            existing = _purge_old_bills(existing, "originReceiveDate", max_days=3)
+            existing_ids = {b["_id"] for b in existing}
+        except Exception:
+            existing = []
+    else:
+        existing = []
+
+    # Fetch bills DESC, stop early when hitting existing bill
+    new_bills = []
+    skip = 0
+    hit_existing = False
+    while not hit_existing:
+        page = getShipmentAnousith(accessToken, skip, 100)
+        if not page:
             break
-        listPurchases += inAPage
-        total = len(listPurchases)
-        with open("listShipmentAnousith.json", "w") as file:
-            file.write(json.dumps(listPurchases,indent=4))
-    print("Total bill in Annousith: ", total)
+        for b in page:
+            if b["_id"] in existing_ids:
+                hit_existing = True
+                break
+            new_bills.append(b)
+        skip += len(page)
+
+    if new_bills:
+        existing.extend(new_bills)
+        with open("listShipmentAnousith.json", "w", encoding="utf-8") as file:
+            file.write(json.dumps(existing, indent=4))
+
+    print(f"Total bill in Anousith: {len(new_bills)} new, {len(existing)} total saved")
 
 def getShipmentHal(accessToken, cursor = None, iter=0):
     today = time.strftime("%Y-%m-%d", time.localtime())
@@ -159,18 +128,42 @@ def getShipmentHal(accessToken, cursor = None, iter=0):
     return response
 
 def getAllShipmentHal(accessToken):
+    # Load existing for early stop
+    existing_ids = set()
+    if os.path.exists("listShipmentHal.json"):
+        try:
+            existing = json.load(open("listShipmentHal.json", "r", encoding="utf-8"))
+            existing = _purge_old_bills(existing, "start_date_actual", max_days=3)
+            existing_ids = {b["id"] for b in existing}
+        except Exception:
+            existing = []
+    else:
+        existing = []
+
+    # Fetch bills DESC, stop early when hitting existing bill
+    new_bills = []
     nextCursor = None
-    allData = []
-    while True:
+    hit_existing = False
+    while not hit_existing:
         data = getShipmentHal(accessToken, nextCursor)
-        allData += data["data"]
-        nextCursor = data["next_cursor"]
-        with open("listShipmentHal.json", "w") as f:
-            f.write(json.dumps(allData, indent=4))
-            f.close()
+        if not data or not data.get("data"):
+            break
+        for b in data["data"]:
+            if b["id"] in existing_ids:
+                hit_existing = True
+                break
+            new_bills.append(b)
+        nextCursor = data.get("next_cursor")
         if not nextCursor:
             break
-    print(f"Total bill in Hal: {len(allData)}")
+
+    if new_bills:
+        existing.extend(new_bills)
+
+    with open("listShipmentHal.json", "w", encoding="utf-8") as f:
+        json.dump(existing, f, indent=4)
+
+    print(f"Total bill in Hal: {len(new_bills)} new, {len(existing)} total saved")
 
 def getAllShipment():
     df = json.load(open("token.json"))
@@ -190,6 +183,7 @@ def getAllBillInPancake():
             respoonse = respoonse.json()
             # print(orderId, respoonse)
             return respoonse["data"]
+        return []
     page = 1
     allBill = []
     while True:

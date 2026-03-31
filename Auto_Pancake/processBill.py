@@ -15,7 +15,7 @@ import requests
 from dotenv import load_dotenv
 from createImageBill import generate_image, close_browser
 
-load_dotenv(override=True)
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env.example"), override=True)
 
 POS_PANCAKE_API_KEY = os.getenv("POS_PANCAKE_API_KEY")
 PANCAKE_ACCESS_TOKEN = os.getenv("PANCAKE_ACCESS_TOKEN")
@@ -121,10 +121,11 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
         try:
             with open(file_local, "rb") as f:
                 files = [("file", (os.path.basename(file_local), f, "image/png"))]
-                resp = requests.post(url, headers=_pancake_headers(), files=files, timeout=15)
+                upload_headers = {k: v for k, v in _pancake_headers().items() if k != "Content-Type"}
+                resp = requests.post(url, headers=upload_headers, files=files, timeout=15)
 
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:200]}")
                 continue
 
             data = resp.json()
@@ -151,7 +152,7 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
                 timeout=15,
             )
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] create_fb_ids failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                print(f"[PANCAKE] create_fb_ids failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:300]}")
                 continue
 
             data = resp.json()
@@ -184,7 +185,7 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
         try:
             resp = requests.post(url, headers=_pancake_headers(), data=payload, timeout=15)
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:300]}")
                 continue
 
             data = resp.json()
@@ -272,12 +273,12 @@ async def process_bill(bill_info):
 
     # Step 3: Push to extension queue for async retry
     print(f"[PROCESS] Pancake failed for {bill_pancake['id']}, queuing for extension...")
-    queue = get_ext_queue()
-    await queue.put({
-        "bill_pancake": bill_pancake,
-        "bill_file": bill_file,
-        "ship_fee": ship_fee,
-    })
+    # queue = get_ext_queue()
+    # await queue.put({
+    #     "bill_pancake": bill_pancake,
+    #     "bill_file": bill_file,
+    #     "ship_fee": ship_fee,
+    # })
     return False
 
 

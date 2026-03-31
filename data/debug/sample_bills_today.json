@@ -1,0 +1,327 @@
+[
+  {
+    "_id": "303487954",
+    "trackingId": "8260891749567",
+    "itemName": "ເຄື່ອງໃຊ້",
+    "itemValueKIP": 100000,
+    "itemValueTHB": 0,
+    "itemValueUSD": 0,
+    "realItemValueKIP": 0,
+    "realItemValueTHB": 0,
+    "realItemValueUSD": 0,
+    "receiverName": "L55864HN",
+    "receiverPhone": "91696125",
+    "description": "",
+    "trackingPlatform": "8260891749567",
+    "isSummary": 0,
+    "destSendDate": null,
+    "charge_on_shop": 0,
+    "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
+    "contactStatus": "NOT_CONTACT",
+    "originSendDate": null,
+    "receiveBackwardDate": null,
+    "width": 40,
+    "weight": 1,
+    "isCod": "1",
+    "isExtraItem": 0,
+    "packagePrice": 9000,
+    "isDeposit": 1,
+    "originReceiveDate": "2026-03-30T11:18:15.000Z",
+    "destReceiveDate": null,
+    "sendCompleteDate": null,
+    "isCustomerCreated": 0,
+    "isBackward": 0,
+    "billNumber": 0,
+    "providedBy": {
+      "_id": "1"
+    },
+    "originProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "destProvinceId": {
+      "provinceName": "ແຂວງ ສະຫວັນນະເຂດ"
+    },
+    "originBranchId": {
+      "branch_name": "ສາຂາ ດົງບອງ(ເມືອງ ນາຊາຍທອງ)"
+    },
+    "destBranchId": {
+      "branch_name": "ສາຂາ ລາດຊະວົງໄຊ(ນະຄອນໄກສອນ)",
+      "branch_address": "ລາດຊະວົງໄຊ",
+      "districtName": "ນະຄອນໄກສອນ",
+      "contactInfo": "99199842/96998720/"
+    },
+    "customerId": {
+      "id_list": "7715280",
+      "full_name": "HOANG VIET NGOC ",
+      "contact_info": "98709576"
+    },
+    "createdBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    },
+    "originReceiveBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    }
+  },
+  {
+    "_id": "303487842",
+    "trackingId": "8260890168484",
+    "itemName": "ເຄື່ອງໃຊ້",
+    "itemValueKIP": 100000,
+    "itemValueTHB": 0,
+    "itemValueUSD": 0,
+    "realItemValueKIP": 0,
+    "realItemValueTHB": 0,
+    "realItemValueUSD": 0,
+    "receiverName": "L65764HN",
+    "receiverPhone": "4885590",
+    "description": "",
+    "trackingPlatform": "8260890168484",
+    "isSummary": 0,
+    "destSendDate": null,
+    "charge_on_shop": 0,
+    "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
+    "contactStatus": "NOT_CONTACT",
+    "originSendDate": null,
+    "receiveBackwardDate": null,
+    "width": 40,
+    "weight": 1,
+    "isCod": "1",
+    "isExtraItem": 0,
+    "packagePrice": 9000,
+    "isDeposit": 1,
+    "originReceiveDate": "2026-03-30T11:17:55.000Z",
+    "destReceiveDate": null,
+    "sendCompleteDate": null,
+    "isCustomerCreated": 0,
+    "isBackward": 0,
+    "billNumber": 0,
+    "providedBy": {
+      "_id": "1"
+    },
+    "originProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "destProvinceId": {
+      "provinceName": "ແຂວງ ສະຫວັນນະເຂດ"
+    },
+    "originBranchId": {
+      "branch_name": "ສາຂາ ດົງບອງ(ເມືອງ ນາຊາຍທອງ)"
+    },
+    "destBranchId": {
+      "branch_name": "ສາຂາ ບຸ່ງຄຳ(ວິລະບູລີ)",
+      "branch_address": "ບ້ານ ບຸ່ງຄຳ",
+      "districtName": "ເມືອງ ວິລະບູລີ",
+      "contactInfo": "97487737/92147958/91325508"
+    },
+    "customerId": {
+      "id_list": "7715280",
+      "full_name": "HOANG VIET NGOC ",
+      "contact_info": "98709576"
+    },
+    "createdBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    },
+    "originReceiveBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    }
+  },
+  {
+    "_id": "303487715",
+    "trackingId": "8260893920414",
+    "itemName": "ເຄື່ອງໃຊ້",
+    "itemValueKIP": 130000,
+    "itemValueTHB": 0,
+    "itemValueUSD": 0,
+    "realItemValueKIP": 0,
+    "realItemValueTHB": 0,
+    "realItemValueUSD": 0,
+    "receiverName": "L64496HN",
+    "receiverPhone": "54168834",
+    "description": "",
+    "trackingPlatform": "8260893920414",
+    "isSummary": 0,
+    "destSendDate": null,
+    "charge_on_shop": 0,
+    "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
+    "contactStatus": "NOT_CONTACT",
+    "originSendDate": null,
+    "receiveBackwardDate": null,
+    "width": 40,
+    "weight": 1,
+    "isCod": "1",
+    "isExtraItem": 0,
+    "packagePrice": 9000,
+    "isDeposit": 1,
+    "originReceiveDate": "2026-03-30T11:17:32.000Z",
+    "destReceiveDate": null,
+    "sendCompleteDate": null,
+    "isCustomerCreated": 0,
+    "isBackward": 0,
+    "billNumber": 0,
+    "providedBy": {
+      "_id": "1"
+    },
+    "originProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "destProvinceId": {
+      "provinceName": "ແຂວງ ບໍລິຄຳໄຊ"
+    },
+    "originBranchId": {
+      "branch_name": "ສາຂາ ດົງບອງ(ເມືອງ ນາຊາຍທອງ)"
+    },
+    "destBranchId": {
+      "branch_name": "ສາຂາ ໜອງບົວ(ເມືອງ ປາກຊັນ)",
+      "branch_address": "ບ້ານ ບົວແວງຄຳ",
+      "districtName": "ເມືອງ ປາກຊັນ",
+      "contactInfo": "WhatsApp:02078111969"
+    },
+    "customerId": {
+      "id_list": "7715280",
+      "full_name": "HOANG VIET NGOC ",
+      "contact_info": "98709576"
+    },
+    "createdBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    },
+    "originReceiveBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    }
+  },
+  {
+    "_id": "303487587",
+    "trackingId": "8260896272635",
+    "itemName": "ເຄື່ອງໃຊ້",
+    "itemValueKIP": 170000,
+    "itemValueTHB": 0,
+    "itemValueUSD": 0,
+    "realItemValueKIP": 0,
+    "realItemValueTHB": 0,
+    "realItemValueUSD": 0,
+    "receiverName": "L56602HN",
+    "receiverPhone": "51557058",
+    "description": "",
+    "trackingPlatform": "8260896272635",
+    "isSummary": 0,
+    "destSendDate": null,
+    "charge_on_shop": 0,
+    "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
+    "contactStatus": "NOT_CONTACT",
+    "originSendDate": null,
+    "receiveBackwardDate": null,
+    "width": 40,
+    "weight": 1,
+    "isCod": "1",
+    "isExtraItem": 0,
+    "packagePrice": 9000,
+    "isDeposit": 1,
+    "originReceiveDate": "2026-03-30T11:17:09.000Z",
+    "destReceiveDate": null,
+    "sendCompleteDate": null,
+    "isCustomerCreated": 0,
+    "isBackward": 0,
+    "billNumber": 0,
+    "providedBy": {
+      "_id": "1"
+    },
+    "originProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "destProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "originBranchId": {
+      "branch_name": "ສາຂາ ດົງບອງ(ເມືອງ ນາຊາຍທອງ)"
+    },
+    "destBranchId": {
+      "branch_name": "ສາຂາ ໜອງວຽງຄຳ(ຫຼັງຫໍພັກຊີເກມ)",
+      "branch_address": "ບ້ານໜອງວຽງຄຳ",
+      "districtName": "ເມືອງ ໄຊທານີ",
+      "contactInfo": "76181565 55912211 57099955 93989168 92799204 ກາຍຮ້ານປິ້ງເປັດຕຸກຕາລົງມາ,ທາງໄປບ້ານຫ້ວຍແດນເມືອງ "
+    },
+    "customerId": {
+      "id_list": "7715280",
+      "full_name": "HOANG VIET NGOC ",
+      "contact_info": "98709576"
+    },
+    "createdBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    },
+    "originReceiveBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    }
+  },
+  {
+    "_id": "303487479",
+    "trackingId": "8260893435564",
+    "itemName": "ເຄື່ອງໃຊ້",
+    "itemValueKIP": 90000,
+    "itemValueTHB": 0,
+    "itemValueUSD": 0,
+    "realItemValueKIP": 0,
+    "realItemValueTHB": 0,
+    "realItemValueUSD": 0,
+    "receiverName": "L65273HN",
+    "receiverPhone": "77962052",
+    "description": "",
+    "trackingPlatform": "8260893435564",
+    "isSummary": 0,
+    "destSendDate": null,
+    "charge_on_shop": 0,
+    "itemStatus": "ORIGIN_BRANCH_RECEIVED_FORWARD",
+    "contactStatus": "NOT_CONTACT",
+    "originSendDate": null,
+    "receiveBackwardDate": null,
+    "width": 40,
+    "weight": 1,
+    "isCod": "1",
+    "isExtraItem": 0,
+    "packagePrice": 9000,
+    "isDeposit": 1,
+    "originReceiveDate": "2026-03-30T11:16:48.000Z",
+    "destReceiveDate": null,
+    "sendCompleteDate": null,
+    "isCustomerCreated": 0,
+    "isBackward": 0,
+    "billNumber": 0,
+    "providedBy": {
+      "_id": "1"
+    },
+    "originProvinceId": {
+      "provinceName": "ນະຄອນຫຼວງວຽງຈັນ"
+    },
+    "destProvinceId": {
+      "provinceName": "ແຂວງ ຊຽງຂວາງ"
+    },
+    "originBranchId": {
+      "branch_name": "ສາຂາ ດົງບອງ(ເມືອງ ນາຊາຍທອງ)"
+    },
+    "destBranchId": {
+      "branch_name": "ສາຂາ ພູວຽງ(ເຂດງາມ)",
+      "branch_address": "ບ້ານ ພູວຽງ",
+      "districtName": "ເມືອງ ຄູນ",
+      "contactInfo": "29900644"
+    },
+    "customerId": {
+      "id_list": "7715280",
+      "full_name": "HOANG VIET NGOC ",
+      "contact_info": "98709576"
+    },
+    "createdBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    },
+    "originReceiveBy": {
+      "first_name": "ນາງ ກຸ້ງແກ້ວ ",
+      "phone_number": 77814451
+    }
+  }
+]
