@@ -167,8 +167,12 @@ def getAllShipmentHal(accessToken):
 
 def getAllShipment():
     df = json.load(open("token.json"))
+    t0 = time.time()
     getAllShipmentAnousith(df["anousith"]["accessToken"])
+    t1 = time.time()
     getAllShipmentHal(df["hal"]["accessToken"])
+    t2 = time.time()
+    print(f"[TIMER] anousith={t1-t0:.1f}s hal={t2-t1:.1f}s")
 
 def getAllBillInPancake():
 
@@ -184,6 +188,7 @@ def getAllBillInPancake():
             # print(orderId, respoonse)
             return respoonse["data"]
         return []
+    t0 = time.time()
     page = 1
     allBill = []
     while True:
@@ -195,7 +200,7 @@ def getAllBillInPancake():
     with open("listBillInPancake.json", "w") as f:
         f.write(json.dumps(allBill, indent=4))
         f.close()
-    print(f"Total bill in Pancake: {len(allBill)}")
+    print(f"Total bill in Pancake: {len(allBill)} ({page-1} pages, {time.time()-t0:.1f}s)")
     return allBill
 
 def getAllBillNeedProcess():

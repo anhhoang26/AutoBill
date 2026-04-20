@@ -19,6 +19,7 @@ from renderer import anousith_api_to_template, hal_api_to_template, render_label
 _playwright = None
 _browser = None
 _pages: dict[str, any] = {}  # "hal" | "anousith" -> Page
+_render_lock = asyncio.Lock()
 
 
 async def _get_browser():
@@ -72,62 +73,45 @@ async def generate_image(bill, is_hal):
         await _generate_anousith(bill)
 
 
+async def _render_bill(html_content, html_file, output_path):
+    """Render HTML to PNG with lock to prevent concurrent page access."""
+    os.makedirs(os.path.dirname(html_file), exist_ok=True)
+    with open(html_file, "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    async with _render_lock:
+        try:
+            page = await _get_page("shared", width=800, height=900)
+            file_url = f"file:///{os.path.abspath(html_file)}"
+            await page.goto(file_url, wait_until="networkidle")
+            await page.wait_for_timeout(1000)
+
+            el = await page.query_selector("#label")
+            if el:
+                await el.screenshot(path=output_path)
+            else:
+                await page.screenshot(path=output_path)
+        finally:
+            try:
+                os.remove(html_file)
+            except OSError:
+                pass
+
+
 async def _generate_anousith(bill):
     template_data = anousith_api_to_template(bill)
     raw_html = render_label_html(template_data)
-
     html_file = f"image_bill/{bill['_id']}.html"
-    os.makedirs(os.path.dirname(html_file), exist_ok=True)
-    with open(html_file, "w", encoding="utf-8") as f:
-        f.write(raw_html)
-
-    try:
-        page = await _get_page("anousith", width=520, height=900)
-        file_url = f"file:///{os.path.abspath(html_file)}"
-        await page.goto(file_url, wait_until="networkidle")
-        await page.wait_for_timeout(1000)
-
-        output_path = f"image_bill/bill_anousith_{bill['_id']}.png"
-
-        el = await page.query_selector("#label")
-        if el:
-            await el.screenshot(path=output_path)
-        else:
-            await page.screenshot(path=output_path)
-    finally:
-        try:
-            os.remove(html_file)
-        except OSError:
-            pass
+    output_path = f"image_bill/bill_anousith_{bill['_id']}.png"
+    await _render_bill(raw_html, html_file, output_path)
 
 
 async def _generate_hal(bill):
     template_data = hal_api_to_template(bill)
     raw_html = render_label_html(template_data)
-
     html_file = f"image_bill/{bill['id']}.html"
-    os.makedirs(os.path.dirname(html_file), exist_ok=True)
-    with open(html_file, "w", encoding="utf-8") as f:
-        f.write(raw_html)
-
-    try:
-        page = await _get_page("hal", width=520, height=900)
-        file_url = f"file:///{os.path.abspath(html_file)}"
-        await page.goto(file_url, wait_until="networkidle")
-        await page.wait_for_timeout(1000)
-
-        output_path = f"image_bill/bill_hal_{bill['id']}.png"
-
-        el = await page.query_selector("#label")
-        if el:
-            await el.screenshot(path=output_path)
-        else:
-            await page.screenshot(path=output_path)
-    finally:
-        try:
-            os.remove(html_file)
-        except OSError:
-            pass
+    output_path = f"image_bill/bill_hal_{bill['id']}.png"
+    await _render_bill(raw_html, html_file, output_path)
 
 
 # --- Legacy sync wrappers ---

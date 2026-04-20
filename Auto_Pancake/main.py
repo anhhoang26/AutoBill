@@ -32,10 +32,16 @@ _shutdown = False
 _last_cleanup = 0
 
 
+_ctrl_c_count = 0
+
 def _signal_handler(sig, frame):
-    global _shutdown
+    global _shutdown, _ctrl_c_count
+    _ctrl_c_count += 1
     print("\n[MAIN] Shutdown requested...")
     _shutdown = True
+    if _ctrl_c_count >= 2:
+        print("[MAIN] Force exit!")
+        os._exit(1)
 
 
 async def run_in_thread(func, *args):
@@ -46,14 +52,19 @@ async def run_in_thread(func, *args):
 
 async def fetch_data():
     """Fetch shipments and Pancake orders in parallel."""
+    t0 = time.time()
     # Run both fetches concurrently in thread pool
     await asyncio.gather(
         run_in_thread(getAllShipment),
         run_in_thread(getAllBillInPancake),
     )
+    t1 = time.time()
 
     # Match bills (fast, CPU-only)
-    return await run_in_thread(getAllBillNeedProcess)
+    result = await run_in_thread(getAllBillNeedProcess)
+    t2 = time.time()
+    print(f"[TIMER] fetch_shipments+pancake={t1-t0:.1f}s match={t2-t1:.1f}s")
+    return result
 
 
 def cleanup_old_files():
@@ -93,10 +104,14 @@ async def pipeline_cycle():
         _last_cleanup = time.time()
 
     # Login (sync, quick)
+    t0 = time.time()
     await run_in_thread(login)
+    t1 = time.time()
 
     # Fetch data (parallel)
     bills = await fetch_data()
+    t2 = time.time()
+    print(f"[TIMER] login={t1-t0:.1f}s fetch+match={t2-t1:.1f}s")
     print(f"Total bill need process: {len(bills)}")
 
     if not bills:
@@ -107,7 +122,7 @@ async def pipeline_cycle():
         json.dump(bills, f, indent=4)
 
     # Process all bills concurrently
-    await process_bills_batch(bills[:1], concurrency=5)
+    await process_bills_batch(bills, concurrency=5)
 
 
 async def main():

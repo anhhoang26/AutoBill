@@ -124,14 +124,19 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
                 upload_headers = {k: v for k, v in _pancake_headers().items() if k != "Content-Type"}
                 resp = requests.post(url, headers=upload_headers, files=files, timeout=15)
 
+            try:
+                data = resp.json()
+            except Exception:
+                data = {"raw": resp.text[:300]}
+
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:200]}")
+                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
                 continue
 
-            data = resp.json()
             if data.get("success"):
                 return data
-            print(f"[PANCAKE] Upload not successful: {data}")
+            print(f"[PANCAKE] Upload not successful: {json.dumps(data, ensure_ascii=False)[:300]}")
         except Exception as e:
             print(f"[PANCAKE] Upload error attempt {attempt + 1}: {e}")
 
@@ -184,15 +189,22 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
     for attempt in range(max_retries):
         try:
             resp = requests.post(url, headers=_pancake_headers(), data=payload, timeout=15)
+            try:
+                data = resp.json()
+            except Exception:
+                data = {"raw": resp.text[:300]}
+
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:300]}")
+                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code}")
+                print(f"  URL: {url[:150]}")
+                print(f"  Payload: {json.dumps(payload, ensure_ascii=False)[:300]}")
+                print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
                 continue
 
-            data = resp.json()
             if data.get("success"):
                 print(f"[PANCAKE] Success send message {bill_pancake['id']}")
                 return True
-            print(f"[PANCAKE] send_message not successful: {data}")
+            print(f"[PANCAKE] send_message not successful: {json.dumps(data, ensure_ascii=False)[:300]}")
         except Exception as e:
             print(f"[PANCAKE] send_message error attempt {attempt + 1}: {e}")
 
@@ -251,6 +263,9 @@ async def process_bill(bill_info):
     Args:
         bill_info: tuple of (bill_pancake, bill_shipment, is_hal)
     """
+    import time as _time
+    t_start = _time.time()
+
     bill_pancake, bill_shipment, is_hal = bill_info
 
     if is_hal:
@@ -261,11 +276,16 @@ async def process_bill(bill_info):
         ship_fee = bill_shipment["packagePrice"]
 
     # Step 1: Generate image (async, reuses browser)
+    t1 = _time.time()
     await generate_image(bill_shipment, is_hal)
+    t2 = _time.time()
 
     # Step 2: Try Pancake API (run in thread to not block event loop)
     loop = asyncio.get_running_loop()
     sent = await loop.run_in_executor(None, send_via_pancake, bill_pancake, bill_file)
+    t3 = _time.time()
+
+    print(f"[TIMER] {bill_pancake['id']}: gen={t2-t1:.2f}s send={t3-t2:.2f}s total={t3-t_start:.2f}s")
 
     if sent:
         _cleanup_and_update(bill_pancake, bill_file, ship_fee)
@@ -293,6 +313,9 @@ async def process_bills_batch(bills, concurrency=5):
     if not bills:
         return
 
+    import time as _time
+    batch_start = _time.time()
+
     # Start extension worker
     await start_ext_worker()
 
@@ -307,6 +330,10 @@ async def process_bills_batch(bills, concurrency=5):
 
     # Run all bills concurrently (limited by semaphore)
     await asyncio.gather(*[_process_with_limit(b) for b in bills])
+
+    elapsed = _time.time() - batch_start
+    rate = len(bills) / elapsed * 60 if elapsed > 0 else 0
+    print(f"[TIMER] Batch done: {len(bills)} bills in {elapsed:.1f}s ({rate:.1f} bills/min)")
 
     # Wait for extension queue to drain
     queue = get_ext_queue()
@@ -323,5 +350,46 @@ def processBill(bill_info):
 
 
 if __name__ == "__main__":
-    bill_need_process = json.load(open("billNeedProcess.json"))
-    asyncio.run(process_bills_batch(bill_need_process))
+    import sys
+    target_id = sys.argv[1] if len(sys.argv) > 1 else None
+
+    if target_id:
+        # Find specific bill by receiver name or tracking number
+        anousith = json.load(open("listShipmentAnousith.json", encoding="utf-8")) if os.path.exists("listShipmentAnousith.json") else []
+        hal = json.load(open("listShipmentHal.json", encoding="utf-8")) if os.path.exists("listShipmentHal.json") else []
+        pancake = json.load(open("listBillInPancake.json", encoding="utf-8")) if os.path.exists("listBillInPancake.json") else []
+
+        # Find shipment
+        shipment, is_hal = None, False
+        for b in anousith:
+            if b.get("receiverName") == target_id or b.get("trackingId") == target_id:
+                shipment, is_hal = b, False
+                break
+        if not shipment:
+            for b in hal:
+                if b.get("vendor_tracking_number") == target_id or b.get("shipment_number") == target_id:
+                    shipment, is_hal = b, True
+                    break
+
+        # Find pancake order
+        bill_pancake = None
+        for b in pancake:
+            if b.get("id") == target_id:
+                bill_pancake = b
+                break
+
+        if shipment:
+            if bill_pancake:
+                print(f"[TEST] Processing {target_id} (hal={is_hal}) with Pancake order")
+                asyncio.run(process_bill((bill_pancake, shipment, is_hal)))
+            else:
+                print(f"[TEST] Shipment found, generating image only...")
+                asyncio.run(generate_image(shipment, is_hal))
+                key = "id" if is_hal else "_id"
+                src = "hal" if is_hal else "anousith"
+                print(f"[TEST] Image saved: image_bill/bill_{src}_{shipment[key]}.png")
+        else:
+            print(f"[TEST] Bill '{target_id}' not found in shipment lists")
+    else:
+        bill_need_process = json.load(open("billNeedProcess.json"))
+        asyncio.run(process_bills_batch(bill_need_process))

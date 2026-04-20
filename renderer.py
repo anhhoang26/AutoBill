@@ -133,7 +133,7 @@ async def render_label_to_png(order: dict, output_dir: str, playwright_instance)
 
     try:
         browser = await playwright_instance.chromium.launch(headless=True)
-        page = await browser.new_page(viewport={"width": 520, "height": 900}, device_scale_factor=2)
+        page = await browser.new_page(viewport={"width": 800, "height": 900}, device_scale_factor=2)
         await page.goto(f"file://{temp_html}")
 
         # Wait for barcode and fonts to render

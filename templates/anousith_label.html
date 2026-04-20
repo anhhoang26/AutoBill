@@ -15,44 +15,29 @@
     justify-content: center;
     padding: 0;
   }
-  /* Exact styles from app */
   .bill-content {
     background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    overflow: hidden;
-    padding: 0.5rem;
-    width: 460px;
+    border: 1px solid rgba(250,250,250,0.98);
+    border-radius: 7px;
     box-shadow: #ccc 1px 1px 7px;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 700px;
+    overflow: hidden;
   }
-  .bill-content img.logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 200px;
-    width: 150px;
-  }
+  .bill-content > img { display: block; margin-left: auto; margin-right: auto; max-width: 200px; width: 150px; }
+  h3 { font-size: 1.17em; margin: 4px 0; }
   .text-center { text-align: center; }
   .text-start, .text-left { text-align: left; }
   .text-end { text-align: right; }
-  h3 { font-size: 1.17em; margin: 4px 0; }
-  .bill-row {
-    border-top: 1px dashed rgb(208, 203, 209);
-    display: flex;
-    padding: 4px 4px;
-  }
-  .bill-column {
-    color: #000;
-    flex: 1 1 0%;
-    padding: 0.1rem;
-    text-align: center;
-  }
+  .bill-row { border-top: 1px dashed rgb(208,203,209); display: flex; padding: 4px 4px; }
+  .bill-column { color: #000; flex: 1 1 0%; padding: 0.1rem; text-align: center; }
   .bill-column b { font-weight: 700 !important; }
   .bill-row .border-right { border-right: 1px solid #000 !important; padding-right: 8px; }
-  .customFont { color: #000 !important; font-size: 14px; }
+  .customFont { color: #000 !important; font-size: 18px; }
   .text-dart, .text-dark { color: #333; }
   .text-danger { color: rgb(182, 0, 0) !important; }
-  .text-link { color: #0d6efd !important; text-decoration: none; font-size: 14px; }
+  .text-link { color: #0d6efd !important; text-decoration: none; }
   .marginTops { margin-top: -4px; }
   .mt-1 { margin-top: 4px; }
   .mt-2 { margin-top: 8px; }
@@ -63,119 +48,22 @@
   .me-2 { margin-right: 8px; }
   .float-end { float: right; }
   .d-inline { display: inline; }
-  .me-1 { margin-right: 4px; }
   .font-weight-bold { font-weight: 700; }
   .fs-5 { font-size: 1.1rem; font-weight: bold; }
   .fs-6 { font-size: 0.9rem; }
-  .col-4 {
-    flex: 1 1 0%;
-    text-align: center;
-    padding: 4px 0;
-  }
+  .col-4 { flex: 0 0 33.3333%; max-width: 33.3333%; text-align: center; padding: 4px 0; }
   b, strong { font-weight: 700; }
   .fa-arrow-right-long { font-size: 14px; color: #333; padding: 0 4px; }
-  .barcode-section { text-align: center; padding: 10px 0 2px; }
 </style>
 </head>
 <body>
-<div class="bill-content" id="label">
-  <img src="https://app.anousith.express/static/media/logo-app.08726185419ef9a8e073.png" class="logo">
-  <h3 class="text-center">ບິນຝາກພັດສະດຸ</h3>
-
-  <!-- Barcode -->
-  <div class="barcode-section">
-    <svg id="barcode"></svg>
-    <div class="fs-5">{{ tracking_number }}</div>
-  </div>
-
-  <!-- Item info + date -->
-  <div class="bill-row mt-1">
-    <div>
-      <div class="text-dark mt-1 customFont">
-        <strong class="customFont text-dart">ຊື່ພັດສະດຸ: <b>{{ item_name }}</b> </strong>
-        <div class="marginTops customFont text-dart">ເລກພັດສະດຸ: {{ tracking_number }}</div>
-      </div>
-      <div class="text-dark marginTops">
-        <b class="customFont text-dart">ພ/ງ ຮັບເຄື່ອງ:</b> <strong class="customFont text-dart">[ {{ received_by }} ]</strong>
-      </div>
-    </div>
-    <div class="bill-column mt-1 text-end">
-      <div class="customFont marginTops text-dart float-end">ວັນທີຝາກ:<br> {{ date }}</div>
-    </div>
-  </div>
-
-  <!-- Province route -->
-  <div class="bill-row">
-    <div class="bill-column"><span class="customFont"><b class="text-dart">{{ origin_province }}</b></span></div>
-    <div><i class="fa-solid fa-arrow-right-long"></i></div>
-    <div class="bill-column customFont"><b class="text-dart">{{ dest_province }}</b></div>
-  </div>
-
-  <!-- Branch route -->
-  <div class="bill-row">
-    <div class="bill-column"><div class="customFont"><b class="text-dart">{{ origin_branch }}</b></div></div>
-    <div><i class="fa-solid fa-arrow-right-long"></i></div>
-    <div class="bill-column customFont"><b class="text-dart">{{ dest_branch }}</b></div>
-  </div>
-
-  <!-- Sender / Receiver -->
-  <div class="bill-row">
-    <div class="bill-column border-right text-left">
-      <div class="customFont text-dart">ID: {{ sender_id }}</div>
-      <div class="customFont marginTops text-dart">ຈາກ: {{ sender_name }}</div>
-      <div class="customFont marginTops text-dart">ໂທ: {{ sender_phone }}</div>
-    </div>
-    <div class="bill-column text-left ml-1">
-      <div class="customFont text-dart">ເຖິງ: {{ receiver_name }}</div>
-      <div class="customFont marginTops text-dart">ໂທ: {{ receiver_phone }}</div>
-      <div class="customFont marginTops text-dart">
-        <span class="customFont"><a class="text-link d-inline text-start" href="#">☎ ແຊັດຫາ</a></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Destination pickup point -->
-  <div class="bill-row">
-    <div class="bill-column text-left customFont pt-1">
-      <b>ຈຸດຮັບເຄື່ອງປາຍທາງ: </b>
-      <div class="d-inline customFont text-dart">{{ dest_address }}{% if dest_contact %}, {{ dest_contact }}{% endif %}</div>
-    </div>
-  </div>
-
-  <!-- Size / Weight / Fee -->
-  <div class="bill-row">
-    <div class="col-4 text-center"><b class="text-dart">ຂະໜາດ</b> <br><b class="text-dart">{{ width }} cm</b></div>
-    <div class="col-4 text-center"><b class="text-dart">ນ້ຳໜັກ</b> <br><b class="text-dart">{{ weight }} kg</b></div>
-    <div class="col-4 text-center"><b class="text-dart">ຄ່າບໍລິການ</b> <br><b class="text-dart">{{ package_price_display }} ກີບ</b></div>
-  </div>
-
-  <!-- Service fee + COD -->
-  <div class="bill-row">
-    <div class="bill-column customFont text-start">ຈ່າຍຄ່າບໍລິການ:<b class="text-danger customFont me-2"> {% if charge_on_shop %}ຈ່າຍຕົ້ນທາງ{% else %}ຈ່າຍປາຍທາງ{% endif %}</b></div>
-    <div class="bill-column text-end me-2">
-      {% if is_cod %}<div class="customFont text-dark"><b class="customFont">ເກັບCOD: {{ cod_display }} KIP</b></div>{% endif %}
-    </div>
-  </div>
-
-  <!-- Total -->
-  <div class="bill-row mb-2">
-    <div class="bill-column font-weight-bold text-start">ລວມທັງໝົດ:</div>
-    <div class="bill-column text-end font-weight-bold">{{ total_display }} KIP &nbsp;</div>
-  </div>
-
-  <!-- Warning -->
-  <div class="text-center mt-2 text-dark">
-    <b class="text-danger customFont">ຮັບເຄື່ອງພາຍໃນ 7 ວັນ (ຫຼັງເຄື່ອງຮອດປາຍທາງ ຖ້າເກີນ 7 ວັນ ເຄື່ອງຈະຕີກັບຕົ້ນທາງ)</b>
-    <div class="text-center text-black fs-6 mb-1 font-weight-bold">ຂອບໃຈທີ່ໃຊ້ບໍລິການອານຸສິດ</div>
-  </div>
-</div>
-
+<div class="bill-content" id="label"><img src="https://app.anousith.express/static/media/logo-app.08726185419ef9a8e073.png" class="" style="width: 150px;"><h3 class="text-center ">ບິນຝາກພັດສະດຸ</h3><div class="bill-row mt-1" style="border-top: 1px dashed rgb(208, 203, 209);"><div><div class="text-dark mt-1 customFont"><strong class="customFont text-dart">ຊື່ພັດສະດຸ: <b>{{ item_name }}</b> </strong><div class="marginTops customFont text-dart">ເລກພັດສະດຸ: {{ tracking_number }}</div></div><div class="text-dark marginTops"><b class="customFont text-dart">ພ/ງ ຮັບເຄື່ອງ:</b> <strong class="customFont text-dart">[ {{ received_by }} ]</strong></div></div><div class="bill-column mt-1 text-end"><div class="customFont marginTops text-dart float-end">ວັນທີຝາກ:<br> {{ date }}</div></div></div><div class="bill-row" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column"><span class="customFont"><b class="text-dart">{{ origin_province }}</b></span></div><div><i class="fa-solid fa-arrow-right-long"></i></div><div class="bill-column customFont"><b class="text-dart">{{ dest_province }}</b></div></div><div class="bill-row" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column "><div class="customFont "><b class="text-dart">{{ origin_branch }}</b></div></div><div><i class="fa-solid fa-arrow-right-long"></i></div><div class="bill-column customFont"><b class="text-dart">{{ dest_branch }}</b></div></div><div class="bill-row " style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column border-right text-left "><div class="customFont text-dart">ID: {{ sender_id }}</div><div class="customFont marginTops text-dart">ຈາກ: {{ sender_name }}</div><div class="customFont marginTops text-dart">ໂທ: {{ sender_phone }}</div></div><div class="bill-column text-left ml-1"><div class="customFont text-dart">ເຖິງ: {{ receiver_name }}</div><div class="customFont marginTops text-dart">ໂທ: {{ receiver_phone }}</div><div class="customFont marginTops text-dart"><span class="customFont "><a class="text-link d-inline text-start" href="#">☎ ແຊັດຫາ</a> </span></div></div></div><div class="bill-row" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column text-left customFont pt-1"><b>ຈຸດຮັບເຄື່ອງປາຍທາງ: </b><div class="d-inline customFont text-dart ">{{ dest_address }}{% if dest_contact %}, {{ dest_contact }}{% endif %}</div></div></div><div class="bill-row" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="col-4 text-black text-center"><b class="text-dart">ຂະໜາດ</b> <br><b class="text-dart">{{ width }} cm</b></div><div class="col-4 text-black text-center"><b class="text-dart">ນ້ຳໜັກ</b> <br><b class="text-dart">{{ weight }} kg</b></div><div class="col-4  text-center text-dark "><b class="text-dart">ຄ່າບໍລິການ</b> <br><b class="text-dart">{{ package_price_display }} ກີບ</b></div></div><div class="bill-row" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column customFont text-start">ຈ່າຍຄ່າບໍລິການ:<b class="text-danger customFont me-2"> {% if charge_on_shop %}ຈ່າຍຕົ້ນທາງ{% else %}ຈ່າຍປາຍທາງ{% endif %}</b></div><div class="bill-column text-end me-2">{% if is_cod %}<div class="customFont text-dark"><b class="customFont">ເກັບCOD: {{ cod_display }} KIP</b></div>{% endif %}</div></div><div class="bill-row mb-2" style="border-top: 1px dashed rgb(208, 203, 209);"><div class="bill-column font-weight-bold text-start">ລວມທັງໝົດ:</div><div class="bill-column text-end font-weight-bold">{{ total_display }} KIP &nbsp;</div></div><div class=" text-center mt-2 text-dark"><svg id="barcode"></svg><div class="fs-5">{{ tracking_number }}</div></div><div class="bill-column text-center"><b class="text-danger customFont">ຮັບເຄື່ອງພາຍໃນ 7 ວັນ (ຫຼັງເຄື່ອງຮອດປາຍທາງ ຖ້າເກີນ 7 ວັນ ເຄື່ອງຈະຕີກັບຕົ້ນທາງ)</b><div class="text-center text-black fs-6  mb-1 font-weight-bold">ຂອບໃຈທີ່ໃຊ້ບໍລິການອານຸສິດ</div></div></div>
 <script>
   try {
     JsBarcode("#barcode", "{{ tracking_number }}", {
-      format: "CODE128", width: 2, height: 40, displayValue: false, margin: 0
+      format: "CODE128", width: 2, height: 30, displayValue: false, margin: 0
     });
-  } catch(e) { console.error("Barcode error:", e); }
+  } catch(e) {}
 </script>
 </body>
 </html>

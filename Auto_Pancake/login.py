@@ -1,24 +1,36 @@
 import requests
 import json
 import time
+import base64
+
+
+def _get_jwt_exp(token):
+    """Extract exp (expiry timestamp) from JWT payload without verification."""
+    try:
+        payload = token.split(".")[1]
+        # Add padding
+        payload += "=" * (4 - len(payload) % 4)
+        data = json.loads(base64.urlsafe_b64decode(payload))
+        return data.get("exp", 0)
+    except Exception:
+        return 0
+
+
 def updateToken(accessToken):
     url = "https://auto-pancake.anhviethoang2000.workers.dev/auth"
+    payload = json.dumps({"authorization": accessToken})
+    headers = {'Content-Type': 'application/json'}
+    requests.request("POST", url, headers=headers, data=payload)
 
-    payload = json.dumps({
-        "authorization": accessToken
-    })
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload)
-    # print(response.status_code)
 
 def loginAnousith():
     df = json.load(open("token.json"))
-    if time.time() - df["anousith"]["lastLogin"] <= 22 * 60 * 60:
+    # Check if token still valid using JWT exp
+    current_token = df.get("anousith", {}).get("accessToken", "")
+    if current_token and _get_jwt_exp(current_token) > time.time():
         return
-    url = "https://pro.api.anousith.express/graphql"
 
+    url = "https://pro.api.anousith.express/graphql"
     payload = json.dumps({
         "operationName": "CustomerLogin",
         "variables": {
@@ -73,9 +85,10 @@ def loginAnousith():
     if response.status_code == 200:
         response = response.json()
         print(response)
-        updateToken(response["data"]["customerLogin"]["accessToken"])
+        token = response["data"]["customerLogin"]["accessToken"]
+        updateToken(token)
         df["anousith"] = {
-            "accessToken": response["data"]["customerLogin"]["accessToken"],
+            "accessToken": token,
             "lastLogin": time.time()
         }
         with open("token.json", "w") as file:
@@ -86,12 +99,15 @@ def loginAnousith():
         print("Try login")
         loginAnousith()
 
+
 def loginHal():
     with open("token.json", "r") as f:
         df = json.loads(f.read())
         f.close()
-    if df["hal"]["exprire"] > time.time():
-        return 
+    # Check if token still valid using JWT exp
+    current_token = df.get("hal", {}).get("accessToken", "")
+    if current_token and _get_jwt_exp(current_token) > time.time():
+        return
     url = "https://hal.hal-logistics.la/api/sign-in"
     payload = json.dumps({
         "id": None,
@@ -110,7 +126,7 @@ def loginHal():
         loginHal()
     response = response.json()
     newLogin = {
-        "exprire": time.time() + 8 * 60 * 60,
+        "exprire": _get_jwt_exp(response["access_token"]),
         "accessToken": response["access_token"],
         "refreshToken": response["refresh_token"],
         "userId": response["authUser"]["userId"]
@@ -120,6 +136,7 @@ def loginHal():
         f.write(json.dumps(df, indent=4))
         f.close()
     return newLogin
+
 
 def login():
     loginAnousith()
