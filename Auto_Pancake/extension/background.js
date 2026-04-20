@@ -280,6 +280,31 @@ async function ensureFbContext(pageId, forceRefresh = false) {
 
   searchDocIds(html);
   await saveDocIds();
+  // Store last HTML of context for on-demand doc_id fetch
+  _lastContextHtml = html;
+}
+
+// Khi chưa có target doc_id, fetch các <script src> từ HTML context để scan
+// (giống docid_extractor.js nhưng chạy ngay trong service worker, không cần user mở tab).
+let _lastContextHtml = "";
+let _scriptsScanned = false;
+
+async function ensureDocIdsFromScripts() {
+  if (_scriptsScanned || !_lastContextHtml) return;
+  _scriptsScanned = true;
+  const srcs = [..._lastContextHtml.matchAll(/<script[^>]+src="(https:\/\/static\.xx\.fbcdn\.net\/[^"]+)"/g)]
+    .map(m => m[1].replace(/&amp;/g, "&"));
+  console.log(`[AutoBill:bg] Fetching ${srcs.length} script chunks to populate doc_ids...`);
+  const before = Object.keys(_docIds).length;
+  await Promise.all(srcs.map(async (url) => {
+    try {
+      const r = await fetch(url);
+      searchDocIds(await r.text());
+    } catch (_) {}
+  }));
+  const after = Object.keys(_docIds).length;
+  console.log(`[AutoBill:bg] doc_ids: ${before} → ${after}`);
+  await saveDocIds();
 }
 
 // ── Resolve threadId → PSID ────────────────────────────────────────────────────
@@ -291,7 +316,13 @@ async function resolveRecipientId(threadId, pageId) {
 
   // Method 1: GraphQL PagesManagerInboxAdminAssignerRootQuery (giống Pancake primary)
   const QUERY = "PagesManagerInboxAdminAssignerRootQuery";
-  const docId = _docIds[QUERY];
+  let docId = _docIds[QUERY];
+
+  // Nếu thiếu doc_id → tự fetch scripts từ HTML để extract
+  if (!docId) {
+    await ensureDocIdsFromScripts();
+    docId = _docIds[QUERY];
+  }
 
   if (docId) {
     try {
@@ -585,4 +616,4 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 ensureOffscreen();
-console.log("[AutoBill:bg] Service worker started v5.6.5 (debug logs)");
+console.log("[AutoBill:bg] Service worker started v5.6.6 (auto fetch script chunks for doc_ids)");
