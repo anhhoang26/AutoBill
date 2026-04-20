@@ -108,9 +108,14 @@ let _lsd = "";
 let _msgrRegion = "PRN";
 let _sprinkleParamName = "jazoest";
 let _sprinkleVersion = 2;
+let _sprinkleShouldRandomize = true;
 let _siteData = {};
+let _jazoest = "";
 let _reqCount = 0;
 let _lastPageId = null;           // page_id đã dùng để fetch context
+// Per-page context cache → tránh fetch business.facebook.com mỗi lần đổi page
+const _contextsByPage = {};        // pageId -> { dtsg, userId, lsd, msgrRegion, sprinkleParamName, sprinkleVersion, siteData, ts }
+const CONTEXT_TTL = 30 * 60 * 1000; // 30 phút — cân bằng giữa tránh stale token và hạn chế fetch
 // Pancake webSession.getId() format: sessionId:activityId:tabId
 const _webSessionId = Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
   Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":" +
@@ -119,15 +124,39 @@ const _webSessionId = Math.floor(Math.random()*1e9).toString(36).slice(0,6) + ":
 function _clearFbContext() {
   _fbDtsg = null; _fbUserId = null; _lsd = "";
   _siteData = {};
+  _lastPageId = null;
+}
+
+function _activateCachedContext(pageId, cached) {
+  _fbDtsg = cached.dtsg;
+  _fbUserId = cached.userId;
+  _lsd = cached.lsd;
+  _msgrRegion = cached.msgrRegion;
+  _sprinkleParamName = cached.sprinkleParamName;
+  _sprinkleVersion = cached.sprinkleVersion;
+  _sprinkleShouldRandomize = cached.sprinkleShouldRandomize;
+  _jazoest = cached.jazoest;
+  _siteData = cached.siteData;
+  _lastPageId = pageId;
 }
 
 async function ensureFbContext(pageId, forceRefresh = false) {
-  if (_fbDtsg && !forceRefresh) return;
-  if (forceRefresh) _clearFbContext();
+  // Reuse cached context for this page if fresh enough → no FB fetch
+  const cached = _contextsByPage[pageId];
+  if (cached && !forceRefresh && Date.now() - cached.ts < CONTEXT_TTL) {
+    if (_lastPageId !== pageId) {
+      _activateCachedContext(pageId, cached);
+      console.log(`[AutoBill:bg] Using cached context for page ${pageId}`);
+    }
+    return;
+  }
+  if (forceRefresh) delete _contextsByPage[pageId];
+  _clearFbContext();
 
-  // Pancake InboxBusiness: fetch business.facebook.com/latest/inbox/all?asset_id=...
-  const url = `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`;
-  console.log(`[AutoBill:bg] Fetching context: ${url}`);
+  // Pancake dùng inbox/messenger (BP:bizweb_pkg), KHÔNG phải inbox/all (HYP:bizweb_comet_pkg)
+  // 2 code path khác nhau — FB validate tokens khác nhau, dùng sai → lỗi 1545012
+  const url = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`;
+  console.log(`[AutoBill:bg] 🔵 FETCHING CONTEXT FROM: ${url}`);
   const resp = await fetch(url, { credentials: "include" });
   if (!resp.ok) throw new Error(`Context fetch ${resp.status}`);
   const html = await resp.text();
@@ -170,16 +199,28 @@ async function ensureFbContext(pageId, forceRefresh = false) {
     if (lsdM) _lsd = lsdM[1];
   }
 
-  // SprinkleConfig
-  const sprinkleM = html.match(/\["SprinkleConfig",\[\],\{"param_name":"([^"]+)","version":(\d+)/);
+  // SprinkleConfig — Pancake extract cả should_randomize (ảnh hưởng công thức jazoest)
+  const sprinkleM = html.match(/\["SprinkleConfig",\[\],\{"param_name":"([^"]+)","version":(\d+),"should_randomize":(true|false)/);
   if (sprinkleM) {
     _sprinkleParamName = sprinkleM[1];
     _sprinkleVersion = parseInt(sprinkleM[2], 10);
+    _sprinkleShouldRandomize = sprinkleM[3] === "true";
   }
 
-  // jazoest v2 = "2" + sum(charCodes of dtsg)
-  let ttstamp = "2";
-  for (let i = 0; i < _fbDtsg.length; i++) ttstamp += _fbDtsg.charCodeAt(i);
+  // jazoest theo Pancake:
+  //   V2: sum(charCodes) → should_randomize ? sum : "2"+sum
+  //   V1: concat(charCodes) → "2" + concat
+  let ttstamp;
+  if (_sprinkleVersion === 2) {
+    let sum = 0;
+    for (let i = 0; i < _fbDtsg.length; i++) sum += _fbDtsg.charCodeAt(i);
+    ttstamp = _sprinkleShouldRandomize ? String(sum) : "2" + sum;
+  } else {
+    let concat = "";
+    for (let i = 0; i < _fbDtsg.length; i++) concat += _fbDtsg.charCodeAt(i);
+    ttstamp = "2" + concat;
+  }
+  _jazoest = ttstamp;
 
   // SiteData — Pancake dùng eval, ta dùng JSON.parse
   // Fields dùng trong buildParams: client_revision, pkg_cohort, pr, hsi, haste_session,
@@ -204,7 +245,7 @@ async function ensureFbContext(pageId, forceRefresh = false) {
   const clientRevision = sd.client_revision ? String(sd.client_revision)
     : (html.match(/client_revision":(\d+)/)?.[1] || "");
 
-  // Pancake buildParams() đầy đủ (tất cả fields khi SiteData có)
+  // Pancake buildParams() — KHÔNG include jazoest ở đây (jazoest phải đặt sau fb_dtsg)
   _siteData = {
     __csr:       "",
     __beoa:      sd.be_one_ahead ? 1 : 0,
@@ -214,16 +255,28 @@ async function ensureFbContext(pageId, forceRefresh = false) {
     __rev:       clientRevision,
     __hsi:       sd.hsi ? String(sd.hsi) : "",
     __hs:        sd.haste_session || "",
-    __comet_req: sd.is_comet ? 1 : 1, // business.facebook.com luôn là comet
+    __comet_req: sd.is_comet ? 1 : 0,
     __spin_r:    sd.__spin_r ? String(sd.__spin_r) : clientRevision,
     __spin_b:    sd.__spin_b || "trunk",
     __spin_t:    sd.__spin_t ? String(sd.__spin_t) : "1514187418",
     __s:         _webSessionId,
-    jazoest:     ttstamp,
   };
 
   _lastPageId = pageId;
-  console.log(`[AutoBill:bg] dtsg=${_fbDtsg.slice(0,8)}... lsd=${_lsd ? _lsd.slice(0,6)+"..." : "MISSING"} region=${_msgrRegion} rev=${clientRevision} comet=${sd.is_comet?1:0} hsi=${sd.hsi?"ok":"MISS"}`);
+  _contextsByPage[pageId] = {
+    dtsg: _fbDtsg,
+    userId: _fbUserId,
+    lsd: _lsd,
+    msgrRegion: _msgrRegion,
+    sprinkleParamName: _sprinkleParamName,
+    sprinkleVersion: _sprinkleVersion,
+    sprinkleShouldRandomize: _sprinkleShouldRandomize,
+    jazoest: _jazoest,
+    siteData: _siteData,
+    ts: Date.now(),
+  };
+  console.log(`[AutoBill:bg] 🔵 EXTRACTED: __pc=${_siteData.__pc} __beoa=${_siteData.__beoa} __ccg=${_siteData.__ccg} __hs=${_siteData.__hs} jazoest=${_jazoest} version=${_sprinkleVersion} should_randomize=${_sprinkleShouldRandomize}`);
+  console.log(`[AutoBill:bg] Fetched+cached context page=${pageId} dtsg=${_fbDtsg.slice(0,8)}... lsd=${_lsd ? _lsd.slice(0,6)+"..." : "MISSING"} region=${_msgrRegion} rev=${clientRevision}`);
 
   searchDocIds(html);
   await saveDocIds();
@@ -260,7 +313,7 @@ async function resolveRecipientId(threadId, pageId) {
         credentials: "include",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          "Referer": `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}`,
+          "Referer": `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`,
         },
       });
 
@@ -284,7 +337,7 @@ async function resolveRecipientId(threadId, pageId) {
 
   // Method 2: HTML parsing fallback (conversation page)
   try {
-    const url = `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}&selected_item_id=${threadId}`;
+    const url = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&selected_item_id=${threadId}&nav_ref=diode_page_inbox`;
     const r = await fetch(url, { credentials: "include" });
     const html = await r.text();
     console.log(`[AutoBill:bg] Conv page ${r.status}, length=${html.length}`);
@@ -358,27 +411,39 @@ function generateOfflineThreadingId() {
 async function sendMessage(recipientId, text, attachmentId, pageId) {
   const tid = generateOfflineThreadingId();
 
-  // Thứ tự giống Pancake:
-  // 1. buildSendParams: body, offline_threading_id, source, timestamp, request_user_id
-  // 2. Object.assign với buildParams(): __user, __a, __req, SiteData fields, fb_dtsg, lsd, jazoest
-  // 3. Facebook-specific: specific_to_list, other_user_fbid, message_id, client, action_type, ...
-  // 4. __usid: null (generateUsid trả null)
-  const body = buildBody({
-    // buildSendParams
+  // Thứ tự params EXACTLY theo curl Pancake thành công:
+  //   body, offline_threading_id, source, timestamp, request_user_id,
+  //   __user, __a, __req, __csr, __beoa, __pc, dpr, __ccg, __rev, __hsi, __hs,
+  //   __comet_req, __spin_r, __spin_b, __spin_t, __s,
+  //   fb_dtsg, jazoest, lsd, __usid,
+  //   specific_to_list[0], specific_to_list[1], other_user_fbid, message_id,
+  //   client, action_type, ephemeral_ttl_mode, has_attachment, image_ids[0]
+  const paramsObj = {
     body: text || "",
     offline_threading_id: tid,
     source: "source:page_unified_inbox",
     timestamp: String(Date.now()),
     request_user_id: pageId,
-    // buildParams() — đầy đủ như Pancake
     __user: _fbUserId || "",
     __a: "1",
     __req: (_reqCount++).toString(36),
-    ..._siteData,                           // __csr,__beoa,__pc,dpr,__ccg,__rev,__hsi,__hs,__comet_req,__spin_*,__s,jazoest
+    __csr: _siteData.__csr ?? "",
+    __beoa: _siteData.__beoa,
+    __pc: _siteData.__pc,
+    dpr: _siteData.dpr,
+    __ccg: _siteData.__ccg,
+    __rev: _siteData.__rev,
+    __hsi: _siteData.__hsi,
+    __hs: _siteData.__hs,
+    __comet_req: _siteData.__comet_req,
+    __spin_r: _siteData.__spin_r,
+    __spin_b: _siteData.__spin_b,
+    __spin_t: _siteData.__spin_t,
+    __s: _siteData.__s,
     fb_dtsg: _fbDtsg,
-    [_sprinkleParamName]: _siteData.jazoest,
+    [_sprinkleParamName]: _jazoest,   // jazoest SAU fb_dtsg
     lsd: _lsd,
-    // facebook-specific (sau buildParams)
+    __usid: "null",                   // __usid SAU lsd, TRƯỚC specific_to_list
     "specific_to_list[0]": `fbid:${recipientId}`,
     "specific_to_list[1]": `fbid:${pageId}`,
     other_user_fbid: recipientId,
@@ -387,20 +452,20 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
     action_type: "ma-type:user-generated-message",
     ephemeral_ttl_mode: "0",
     has_attachment: attachmentId ? "true" : "false",
-    ...(attachmentId ? { "image_ids[0]": attachmentId } : {}),
-    __usid: "",
-  });
+  };
+  if (attachmentId) paramsObj["image_ids[0]"] = attachmentId;
+
+  const body = buildBody(paramsObj);
   console.log(`[AutoBill:bg] send params: user=${_fbUserId} page=${pageId} recipient=${recipientId} rev=${_siteData.__rev} comet=${_siteData.__comet_req}`);
 
+  // Headers: match Pancake exactly — chỉ Content-Type + X-MSGR-Region (không x-requested-with/x-response-format)
   const r = await fetch("https://business.facebook.com/messaging/send/", {
     method: "POST",
     body,
     credentials: "include",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "x-requested-with": "XMLHttpRequest",
-      "x-response-format": "JSONStream",
-      "x-msgr-region": _msgrRegion,
+      "X-MSGR-Region": _msgrRegion,
     },
   });
 
@@ -409,11 +474,27 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
 
   const json = JSON.parse(resText.replace(/^for\s*\(;;\);/, ""));
-  if (json.error) {
-    console.error("[AutoBill:bg] FB error:", JSON.stringify(json));
-    throw new Error(`FB error: ${JSON.stringify(json.error)}`);
+
+  // FB có thể trả 200 OK nhưng vẫn lỗi. Check đầy đủ các field lỗi:
+  if (json.error || json.errorSummary || json.errorCode || json.errorDescription) {
+    const errInfo = {
+      error: json.error, errorCode: json.errorCode,
+      summary: json.errorSummary, desc: json.errorDescription,
+    };
+    console.error("[AutoBill:bg] FB error:", JSON.stringify(errInfo));
+    throw new Error(`FB error: ${JSON.stringify(errInfo)}`);
   }
-  return { success: true };
+
+  // Chỉ coi là success khi có action_id hoặc payload.actions chứa message đã gửi
+  const actionId = json.payload?.action_id || json.action_id;
+  const actions = json.payload?.actions;
+  if (!actionId && !(Array.isArray(actions) && actions.length > 0)) {
+    console.error("[AutoBill:bg] No action_id/actions in response:", resText.slice(0, 400));
+    throw new Error("FB send: no action_id in response");
+  }
+
+  console.log(`[AutoBill:bg] Message sent, action_id=${actionId || "(from actions[])"}`);
+  return { success: true, action_id: actionId };
 }
 
 // ── Main send handler ──────────────────────────────────────────────────────────
@@ -504,4 +585,4 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 ensureOffscreen();
-console.log("[AutoBill:bg] Service worker started v5.5.0");
+console.log("[AutoBill:bg] Service worker started v5.6.5 (debug logs)");

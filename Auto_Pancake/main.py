@@ -67,6 +67,23 @@ async def fetch_data():
     return result
 
 
+def cleanup_all_bill_images():
+    """Remove ALL bills images in image_bill/ — call after each pipeline cycle
+    to drop orphans from bills that failed both Pancake API and extension.
+    Safe because pipeline_cycle awaits batch + extension queue drain before calling this."""
+    if not os.path.isdir("image_bill"):
+        return
+    removed = 0
+    for f in glob.glob("image_bill/*.png") + glob.glob("image_bill/*.html"):
+        try:
+            os.remove(f)
+            removed += 1
+        except OSError:
+            pass
+    if removed:
+        print(f"[CLEANUP] Removed {removed} leftover files in image_bill/")
+
+
 def cleanup_old_files():
     """Remove orphan bill images older than 1 hour and cap JSON file sizes."""
     # Clean orphan images in image_bill/
@@ -123,6 +140,9 @@ async def pipeline_cycle():
 
     # Process all bills concurrently
     await process_bills_batch(bills, concurrency=5)
+
+    # Drop all leftover images (bills that failed both Pancake + extension)
+    cleanup_all_bill_images()
 
 
 async def main():

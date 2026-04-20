@@ -1,5 +1,5 @@
 /**
- * AutoBill Messenger - Content Script v5.5.0
+ * AutoBill Messenger - Content Script v5.6.0
  *
  * Chạy trên business.facebook.com (giống Pancake v2).
  * Lợi thế so với offscreen:
@@ -526,5 +526,5 @@ function base64ToBlob(b64) {
 
 // ── Start ──────────────────────────────────────────────────────────────────────
 
-console.log("[AutoBill] Content script loaded v5.5.0");
+console.log("[AutoBill] Content script loaded v5.6.0");
 connect();

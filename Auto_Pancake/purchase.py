@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 import os
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env.example"), override=True)
@@ -178,30 +178,133 @@ def getAllBillInPancake():
 
     def getBill(page=0):
         url = f'https://pos.pancake.vn/api/v1/shops/{SHOP_ID}/orders?api_key={POS_PANCAKE_API_KEY}&filter_status[]=8&filter_status[]=9&page_size=200&&page={page}'
-        # print(url)    
         headers = {
             'Content-Type': 'application/json'
         }
-        respoonse = requests.request("GET", url=url, headers=headers)
+        t_req = time.time()
+        try:
+            respoonse = requests.request("GET", url=url, headers=headers, timeout=30)
+        except requests.exceptions.RequestException as e:
+            print(f"[PANCAKE] page={page} request error after {time.time()-t_req:.1f}s: {e}")
+            return []
+        print(f"[PANCAKE] page={page} status={respoonse.status_code} took={time.time()-t_req:.1f}s")
         if respoonse.status_code // 200 == 1:
             respoonse = respoonse.json()
-            # print(orderId, respoonse)
             return respoonse["data"]
+        print(f"[PANCAKE] page={page} non-2xx body: {respoonse.text[:200]}")
         return []
     t0 = time.time()
     page = 1
     allBill = []
+    MAX_PAGES = 50
     while True:
         bills = getBill(page)
+        print(f"[PANCAKE] page={page} got={len(bills)} total_so_far={len(allBill)+len(bills)}")
         if len(bills) == 0:
             break
         allBill += bills
         page += 1
+        if page > MAX_PAGES:
+            print(f"[PANCAKE] reached MAX_PAGES={MAX_PAGES}, stop")
+            break
     with open("listBillInPancake.json", "w") as f:
         f.write(json.dumps(allBill, indent=4))
         f.close()
     print(f"Total bill in Pancake: {len(allBill)} ({page-1} pages, {time.time()-t0:.1f}s)")
     return allBill
+
+def _slim_bill_pancake(bill):
+    """Keep only fields used downstream: id, page_id (flat), conversation_id, updated_at."""
+    return {
+        "id": bill.get("id"),
+        "page_id": bill.get("page_id") or (bill.get("page") or {}).get("id"),
+        "conversation_id": bill.get("conversation_id"),
+        "updated_at": bill.get("updated_at"),
+    }
+
+
+def _slim_anousith(item):
+    """Keep only fields used by processBill + anousith_api_to_template."""
+    customer = item.get("customerId") or {}
+    origin_branch = item.get("originBranchId") or {}
+    dest_branch = item.get("destBranchId") or {}
+    origin_province = item.get("originProvinceId") or {}
+    dest_province = item.get("destProvinceId") or {}
+    received_by = item.get("originReceiveBy") or item.get("createdBy") or {}
+    return {
+        "_id": item.get("_id"),
+        "packagePrice": item.get("packagePrice"),
+        "trackingId": item.get("trackingId"),
+        "itemName": item.get("itemName"),
+        "originReceiveDate": item.get("originReceiveDate"),
+        "receiverName": item.get("receiverName"),
+        "receiverPhone": item.get("receiverPhone"),
+        "width": item.get("width"),
+        "weight": item.get("weight"),
+        "itemValueKIP": item.get("itemValueKIP"),
+        "isCod": item.get("isCod"),
+        "charge_on_shop": item.get("charge_on_shop"),
+        "originReceiveBy": {"first_name": received_by.get("first_name")},
+        "originProvinceId": {"provinceName": origin_province.get("provinceName")},
+        "destProvinceId": {"provinceName": dest_province.get("provinceName")},
+        "originBranchId": {"branch_name": origin_branch.get("branch_name")},
+        "destBranchId": {
+            "branch_name": dest_branch.get("branch_name"),
+            "branch_address": dest_branch.get("branch_address"),
+            "contactInfo": dest_branch.get("contactInfo"),
+        },
+        "customerId": {
+            "id_list": customer.get("id_list"),
+            "full_name": customer.get("full_name"),
+            "contact_info": customer.get("contact_info"),
+        },
+    }
+
+
+def _slim_hal(item):
+    """Keep only fields used by processBill + hal_api_to_template."""
+    sender = item.get("sender_customer") or {}
+    receiver = item.get("receiver_customer") or {}
+    start_branch = item.get("start_branch") or {}
+    end_branch = item.get("end_branch") or {}
+    parcel = item.get("parcel") or {}
+    parcel_category = parcel.get("parcel_category") or {}
+    return {
+        "id": item.get("id"),
+        "total_freight": item.get("total_freight"),
+        "shipment_number": item.get("shipment_number"),
+        "start_date_actual": item.get("start_date_actual"),
+        "pieces": item.get("pieces"),
+        "total_price": item.get("total_price"),
+        "sender_customer": {"name": sender.get("name"), "tel": sender.get("tel")},
+        "receiver_customer": {"name": receiver.get("name"), "tel": receiver.get("tel")},
+        "start_branch": {"name": start_branch.get("name")},
+        "end_branch": {"name": end_branch.get("name")},
+        "parcel": {
+            "name": parcel.get("name"),
+            "weight": parcel.get("weight"),
+            "dimension_length": parcel.get("dimension_length"),
+            "parcel_category": {"name_la": parcel_category.get("name_la")},
+        },
+    }
+
+
+MAX_BILL_AGE_DAYS = 7
+
+
+def _is_too_old(updated_at, max_days=MAX_BILL_AGE_DAYS):
+    """Return True if updated_at (Pancake ISO string) is older than max_days."""
+    if not updated_at:
+        return False
+    try:
+        dt = datetime.fromisoformat(str(updated_at).replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        age = datetime.now(timezone.utc) - dt
+        return age > timedelta(days=max_days)
+    except Exception:
+        return False
+
 
 def getAllBillNeedProcess():
     listBillInPancake = json.load(open("listBillInPancake.json"))
@@ -209,13 +312,20 @@ def getAllBillNeedProcess():
     listShipmentHal = json.load(open("listShipmentHal.json"))
     dictShipmentAnousith = {bill["receiverName"]: bill for bill in listShipmentAnousith}
     dictShipmentHal = {bill["receiver_customer"]["name"]: bill for bill in listShipmentHal}
-    
+
     listBillNeedProcess = []
+    skipped_old = 0
     for bill in listBillInPancake:
+        if _is_too_old(bill.get("updated_at")):
+            skipped_old += 1
+            continue
+        slim_pancake = _slim_bill_pancake(bill)
         if bill["id"] in dictShipmentAnousith:
-            listBillNeedProcess.append((bill, dictShipmentAnousith[bill["id"]], False))
+            listBillNeedProcess.append((slim_pancake, _slim_anousith(dictShipmentAnousith[bill["id"]]), False))
         elif bill["id"] in dictShipmentHal:
-            listBillNeedProcess.append((bill, dictShipmentHal[bill["id"]], True))
+            listBillNeedProcess.append((slim_pancake, _slim_hal(dictShipmentHal[bill["id"]]), True))
+    if skipped_old:
+        print(f"[MATCH] Skipped {skipped_old} bills older than {MAX_BILL_AGE_DAYS} days")
     return listBillNeedProcess
 if __name__ == "__main__":
     getAllBillInPancake()

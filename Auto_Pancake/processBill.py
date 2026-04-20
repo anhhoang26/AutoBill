@@ -52,9 +52,23 @@ def get_ext_queue() -> asyncio.Queue:
     return _ext_queue
 
 
+_ws_server_started = False
+
+
+def _ensure_ws_server():
+    """Start the WebSocket server (background thread) so the Chrome extension can connect."""
+    global _ws_server_started
+    if _ws_server_started:
+        return
+    from ws_server import start_background_server
+    start_background_server()
+    _ws_server_started = True
+
+
 async def start_ext_worker():
     """Background worker that processes the extension fallback queue."""
     global _ext_worker_task
+    _ensure_ws_server()
     if _ext_worker_task and not _ext_worker_task.done():
         return
     _ext_worker_task = asyncio.create_task(_ext_worker_loop())
@@ -132,11 +146,13 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
             if resp.status_code < 200 or resp.status_code >= 300:
                 print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code}")
                 print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
+                if 400 <= resp.status_code < 500 and resp.status_code != 429:
+                    return None
                 continue
 
             if data.get("success"):
                 return data
-            print(f"[PANCAKE] Upload not successful: {json.dumps(data, ensure_ascii=False)[:300]}")
+            print(f"[PANCAKE] Upload not successful {bill_pancake['id']}: {json.dumps(data, ensure_ascii=False)[:300]}")
         except Exception as e:
             print(f"[PANCAKE] Upload error attempt {attempt + 1}: {e}")
 
@@ -158,12 +174,14 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
             )
             if resp.status_code < 200 or resp.status_code >= 300:
                 print(f"[PANCAKE] create_fb_ids failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:300]}")
+                if 400 <= resp.status_code < 500 and resp.status_code != 429:
+                    return None
                 continue
 
             data = resp.json()
             if data.get("success"):
                 return data["fb_ids"][0]
-            print(f"[PANCAKE] create_fb_ids not successful: {data}")
+            print(f"[PANCAKE] create_fb_ids not successful {bill_pancake['id']}: {data}")
         except Exception as e:
             print(f"[PANCAKE] create_fb_ids error attempt {attempt + 1}: {e}")
 
@@ -185,10 +203,12 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
         "height": upload_response["image_data"]["height"],
         "send_by_platform": "web",
     }
+    multipart = {k: (None, str(v)) for k, v in payload.items()}
+    send_headers = {k: v for k, v in _pancake_headers().items() if k != "Content-Type"}
 
     for attempt in range(max_retries):
         try:
-            resp = requests.post(url, headers=_pancake_headers(), data=payload, timeout=15)
+            resp = requests.post(url, headers=send_headers, files=multipart, timeout=15)
             try:
                 data = resp.json()
             except Exception:
@@ -199,12 +219,18 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
                 print(f"  URL: {url[:150]}")
                 print(f"  Payload: {json.dumps(payload, ensure_ascii=False)[:300]}")
                 print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
+                if 400 <= resp.status_code < 500 and resp.status_code != 429:
+                    return False
                 continue
 
             if data.get("success"):
                 print(f"[PANCAKE] Success send message {bill_pancake['id']}")
                 return True
-            print(f"[PANCAKE] send_message not successful: {json.dumps(data, ensure_ascii=False)[:300]}")
+            print(f"[PANCAKE] send_message not successful {bill_pancake['id']}: {json.dumps(data, ensure_ascii=False)[:300]}")
+            # Non-retryable Facebook errors (by e_subcode)
+            if data.get("e_subcode") in (2018278, 2018001, 551):
+                print(f"[PANCAKE] {bill_pancake['id']} non-retryable (e_subcode={data.get('e_subcode')}), skip retry")
+                return False
         except Exception as e:
             print(f"[PANCAKE] send_message error attempt {attempt + 1}: {e}")
 
@@ -237,6 +263,8 @@ def update_order_status(bill_pancake, ship_fee, max_retries=3):
             if 200 <= resp.status_code < 300:
                 return True
             print(f"[PANCAKE] update_status failed {bill_pancake['id']}: HTTP {resp.status_code}")
+            if 400 <= resp.status_code < 500 and resp.status_code != 429:
+                return False
         except Exception as e:
             print(f"[PANCAKE] update_status error attempt {attempt + 1}: {e}")
 
@@ -291,14 +319,14 @@ async def process_bill(bill_info):
         _cleanup_and_update(bill_pancake, bill_file, ship_fee)
         return True
 
-    # Step 3: Push to extension queue for async retry
+    # Step 3: Push to extension queue for async retry via Chrome extension
     print(f"[PROCESS] Pancake failed for {bill_pancake['id']}, queuing for extension...")
-    # queue = get_ext_queue()
-    # await queue.put({
-    #     "bill_pancake": bill_pancake,
-    #     "bill_file": bill_file,
-    #     "ship_fee": ship_fee,
-    # })
+    queue = get_ext_queue()
+    await queue.put({
+        "bill_pancake": bill_pancake,
+        "bill_file": bill_file,
+        "ship_fee": ship_fee,
+    })
     return False
 
 
@@ -352,7 +380,7 @@ def processBill(bill_info):
 if __name__ == "__main__":
     import sys
     target_id = sys.argv[1] if len(sys.argv) > 1 else None
-
+    target_id = 'L74447HN'
     if target_id:
         # Find specific bill by receiver name or tracking number
         anousith = json.load(open("listShipmentAnousith.json", encoding="utf-8")) if os.path.exists("listShipmentAnousith.json") else []
@@ -381,7 +409,17 @@ if __name__ == "__main__":
         if shipment:
             if bill_pancake:
                 print(f"[TEST] Processing {target_id} (hal={is_hal}) with Pancake order")
-                asyncio.run(process_bill((bill_pancake, shipment, is_hal)))
+
+                async def _run_test():
+                    # Start ext worker + ws_server so Pancake failures can fall back to extension
+                    await start_ext_worker()
+                    await process_bill((bill_pancake, shipment, is_hal))
+                    queue = get_ext_queue()
+                    if not queue.empty():
+                        print(f"[TEST] Waiting for {queue.qsize()} extension queue items...")
+                        await queue.join()
+
+                asyncio.run(_run_test())
             else:
                 print(f"[TEST] Shipment found, generating image only...")
                 asyncio.run(generate_image(shipment, is_hal))
