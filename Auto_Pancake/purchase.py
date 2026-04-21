@@ -107,21 +107,21 @@ def getAllShipmentAnousith(accessToken):
 
     print(f"Total bill in Anousith: {len(new_bills)} new, {len(existing)} total saved")
 
-def getShipmentHal(accessToken, cursor = None, iter=0):
+def getShipmentHal(accessToken, cursor = None, iter=0, status="arrived_status"):
     today = time.strftime("%Y-%m-%d", time.localtime())
     before = time.strftime("%Y-%m-%d", time.localtime(time.time() - 3 * 24 * 60 * 60))
     # print(before, today)
     if cursor:
-        url = f"https://hal.hal-logistics.la/api/v1/auth/users/me/shipments/orders?status=arrived_status&sort_order=desc&use_cursor=true&cursor={cursor}&start_date={before}&end_date={today}&limit=100"
+        url = f"https://hal.hal-logistics.la/api/v1/auth/users/me/shipments/orders?status={status}&sort_order=desc&use_cursor=true&cursor={cursor}&start_date={before}&end_date={today}&limit=100"
     else:
-        url = f"https://hal.hal-logistics.la/api/v1/auth/users/me/shipments/orders?status=arrived_status&sort_order=desc&use_cursor=true&start_date={before}&end_date={today}&limit=100"
+        url = f"https://hal.hal-logistics.la/api/v1/auth/users/me/shipments/orders?status={status}&sort_order=desc&use_cursor=true&start_date={before}&end_date={today}&limit=100"
     headers = {
         "Authorization": f"Bearer {accessToken}"
     }
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         time.sleep(10)
-        getShipmentHal(accessToken, cursor, iter+1)
+        return getShipmentHal(accessToken, cursor, iter+1, status)
     response = response.json()
     if iter > 10:
         return
@@ -140,22 +140,25 @@ def getAllShipmentHal(accessToken):
     else:
         existing = []
 
-    # Fetch bills DESC, stop early when hitting existing bill
+    # Fetch bills DESC from both statuses, stop early when hitting existing bill
     new_bills = []
-    nextCursor = None
-    hit_existing = False
-    while not hit_existing:
-        data = getShipmentHal(accessToken, nextCursor)
-        if not data or not data.get("data"):
-            break
-        for b in data["data"]:
-            if b["id"] in existing_ids:
-                hit_existing = True
+    seen_ids = set(existing_ids)
+    for status in ("arrived_status", "processing"):
+        nextCursor = None
+        hit_existing = False
+        while not hit_existing:
+            data = getShipmentHal(accessToken, nextCursor, status=status)
+            if not data or not data.get("data"):
                 break
-            new_bills.append(b)
-        nextCursor = data.get("next_cursor")
-        if not nextCursor:
-            break
+            for b in data["data"]:
+                if b["id"] in seen_ids:
+                    hit_existing = True
+                    break
+                new_bills.append(b)
+                seen_ids.add(b["id"])
+            nextCursor = data.get("next_cursor")
+            if not nextCursor:
+                break
 
     if new_bills:
         existing.extend(new_bills)

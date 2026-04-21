@@ -57718,5 +57718,3905 @@
             "first_name": "\u0ec3\u0e88",
             "phone_number": 99759792
         }
+    },
+    {
+        "_id": "306261410",
+        "trackingId": "8261119280473",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L80162HN",
+        "receiverPhone": "95272980",
+        "description": "",
+        "trackingPlatform": "8261119280473",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:17.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:13:14.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2\u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99(\u0ec4\u0e81\u0eaa\u0ead\u0e99\u0e9e\u0ebb\u0ea1\u0ea7\u0eb4\u0eab\u0eb2\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e81\u0eaa\u0ead\u0e99\u0e9e\u0ebb\u0ea1\u0ea7\u0eb4\u0eab\u0eb2\u0e99",
+            "contactInfo": "98702141 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306260977",
+        "trackingId": "8261114844889",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L78412HN",
+        "receiverPhone": "77009658",
+        "description": "",
+        "trackingPlatform": "8261114844889",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:20.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:12:01.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb8\u0e94\u0ebb\u0ea1\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9b\u0eb2\u0e87\u0ec0\u0e94\u0eb7\u0ead(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0ec1\u0e9a\u0ec8\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e9b\u0eb2\u0e87\u0ec0\u0e94\u0eb7\u0ead",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec1\u0e9a\u0ec8\u0e87",
+            "contactInfo": "/94252289/97156366"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306260670",
+        "trackingId": "8261113230752",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79822HN",
+        "receiverPhone": "29258864",
+        "description": "",
+        "trackingPlatform": "8261113230752",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:36.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:11:05.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e82\u0eb5\u0ec9\u0e99\u0eb2\u0e812",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e82\u0eb5\u0ec9\u0e99\u0eb2\u0e81",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec2\u0e82\u0e87",
+            "contactInfo": "96560827/95395194/93103925"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306260270",
+        "trackingId": "8261113232668",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79024HN",
+        "receiverPhone": "96919559",
+        "description": "",
+        "trackingPlatform": "8261113232668",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:50.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:09:56.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebb\u0ea7\u0e9e\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0eaa\u0ebb\u0e9a\u0ec0\u0e9a\u0ebb\u0eb2",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0ebb\u0e9a\u0ec0\u0e9a\u0ebb\u0eb2",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0ebb\u0e9a\u0ec0\u0e9a\u0ebb\u0eb2",
+            "contactInfo": "\u0ec2\u0e97-\u0ec1\u0ead\u0eb1\u0e9a    020 58300400/ 97423921"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306259863",
+        "trackingId": "8261115092811",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L76944HN",
+        "receiverPhone": "95584395",
+        "description": "",
+        "trackingPlatform": "8261115092811",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:21.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:08:48.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e99\u0ec9\u0eb3\u0e97\u0eb2"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 4\u0ec1\u0e8d\u0e81\u0ec2\u0e9e\u0e99\u0ec4\u0e8a(\u0eab\u0ebc\u0ea7\u0e87\u0e99\u0ecd\u0ec9\u0eb2\u0e97\u0eb2)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0ec4\u0e8a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e99\u0ecd\u0ec9\u0eb2\u0e97\u0eb2",
+            "contactInfo": "02051611766"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306259521",
+        "trackingId": "8261116384268",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L80353HN",
+        "receiverPhone": "95695842",
+        "description": "",
+        "trackingPlatform": "8261116384268",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:51.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:07:49.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e9e\u0e99\u0e97\u0ead\u0e87",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0e97\u0ead\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec2\u0e9e\u0e99\u0e97\u0ead\u0e87",
+            "contactInfo": "91438384\u0ea7\u0eca\u0ead\u0e94\u0ec1\u0ead\u0eb1\u0e9a"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306259079",
+        "trackingId": "8261116123040",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77203HN",
+        "receiverPhone": "98528618",
+        "description": "",
+        "trackingPlatform": "8261116123040",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:41.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:06:34.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eab\u0ebc\u0eb1\u0e8114(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e9a\u0eb2\u0e88\u0ebd\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eab\u0ebc\u0eb1\u0e8114",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9a\u0eb2\u0e88\u0ebd\u0e87",
+            "contactInfo": "\u0e95\u0ecd\u0ec8\u0eab\u0e99\u0ec9\u0eb2\u0ea1\u0eb0\u0eab\u0eb2\u0ec4\u0e8a \u0ea7\u0eb1\u0e94\u0eaa\u0eb0\u0e94\u0eb8 \u0ec0\u0eaa\u0eb1\u0ec9\u0e99\u0e97\u0eb2\u0e87\u0ec0\u0ea5\u0e81\u0e97\u0eb513\u0ec3\u0e95\u0ec9  93223001 -98072067-98717895"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306258288",
+        "trackingId": "8261118415754",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79878HN",
+        "receiverPhone": "99123695",
+        "description": "",
+        "trackingPlatform": "8261118415754",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:32.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:04:20.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e9e\u0e99\u0e95\u0ec9\u0ead\u0e87\u0eaa\u0eb0\u0eab\u0ea7\u0eb2\u0e94",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0e95\u0ec9\u0ead\u0e87\u0eaa\u0eb0\u0eab\u0ea7\u0eb2\u0e94",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e88\u0eb1\u0e99\u0e97\u0eb0\u0e9a\u0eb9\u0ea5\u0eb5",
+            "contactInfo": "\u0e82\u0ec9\u0eb2\u0e87\u0eaa\u0eb8\u0ea7\u0eb1\u0e99\u0e99\u0eb5, \u0e81\u0ebb\u0e87\u0e81\u0eb1\u0e99\u0e82\u0ec9\u0eb2\u0ea1\u0e81\u0eb1\u0e9a\u0edc\u0ec9\u0eb2\u0ea7\u0eb1\u0e94\u0ec2\u0e9e\u0e99\u0e95\u0ec9\u0ead\u0e87\u0eaa\u0eb0\u0eab\u0ea7\u0eb2\u0e94 \u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8\u0e9b\u0eb0\u0eaa\u0eb2\u0e99\u0ea7\u0ebd\u0e81 \u0e8d\u0ec9\u0eb2\u0e8d\u0e9a\u0eb5\u0e99 91484233 \u0ec0\u0e88\u0ebb\u0ec9\u0eb2\u0e82\u0ead\u0e87\u0eaa\u0eb2\u0e82\u0eb2 56155156"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306258000",
+        "trackingId": "8261111772250",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L80020HN",
+        "receiverPhone": "91558239",
+        "description": "",
+        "trackingPlatform": "8261111772250",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:31.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:03:32.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0ec4\u0e8a\u0e99\u0ec9\u0ead\u0e8d",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0ec4\u0e8a\u0e99\u0ec9\u0ead\u0e8d",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99",
+            "contactInfo": "020 99522688"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306256750",
+        "trackingId": "8261117011574",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77115HN",
+        "receiverPhone": "76217336",
+        "description": "",
+        "trackingPlatform": "8261117011574",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:15.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T10:00:12.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0ead\u0eb2\u0e94(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e99\u0ec9\u0eb3\u0e9a\u0eb2\u0e81)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0ead\u0eb2\u0e94",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0ec9\u0eb3\u0e9a\u0eb2\u0e81",
+            "contactInfo": "020 28035615"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306256367",
+        "trackingId": "8261112060151",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77523HN",
+        "receiverPhone": "91850343",
+        "description": "",
+        "trackingPlatform": "8261112060151",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:11.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:59:13.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e88\u0eb1\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0ec8\u0eb2\u0e87(\u0e9b\u0eb2\u0e81\u0e8a\u0ec8\u0ead\u0e87\u0ec1\u0e94\u0e99\u0edc\u0eb2\u0ea7)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e88\u0eb1\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0ec8\u0eb2\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9b\u0eb2\u0e81\u0e8a\u0ec8\u0ead\u0e87",
+            "contactInfo": "97013689"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306256047",
+        "trackingId": "8261111883615",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77276HN",
+        "receiverPhone": "91977868",
+        "description": "",
+        "trackingPlatform": "8261111883615",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:47.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:58:23.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb8\u0e94\u0ebb\u0ea1\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2\u0e9a\u0ec9\u0eb2\u0e99\u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0eae\u0eb8\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e97\u0ec9\u0ebd\u0ea7",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eae\u0eb8\u0e99",
+            "contactInfo": "\u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8\u0e9e\u0ebb\u0ea7\u0e9e\u0eb1\u0e99\u0ea7\u0ebd\u0e81 2057594887 2052003136"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306255721",
+        "trackingId": "8261112836336",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79211HN",
+        "receiverPhone": "54999679",
+        "description": "",
+        "trackingPlatform": "8261112836336",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:13.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:57:29.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ec0\u0e8a\u0e81\u0ead\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eab\u0ea7\u0ec9\u0e8d\u0e8a\u0eb2\u0e8d(\u0e97\u0ec8\u0eb2\u0ec1\u0e95\u0ec8\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eab\u0ea7\u0ec9\u0e8d\u0e8a\u0eb2\u0e8d",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e97\u0ec8\u0eb2\u0ec1\u0e95\u0e87",
+            "contactInfo": "02023333391 \u0e81\u0ebb\u0e87\u0e81\u0eb1\u0e99\u0e82\u0ec9\u0eb2\u0ea1\u0e81\u0eb1\u0e9a\u0eab\u0ec9\u0ead\u0e87\u0e81\u0eb2\u0e99\u0e81\u0eb2\u0e99\u0ec0\u0e87\u0eb4\u0e99 / \u0e82\u0ec9\u0eb2\u0e87\u0ec4\u0ead\u0ec0\u0eab\u0ebc\u0eb1\u0e81\u0ea1\u0eb2\u0e81/\u0ec4\u0e81\u0ec9\u0e88\u0eb0\u0eae\u0ead\u0e94\u0e95\u0eb0\u0eab\u0ebc\u0eb2\u0e94\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e97\u0ec8\u0eb2\u0ec1\u0e95\u0e87"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306255284",
+        "trackingId": "8261118107695",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79904HN",
+        "receiverPhone": "91380216",
+        "description": "",
+        "trackingPlatform": "8261118107695",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:14.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:56:31.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e9a\u0ecd\u0ea5\u0eb4\u0e84\u0eb3\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0ec9\u0eb3\u0ea2\u0ec9\u0eb2\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0ea7\u0ebd\u0e87\u0e97\u0ead\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0ec9\u0eb3\u0ea2\u0ec9\u0eb2\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ea7\u0ebd\u0e87\u0e97\u0ead\u0e87",
+            "contactInfo": "\u0ea1\u0eb5\u0ea7\u0ebd\u0e81\u0ec4\u0eab\u0ec9\u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8\u0ec0\u0e9a\u0eb5\u0e99\u0eb5\u0ec902096139493/0305213980"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306254898",
+        "trackingId": "8261117073834",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79921HN",
+        "receiverPhone": "91668440",
+        "description": "",
+        "trackingPlatform": "8261117073834",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:17.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:55:30.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9b\u0eb2\u0e81\u0e8a\u0ec8\u0ead\u0e87\u0ea5\u0eb0\u0eab\u0eb2\u0e99\u0ec9\u0eb3(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0eaa\u0ead\u0e87\u0e84\u0ead\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e9b\u0eb2\u0e81\u0e8a\u0ec8\u0ead\u0e87\u0ea5\u0eb0\u0eab\u0eb2\u0e99\u0ec9\u0eb3",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e8a\u0ead\u0e87\u0e84\u0ead\u0e99",
+            "contactInfo": "\u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8\u0ec0\u0e9a\u0eb5 98536761\u0e95\u0eb4\u0e94\u0e81\u0eb1\u0e9a\u0e97\u0eb0\u0e99\u0eb2\u0e84\u0eb2\u0e99\u0ec0\u0ead\u0e8a\u0eb5\u0ea5\u0eb5\u0e94\u0ec9\u0eb2 \u0ea1\u0eb5\u0e9a\u0ecd\u0ea5\u0eb4\u0e81\u0eb2\u0e99\u0eaa\u0ebb\u0ec8\u0e87\u0ec0\u0e96\u0eb4\u0e87\u0e97\u0eb5\u0ec8"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306254358",
+        "trackingId": "8261118003548",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77614HN",
+        "receiverPhone": "9100948",
+        "description": "",
+        "trackingPlatform": "8261118003548",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:12.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:54:10.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb1\u0e94\u0e95\u0eb0\u0e9b\u0eb7"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ea7\u0ebb\u0e87\u0eaa\u0eb3\u0e9e\u0eb1\u0e99(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e9e\u0eb9\u0ea7\u0ebb\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0ebb\u0e87\u0eaa\u0eb3\u0e9e\u0eb1\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9e\u0eb9\u0ea7\u0ebb\u0e87",
+            "contactInfo": "020 91602545/ 0304546701"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306253220",
+        "trackingId": "8261118824016",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 461000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73321HN",
+        "receiverPhone": "59693999",
+        "description": "",
+        "trackingPlatform": "8261118824016",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:50.000Z",
+        "receiveBackwardDate": null,
+        "width": 84,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 29000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:51:21.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0ec0\u0ea5\u0ebb\u0ec8\u0eb2(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0ec4\u0e81\u0eaa\u0ead\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0ec0\u0ea5\u0ebb\u0ec8\u0eb2",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e81\u0eaa\u0ead\u0e99",
+            "contactInfo": "/99539347/-//\u0ec1\u0e88\u0ec9\u0e87\u0e8d\u0ec9\u0eb2\u0e8d \u0eab\u0ebc\u0eb7 \u0ec2\u0e97/54433456-\u0e81\u0ec8\u0ebd\u0ea7\u0e81\u0eb1\u0e9aCod \u0eab\u0ebc\u0eb7 \u0ec3\u0eab\u0ec9\u0e81\u0ebb\u0e94\u0eaa\u0eb3\u0ec0\u0ea5\u0eb1\u0e94///\u0e95\u0eb1\u0ec9\u0e87\u0ea2\u0eb9\u0ec8\u0ec1\u0e96\u0ea7\u0eab\u0ec9\u0ead\u0e87\u0ea7\u0ec8\u0eb2\u0e81\u0eb2\u0e99\u0ec1\u0e82\u0ea7\u0e87"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306252614",
+        "trackingId": "8261111687616",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 240000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73366HN",
+        "receiverPhone": "99567041",
+        "description": "",
+        "trackingPlatform": "8261111687616",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:33.000Z",
+        "receiveBackwardDate": null,
+        "width": 60,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 19000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:49:49.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e97\u0eb2\u0e87\u0e84\u0ebb\u0e9a(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e88\u0ecd\u0eb2\u0e9b\u0eb2\u0eaa\u0eb1\u0e81))",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e97\u0eb2\u0e87\u0e84\u0ebb\u0e9a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81",
+            "contactInfo": "91173830"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306252065",
+        "trackingId": "8261117924181",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 220000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73358HN",
+        "receiverPhone": "55022399",
+        "description": "",
+        "trackingPlatform": "8261117924181",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:54.000Z",
+        "receiveBackwardDate": null,
+        "width": 60,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 19000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:48:29.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0e9a\u0ebb\u0e87(\u0e9b\u0eb2\u0e81\u0e87\u0eb7\u0ec8\u0ea1)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0e9a\u0ebb\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9b\u0eb2\u0e81\u0e87\u0eb7\u0ec8\u0ea1",
+            "contactInfo": "\u0e8d\u0ec9\u0eb2\u0e8d\u0eaa\u0eb2\u0e82\u0eb2\u0e95\u0eb5\u0e94\u0e95\u0ecd\u0ec8 54618316 / 56972616"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306251527",
+        "trackingId": "8261114814941",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 285000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L78419HN",
+        "receiverPhone": "78816410",
+        "description": "",
+        "trackingPlatform": "8261114814941",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:01.000Z",
+        "receiveBackwardDate": null,
+        "width": 60,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 19000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:47:09.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb8\u0e94\u0ebb\u0ea1\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eaa\u0eb5\u0e9a\u0eb8\u0e99\u0ec0\u0eae\u0eb7\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0eae\u0eb8\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0eb5\u0e9a\u0eb8\u0e99\u0ec0\u0eae\u0eb7\u0ead\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eae\u0eb8\u0e99",
+            "contactInfo": "\u0ec1\u0ead\u0eb1\u0e9a97186803 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306250412",
+        "trackingId": "8261111121066",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 178000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L72766HN",
+        "receiverPhone": "55999765",
+        "description": "",
+        "trackingPlatform": "8261111121066",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:09.000Z",
+        "receiveBackwardDate": null,
+        "width": 64,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 21000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:44:41.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0edc\u0ead\u0e87\u0e97\u0eb2\u0ec3\u0e95\u0ec9 (\u0e88\u0eb1\u0e99\u0e97\u0eb0\u0e9a\u0eb9\u0ea5\u0eb5)",
+            "branch_address": "\u0edc\u0ead\u0e87\u0e97\u0eb2\u0ec3\u0e95\u0ec9",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e88\u0eb1\u0e99\u0e97\u0eb0\u0e9a\u0eb9\u0ea5\u0eb5",
+            "contactInfo": "\u260e\ufe0f\u0ec0\u0e9a\u0eb5\u0e9b\u0eb0\u0e88\u0eb3\u0eaa\u0eb2\u0e82\u0eb29705-6165;9298-5087 \u0ec1\u0e96\u0ea7\u0eab\u0ec9\u0ead\u0e87\u0e81\u0eb2\u0e99\u0e9a\u0ec9\u0eb2\u0e99\u0edc\u0ead\u0e87\u0e97\u0eb2\u0ec3\u0e95\u0ec9"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306249876",
+        "trackingId": "8261113281051",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 100000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79382HN",
+        "receiverPhone": "99266991",
+        "description": "",
+        "trackingPlatform": "8261113281051",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:18.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:43:24.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e88\u0eb0\u0ec0\u0ea5\u0eb5\u0e99\u0eaa\u0eb8\u0e81(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ead\u0eb8\u0e97\u0eb8\u0ea1\u0e9e\u0ead\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0eb0\u0edc\u0eb2\u0ea1\u0ec4\u0e8a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ead\u0eb8\u0e97\u0eb8\u0ea1\u0e9e\u0ead\u0e99 (\u0ec0\u0e8a\u0ec2\u0e99)",
+            "contactInfo": "W 95448143/92676668"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306247293",
+        "trackingId": "8261116474339",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 120000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L68851HN",
+        "receiverPhone": "94260729",
+        "description": "",
+        "trackingPlatform": "8261116474339",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:38.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:37:04.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e84\u0ebb\u0e87\u0e99\u0eb0\u0e84\u0ead\u0e99(\u0e84\u0ebb\u0e87\u0ec0\u0e8a\u0ec2\u0e94\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e84\u0ebb\u0e87\u0e99\u0eb0\u0e84\u0ead\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e84\u0ebb\u0e87\u0ec0\u0e8a\u0ec2\u0e94\u0e99",
+            "contactInfo": "99423292"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306246809",
+        "trackingId": "8261113523952",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 144000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L71290HN",
+        "receiverPhone": "97410769",
+        "description": "",
+        "trackingPlatform": "8261113523952",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:00.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:35:51.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e95\u0eb8\u0ec9\u0ea1\u0ea5\u0eb2\u0e99(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e95\u0eb8\u0ec9\u0ea1\u0ea5\u0eb2\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0eb2\u0ea1\u0eb1\u0e81\u0e84\u0eb5\u0ec4\u0e8a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e95\u0eb8\u0ec9\u0ea1\u0ea5\u0eb2\u0e99",
+            "contactInfo": "23646395"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306246344",
+        "trackingId": "8261115525683",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 84000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73891HN",
+        "receiverPhone": "5128973",
+        "description": "",
+        "trackingPlatform": "8261115525683",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:45.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:34:45.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0e9a\u0ead\u0e99 (\u0ea7\u0eb1\u0e87\u0ea1\u0ebb\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0e9a\u0ead\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec2\u0e9e\u0e99\u0ec2\u0eae\u0e87",
+            "contactInfo": "\u0e95\u0eb1\u0ec9\u0e87\u0ea2\u0eb9\u0ec8\u0edc\u0ec9\u0eb2 \u0ec2\u0eae\u0e87\u0eae\u0ebd\u0e99\u0e9b\u0eb0\u0e96\u0ebb\u0ea1 \u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0e9a\u0ead\u0e99, \u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec2\u0e9e\u0e99\u0ec2\u0eae\u0e87, \u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99, 52244453, \u0ec0\u0e9a\u0eb5\u0e9b\u0eb0\u0e88\u0eb3 95737773"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306245874",
+        "trackingId": "8261116007069",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 181000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73221HN",
+        "receiverPhone": "59890211",
+        "description": "",
+        "trackingPlatform": "8261116007069",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:36.000Z",
+        "receiveBackwardDate": null,
+        "width": 52,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 18000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:33:25.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e97\u0eb2\u0e94\u0eab\u0ebc\u0ea7\u0e87\u0ec3\u0e95\u0ec9",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e97\u0eb2\u0e94\u0eab\u0ebc\u0ea7\u0e87\u0ec3\u0e95\u0ec91",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2",
+            "contactInfo": "59651096 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306245331",
+        "trackingId": "8261117133904",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 84000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73625HN",
+        "receiverPhone": "93447881",
+        "description": "",
+        "trackingPlatform": "8261117133904",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:13.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:32:01.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 106 \u0eab\u0ebb\u0ea7\u0ec1\u0e8a(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9a\u0eb2\u0e88\u0ebd\u0e87\u0e88\u0eb0\u0ec0\u0ea5\u0eb5\u0e99\u0eaa\u0eb8\u0e81)",
+            "branch_address": "\u0eab\u0ebb\u0ea7\u0ec1\u0e8a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9a\u0eb2\u0e88\u0ebd\u0e87",
+            "contactInfo": "56385123"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306244856",
+        "trackingId": "8261111903437",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 190000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L74233HN",
+        "receiverPhone": "92290169",
+        "description": "",
+        "trackingPlatform": "8261111903437",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:36.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:30:47.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ec4\u0e8a\u0e8d\u0eb0\u0e9a\u0eb9\u0ea5\u0eb5"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0ec3\u0eab\u0ea1\u0ec8 ( \u0e9b\u0eb2\u0e81\u0ea5\u0eb2\u0e8d )",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0ec3\u0eab\u0ea1\u0ec8",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9b\u0eb2\u0e81\u0ea5\u0eb2\u0e8d",
+            "contactInfo": "( \u0ea2\u0eb9\u0ec8\u0e95\u0ecd\u0ec8\u0edc\u0ec9\u0eb2\u0eae\u0ec9\u0eb2\u0e99\u0ec1\u0e9b\u0e87\u0ea5\u0ebb\u0e94 \u0e81\u0eb1\u0e9a \u0e9b\u0ec9\u0eb3\u0e99\u0ec9\u0eb3\u0ea1\u0eb1\u0e99\u0e95\u0eb4\u0e94\u0e81\u0eb1\u0e9a\u0e95\u0eb0\u0eab\u0ea5\u0eb2\u0e94\u0e99\u0eb2\u0ec3\u0edd\u0ec8 )whatsapp 02096286486/"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306244241",
+        "trackingId": "8261118700113",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 150000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73643HN",
+        "receiverPhone": "76901334",
+        "description": "",
+        "trackingPlatform": "8261118700113",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:28.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:29:11.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e88\u0eb1\u0e94\u0eaa\u0eb1\u0e99(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0ec0\u0e9f\u0eb7\u0ead\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb2\u0e94",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec0\u0e9f\u0eb7\u0ead\u0e87",
+            "contactInfo": "02095055775. \u0ec0\u0e9a\u0eb5\u0e9e\u0eb0\u0e99\u0eb1\u0e81\u0e87\u0eb2\u0e9902096489875"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306243690",
+        "trackingId": "8261112921116",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 154000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79011HN",
+        "receiverPhone": "55958501",
+        "description": "",
+        "trackingPlatform": "8261112921116",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:11.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:27:38.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0ec0\u0eab\u0ebc\u0eb1\u0e81(\u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0ec0\u0eab\u0ebc\u0eb1\u0e81",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99",
+            "contactInfo": "02096795878  .0305472181 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306243202",
+        "trackingId": "8261110376374",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L77131HN",
+        "receiverPhone": "29301033",
+        "description": "",
+        "trackingPlatform": "8261110376374",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:06.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:26:13.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ea7\u0ebd\u0e87\u0ec3\u0edd\u0ec8 (\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0ebd\u0e87\u0ec1\u0e81\u0ec9\u0ea7",
+            "districtName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87",
+            "contactInfo": "\u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0eaa\u0ec9\u0eb2\u0e87\u0ec0\u0eab\u0ea7\u0eb5\u0e8d  \u0ec2\u0e97 020 98345671  \u0eaa\u0eb5\u0ec8\u0ec1\u0e8d\u0e81\u0eaa\u0ec9\u0eb2\u0e87\u0e84\u0eb9 \u0e82\u0ec9\u0eb2\u0e87\u0eae\u0ec9\u0eb2\u0e99\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0eaa\u0eb3\u0ead\u0eb2\u0e87\u0e9b\u0eb2\u0e99\u0ea7\u0eb0\u0ea5\u0eb4\u0e99"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306242867",
+        "trackingId": "8261113979008",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 100000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L70474HN",
+        "receiverPhone": "78203121",
+        "description": "",
+        "trackingPlatform": "8261113979008",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:14.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:25:15.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0ec2\u0e9e\u0e99\u0ea7\u0ebd\u0e87 (\u0ea7\u0eb1\u0e87\u0ea7\u0ebd\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0ea7\u0ebd\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ea7\u0eb1\u0e87\u0ea7\u0ebd\u0e87",
+            "contactInfo": "99781949@98145838"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306242319",
+        "trackingId": "8261111853021",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73557HN",
+        "receiverPhone": "77898233",
+        "description": "",
+        "trackingPlatform": "8261111853021",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:44.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:23:54.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ea7\u0ebd\u0e87\u0ec3\u0edd\u0ec8 (\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0ebd\u0e87\u0ec1\u0e81\u0ec9\u0ea7",
+            "districtName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87",
+            "contactInfo": "\u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0eaa\u0ec9\u0eb2\u0e87\u0ec0\u0eab\u0ea7\u0eb5\u0e8d  \u0ec2\u0e97 020 98345671  \u0eaa\u0eb5\u0ec8\u0ec1\u0e8d\u0e81\u0eaa\u0ec9\u0eb2\u0e87\u0e84\u0eb9 \u0e82\u0ec9\u0eb2\u0e87\u0eae\u0ec9\u0eb2\u0e99\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0eaa\u0eb3\u0ead\u0eb2\u0e87\u0e9b\u0eb2\u0e99\u0ea7\u0eb0\u0ea5\u0eb4\u0e99"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306241836",
+        "trackingId": "8261116385216",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 160000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L79756HN",
+        "receiverPhone": "55482456",
+        "description": "",
+        "trackingPlatform": "8261116385216",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:08.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:22:34.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb1\u0e94\u0e95\u0eb0\u0e9b\u0eb7"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eaa\u0eb2\u0ea1\u0eb1\u0e81\u0e84\u0eb5\u0ec4\u0e8a",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0eb1\u0e94\u0eab\u0ebc\u0ea7\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0eb2\u0ea1\u0eb1\u0e81\u0e84\u0eb5\u0ec4\u0e8a",
+            "contactInfo": "56246866//95409396//77456466//95046699//0305472265 \u0eaa\u0eb2\u0e82\u0eb2\u0e95\u0eb1\u0ec9\u0e87\u0ea2\u0eb9\u0ec8\u0e95\u0ecd\u0ec8\u0edc\u0ec9\u0eb2\u0e81\u0eb1\u0e9a \u0ea7\u0eb1\u0e94\u0eab\u0ebc\u0ea7\u0e87 \u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0eaa\u0eb2\u0ea1\u0eb1\u0e81\u0e84\u0eb5\u0ec4\u0e8a"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306241425",
+        "trackingId": "8261111976882",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L81405HN",
+        "receiverPhone": "58425253",
+        "description": "",
+        "trackingPlatform": "8261111976882",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:18.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:21:18.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ea7\u0eb1\u0e94\u0e99\u0eb2\u0e81(\u0eaa\u0eb5\u0eaa\u0eb1\u0e94\u0e95\u0eb0\u0e99\u0eb2\u0e81)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0eb1\u0e94\u0e99\u0eb2\u0e81",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87  \u0eaa\u0eb5\u0eaa\u0eb1\u0e94\u0e95\u0eb0\u0e99\u0eb2\u0e81",
+            "contactInfo": " ( \u0ec3\u0e81\u0ec9\u0e81\u0eb1\u0e9a \u0ea7\u0eb4\u0e97\u0eb0\u0e8d\u0eb2\u0ec4\u0ea5 \u0e81\u0eb2\u0e99\u0e8a\u0ec8\u0eb2\u0e87\u0ea5\u0eb2\u0ea7-\u0ec0\u0ea2\u0e8d\u0ea5\u0eb0\u0ea1\u0eb1\u0e99) whatsapp  55800552"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306241007",
+        "trackingId": "8261117353449",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L81386HN",
+        "receiverPhone": "54050300",
+        "description": "",
+        "trackingPlatform": "8261117353449",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:24.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:20:14.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e9e\u0e99\u0ec2\u0eae\u0e871",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0ec2\u0eae\u0e871",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec2\u0e9e\u0e99\u0ec2\u0eae\u0e87",
+            "contactInfo": "\u0ec0\u0e9a\u0eb5\u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8 2095991540"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306240391",
+        "trackingId": "8261116841164",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 369000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L72453HN",
+        "receiverPhone": "55529776",
+        "description": "",
+        "trackingPlatform": "8261116841164",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:39.000Z",
+        "receiveBackwardDate": null,
+        "width": 56,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 19000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:18:27.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e99\u0e99\u0eaa\u0eb0\u0eab\u0e87\u0ec8\u0eb21 (\u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e99\u0e99\u0eaa\u0eb0\u0eab\u0e87\u0ec8\u0eb2",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2",
+            "contactInfo": "\u0ec1\u0e8a\u0eb1\u0e94\u0e9a\u0ecd\u0ec8\u0e95\u0ead\u0e9a\u0ec1\u0e99\u0eb0\u0e99\u0eb3\u0ec2\u0e97: 02096661151 (02078785501 \u0e99\u0ecd\u0eb2\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87, \u0e8d\u0ec9\u0eb2\u0e8d\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87)"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306239957",
+        "trackingId": "8261117762986",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 84000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73770HN",
+        "receiverPhone": "54867795",
+        "description": "",
+        "trackingPlatform": "8261117762986",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:49.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:17:09.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eaa\u0eb5\u0eaa\u0eb1\u0e87\u0ea7\u0ead\u0e99",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0eb5\u0eaa\u0eb1\u0e87\u0ea7\u0ead\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2",
+            "contactInfo": "96862658"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306239428",
+        "trackingId": "8261114803256",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 100000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L67318HN",
+        "receiverPhone": "98282594",
+        "description": "",
+        "trackingPlatform": "8261114803256",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:17.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:15:44.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec2\u0e99\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99(\u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e99\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0ec0\u0eaa\u0e94\u0e96\u0eb2",
+            "contactInfo": "020 76471687 \u0e95\u0eb1\u0ec9\u0e87\u0ea2\u0eb9\u0ec8\u0ec1\u0e96\u0e9a\u0e97\u0eb2\u0e87\u0ec2\u0e84\u0ec9\u0e87 (\u0e82\u0ead\u0e9a\u0ec0\u0e82\u0e94\u0e9a\u0ec9\u0eb2\u0e99\u0eae\u0ec8\u0ead\u0e87\u0eaa\u0eb8\u0e9e\u0eb2\u0e9a-\u0ec2\u0e99\u0e99\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99)"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306239052",
+        "trackingId": "8261115848820",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 120000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L70810HN",
+        "receiverPhone": "96780223",
+        "description": "",
+        "trackingPlatform": "8261115848820",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:48.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:14:45.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0ead\u0eb2\u0e81\u0eb2\u0e94",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99\u0ead\u0eb2\u0e81\u0eb2\u0e94",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0eb5\u0ec2\u0e84\u0e94\u0e95\u0eb0\u0e9a\u0ead\u0e87",
+            "contactInfo": "55179887"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306238539",
+        "trackingId": "8261111733118",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 140000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73953HN",
+        "receiverPhone": "77355065",
+        "description": "",
+        "trackingPlatform": "8261111733118",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:28.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:13:26.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eab\u0ea5\u0eb1\u0e8127(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0e97\u0eb2\u0e99\u0eb5)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0ebb\u0ea1\u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0e97\u0eb2\u0e99\u0eb5",
+            "contactInfo": "91003710"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306237996",
+        "trackingId": "8261113959483",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L70136HN",
+        "receiverPhone": "96514992",
+        "description": "",
+        "trackingPlatform": "8261113959483",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:36:07.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:12:10.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ea7\u0ebd\u0e87\u0ec3\u0edd\u0ec8 (\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0ebd\u0e87\u0ec1\u0e81\u0ec9\u0ea7",
+            "districtName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87",
+            "contactInfo": "\u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0eaa\u0ec9\u0eb2\u0e87\u0ec0\u0eab\u0ea7\u0eb5\u0e8d  \u0ec2\u0e97 020 98345671  \u0eaa\u0eb5\u0ec8\u0ec1\u0e8d\u0e81\u0eaa\u0ec9\u0eb2\u0e87\u0e84\u0eb9 \u0e82\u0ec9\u0eb2\u0e87\u0eae\u0ec9\u0eb2\u0e99\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0eaa\u0eb3\u0ead\u0eb2\u0e87\u0e9b\u0eb2\u0e99\u0ea7\u0eb0\u0ea5\u0eb4\u0e99"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306237558",
+        "trackingId": "8261113368022",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L71178HN",
+        "receiverPhone": "2001684",
+        "description": "",
+        "trackingPlatform": "8261113368022",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:00.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:11:01.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e88\u0eb3\u0e9b\u0eb2\u0eaa\u0eb1\u0e81"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec4\u0e8a\u0eaa\u0eb0\u0eab\u0ea7\u0ec8\u0eb2\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e9a\u0eb2\u0e88\u0ebd\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec4\u0e8a\u0eaa\u0eb0\u0eab\u0ea7\u0ec8\u0eb2\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9a\u0eb2\u0e88\u0ebd\u0e87",
+            "contactInfo": "56953224"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306237011",
+        "trackingId": "8261117560256",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L67908HN",
+        "receiverPhone": "99175565",
+        "description": "",
+        "trackingPlatform": "8261117560256",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:54.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:09:34.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e84\u0ebb\u0e87\u0e99\u0eb0\u0e84\u0ead\u0e99(\u0e84\u0ebb\u0e87\u0ec0\u0e8a\u0ec2\u0e94\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e84\u0ebb\u0e87\u0e99\u0eb0\u0e84\u0ead\u0e99",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e84\u0ebb\u0e87\u0ec0\u0e8a\u0ec2\u0e94\u0e99",
+            "contactInfo": "99423292"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306236681",
+        "trackingId": "8261117321763",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 120000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L72131HN",
+        "receiverPhone": "56881448",
+        "description": "",
+        "trackingPlatform": "8261117321763",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:36:07.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:08:43.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d1(\u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d1",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87",
+            "contactInfo": "\u0e82\u0ec9\u0eb2\u0e87\u0ec2\u0eae\u0e87\u0eae\u0ebd\u0e99 \u0ea1\u0eaa \u0e99\u0eb2\u0e8a\u0eb2\u0e8d,020 57452802"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306236209",
+        "trackingId": "8261117501898",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L72869HN",
+        "receiverPhone": "56848425",
+        "description": "",
+        "trackingPlatform": "8261117501898",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:41.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:07:34.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0edc\u0ead\u0e87\u0e9e\u0eb0\u0e8d\u0eb2(\u0edc\u0ec9\u0eb2\u0eab\u0ec9\u0ead\u0e87\u0e81\u0eb2\u0e99\u0e9a\u0ec9\u0eb2\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0edc\u0ead\u0e87\u0e9e\u0eb0\u0e8d\u0eb2",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0e97\u0eb2\u0e99\u0eb5",
+            "contactInfo": "99162970"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306235788",
+        "trackingId": "8261113930074",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L68839HN",
+        "receiverPhone": "98974505",
+        "description": "",
+        "trackingPlatform": "8261113930074",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:41:02.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:06:40.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e9a\u0ecd\u0ea5\u0eb4\u0e84\u0eb3\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eab\u0ebc\u0eb1\u0e8120 (\u0e9a\u0ec9\u0eb2\u0e99 \u0eab\u0ec9\u0ea7\u0e8d\u0ec1\u0e81\u0ec9\u0ea7 \u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e84\u0eb3\u0ec0\u0e81\u0eb5\u0e94)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eab\u0ea7\u0ec9\u0e8d\u0ec1\u0e81\u0ec9\u0ea7",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e84\u0eb3\u0ec0\u0e81\u0eb5\u0e94",
+            "contactInfo": "\u0ec2\u0e97: 0305637163,\u0ea7\u0eca\u0ead\u0e94\u0ec1\u0ead\u0eb1\u0e9a: 02097636162"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306234003",
+        "trackingId": "8261114601173",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L72461HN",
+        "receiverPhone": "95297620",
+        "description": "",
+        "trackingPlatform": "8261114601173",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:05.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:02:26.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0ea7\u0ebd\u0e87",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea7\u0ebd\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ea7\u0eb4\u0ea5\u0eb0\u0e9a\u0eb9\u0ea5\u0eb5",
+            "contactInfo": " 020 94445929 \u0e95\u0eb1\u0ec9\u0e87\u0ea2\u0eb9\u0ec8\u0e95\u0ecd\u0ec8\u0edc\u0ec9\u0eb2\u0e9a\u0ec8\u0ead\u0e99\u0e82\u0eb6\u0ec9\u0e99-\u0ea5\u0ebb\u0e87\u0ea5\u0ebb\u0e94\u0e82\u0ead\u0e87\u0e9e/\u0e87\u0e9a\u0ecd\u0ec8\u0e84\u0eb3"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306233631",
+        "trackingId": "8261111395839",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 100000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73929HN",
+        "receiverPhone": "28943360",
+        "description": "",
+        "trackingPlatform": "8261111395839",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:19.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T09:01:28.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e9a\u0ecd\u0ea5\u0eb4\u0e84\u0eb3\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0e81\u0ec9\u0ea7\u0e8d\u0ead\u0eb8\u0e94\u0ebb\u0ea1 ( \u0e9b\u0eb2\u0e81\u0e8a\u0eb1\u0e99 )",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e81\u0ec9\u0ea7\u0e8d\u0ead\u0eb8\u0e94\u0ebb\u0ea1",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9b\u0eb2\u0e81\u0e8a\u0eb1\u0e99",
+            "contactInfo": "\u0ea7\u0eb1\u0ead\u0e94\u0ec1\u0ead\u0eb1\u0e9a: 99784599 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306232769",
+        "trackingId": "8261119454847",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 100000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73276HN",
+        "receiverPhone": "77559956",
+        "description": "",
+        "trackingPlatform": "8261119454847",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:04.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:59:17.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0eab\u0ebc\u0ea7\u0e87 ( \u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87 )",
+            "branch_address": "\u0e99\u0eb2\u0eab\u0ebc\u0ea7\u0e87",
+            "districtName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87",
+            "contactInfo": "\u0e95\u0eb4\u0e94\u0e95\u0ecd\u0ec8\u0ec0\u0e9a\u0eb5 whats app \u0e9e\u0eb0\u0e99\u0eb1\u0e81\u0e87\u0eb2\u0e99\u0e9b\u0eb0\u0e88\u0eb3\u0eaa\u0eb2\u0e82\u0eb2\u0e99\u0eb2\u0eab\u0ebc\u0ea7\u0e8702052980535 \u0eab\u0e99\u0ec9\u0eb2\u0e84\u0eb4\u0ea7\u0ea5\u0ebb\u0e94\u0eaa\u0eb2\u0e8d\u0ec3\u0e95\u0ec9\u0e9a\u0ec9\u0eb2\u0e99\u0e99\u0eb2\u0eab\u0ebc\u0ea7\u0e87\u0eab\u0ebc\u0ea7\u0e87\u0e9e\u0eb0\u0e9a\u0eb2\u0e87"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306232331",
+        "trackingId": "8261114799085",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "114000",
+        "receiverPhone": "95030897",
+        "description": "",
+        "trackingPlatform": "8261114799085",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:32.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:58:02.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0eaa\u0eb8\u0e99\u0eb1\u0e99\u0e97\u0eb2",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0eaa\u0eb8\u0e99\u0eb1\u0e99\u0e97\u0eb2",
+            "districtName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0ec4\u0e81\u0eaa\u0ead\u0e99",
+            "contactInfo": "\u0eaa\u0eb0\u0ea5\u0eb1\u0e9957272707/\u0e95\u0ecb\u0ead\u0e8192560759/57964357  \u0e82\u0ec9\u0eb2\u0e87\u0eae\u0ec9\u0eb2\u0e99\u0e82\u0eb2\u0e8d\u0ec0\u0e82\u0ebb\u0ec9\u0eb2\u0e9b\u0ebd\u0e81\u0e9b\u0eb2 \u0ead \u0eab\u0e99\u0ecb\u0ead\u0e8d\u0e97\u0eb0\u0e99\u0eb2\u0e84\u0eb2\u0e99\u0e81\u0eb2\u0e99\u0e84\u0ec9\u0eb2\u0e95\u0ec8\u0eb2\u0e87\u0e9b\u0eb0\u0ec0\u0e97\u0e94"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306231911",
+        "trackingId": "8261115780000",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L80124HN",
+        "receiverPhone": "23668881",
+        "description": "",
+        "trackingPlatform": "8261115780000",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:43.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:56:52.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb2\u0ea5\u0eb0\u0ea7\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0ea5\u0eb0\u0e84\u0ead\u0e99\u0ec0\u0e9e\u0eb1\u0e87",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ea5\u0eb0\u0e84\u0ead\u0e99\u0ec0\u0e9e\u0eb1\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ea5\u0eb0\u0e84\u0ead\u0e99\u0ec0\u0e9e\u0eb1\u0e87",
+            "contactInfo": "99382631"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306231502",
+        "trackingId": "8261114030883",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 195000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L80671HN",
+        "receiverPhone": "55031123",
+        "description": "",
+        "trackingPlatform": "8261114030883",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:38.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:55:41.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e8a\u0ebd\u0e87\u0e82\u0ea7\u0eb2\u0e87"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e84\u0eb1\u0e87\u0ec4\u0e82(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec1\u0e9b\u0e81)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e84\u0eb1\u0e87\u0ec4\u0e82",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec1\u0e9b\u0e81",
+            "contactInfo": "94464515"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306231020",
+        "trackingId": "8261113531621",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 195000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L78541HN",
+        "receiverPhone": "59216294",
+        "description": "",
+        "trackingPlatform": "8261113531621",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:37:20.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:54:26.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9a\u0ec9\u0eb2\u0e99\u0ec2\u0e9e\u0e99\u0e87\u0eb2\u0ea1(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e97\u0eb8\u0ea5\u0eb0\u0e84\u0ebb\u0ea1)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec2\u0e9e\u0e99\u0e87\u0eb2\u0ea1",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e97\u0eb8\u0ea5\u0eb0\u0e84\u0ebb\u0ea1",
+            "contactInfo": "02055627638, 02055607889, 02055880108"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306230493",
+        "trackingId": "8261114749902",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 105000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L81299HN",
+        "receiverPhone": "56897476",
+        "description": "",
+        "trackingPlatform": "8261114749902",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:36:50.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:53:02.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec0\u0e81\u0ebb\u0ec9\u0eb2\u0ea5\u0ec9\u0ebd\u0ea7(\u0eaa\u0eb5\u0ec2\u0e84\u0e94\u0e95\u0eb0\u0e9a\u0ead\u0e87)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0ec0\u0e81\u0ebb\u0ec9\u0eb2\u0ea5\u0ec9\u0ebd\u0ea7",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0eaa\u0eb5\u0ec2\u0e84\u0e94\u0e95\u0eb0\u0e9a\u0ead\u0e87",
+            "contactInfo": "\u0e9e/\u0e87\u0e9b\u0eb0\u0e88\u0eb3\u0eaa\u0eb2\u0e82\u0eb2 92625624, 98111090"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306229867",
+        "trackingId": "8261114029434",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 235000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L73863HN",
+        "receiverPhone": "56847038",
+        "description": "",
+        "trackingPlatform": "8261114029434",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:32.000Z",
+        "receiveBackwardDate": null,
+        "width": 45,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 14000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:51:28.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eab\u0ebb\u0ea7\u0e9e\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e8a\u0ebd\u0e87\u0e84\u0ecd\u0ec9",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e8a\u0ebd\u0e87\u0e84\u0ecd\u0ec9",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e8a\u0ebd\u0e87\u0e84\u0ecd\u0ec9",
+            "contactInfo": "020 97539752/030 4601715"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306229527",
+        "trackingId": "8261119150337",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L74107HN",
+        "receiverPhone": "96439471",
+        "description": "",
+        "trackingPlatform": "8261119150337",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:40:56.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:50:39.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0e9a\u0ecd\u0ea5\u0eb4\u0e84\u0eb3\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0edc\u0ead\u0e87\u0e9b\u0ead\u0e87(\u0eab\u0ebc\u0eb1\u0e8120 \u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e84\u0ecd\u0eb2\u0ec0\u0e81\u0eb5\u0e94)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0edc\u0ead\u0e87\u0e9b\u0ead\u0e87",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e84\u0eb3\u0ec0\u0e81\u0eb5\u0e94",
+            "contactInfo": "\u0ec0\u0e9a\u0eb5\u0ea7\u0ead\u0e94\u0ec1\u0ead\u0eb1\u0e9a 02097317765 | \u0ec2\u0e97 0309724766 \u0e88\u0eb8\u0e94\u0eae\u0eb1\u0e9a\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec1\u0ea1\u0ec8\u0e99\u0ea2\u0eb9\u0ec8\u0e95\u0ecd\u0ec8\u0edc\u0ec9\u0eb2\u0eae\u0ec9\u0eb2\u0e99 \u0e84\u0eb3\u0eaa\u0ead\u0e99\u0e81\u0eb2\u0e99\u0ec4\u0e9f\u0e9f\u0ec9\u0eb2"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306229084",
+        "trackingId": "8261113175677",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 300000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L67017HN",
+        "receiverPhone": "59779666",
+        "description": "",
+        "trackingPlatform": "8261113175677",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:23.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:49:45.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e99\u0eb2\u0ec1\u0e84",
+            "branch_address": "\u0e99\u0eb2\u0ec1\u0e84",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0ec4\u0e8a\u0e97\u0eb2\u0e99\u0eb5",
+            "contactInfo": "020 56496543 02094055087 "
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306228853",
+        "trackingId": "8261111085410",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 90000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L74822HN",
+        "receiverPhone": "97445868",
+        "description": "",
+        "trackingPlatform": "8261111085410",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:36:05.000Z",
+        "receiveBackwardDate": null,
+        "width": 40,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 9000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:49:02.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0ead\u0eb8\u0e94\u0ebb\u0ea1\u0ec4\u0e8a"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ead\u0e99\u0e87\u0eb5\u0ec9\u0ea7(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e87\u0eb2)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e94\u0ead\u0e99\u0e87\u0eb5\u0ec9\u0ea7",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e87\u0eb2",
+            "contactInfo": "\u0ec1\u0e81\u0ec9\u0ec4\u0e82\u0e9a\u0eb4\u0e9902052066440/\u0e8d\u0ec9\u0eb2\u0e8d\u0eaa\u0eb2\u0e82\u0eb202099578263"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
+    },
+    {
+        "_id": "306228385",
+        "trackingId": "8261119796896",
+        "itemName": "\u0ec0\u0e84\u0eb7\u0ec8\u0ead\u0e87\u0ec3\u0e8a\u0ec9",
+        "itemValueKIP": 149000,
+        "itemValueTHB": 0,
+        "itemValueUSD": 0,
+        "realItemValueKIP": 0,
+        "realItemValueTHB": 0,
+        "realItemValueUSD": 0,
+        "receiverName": "L76494HN",
+        "receiverPhone": "91552878",
+        "description": "",
+        "trackingPlatform": "8261119796896",
+        "isSummary": 0,
+        "destSendDate": null,
+        "charge_on_shop": 0,
+        "itemStatus": "TRANSIT_TO_DEST_BRANCH",
+        "contactStatus": "NOT_CONTACT",
+        "originSendDate": "2026-04-21T11:38:25.000Z",
+        "receiveBackwardDate": null,
+        "width": 50,
+        "weight": 1,
+        "isCod": "1",
+        "isExtraItem": 0,
+        "packagePrice": 15000,
+        "isDeposit": 1,
+        "originReceiveDate": "2026-04-21T08:47:57.000Z",
+        "destReceiveDate": null,
+        "sendCompleteDate": null,
+        "isCustomerCreated": 0,
+        "isBackward": 0,
+        "billNumber": 0,
+        "providedBy": {
+            "_id": "1"
+        },
+        "originProvinceId": {
+            "provinceName": "\u0e99\u0eb0\u0e84\u0ead\u0e99\u0eab\u0ebc\u0ea7\u0e87\u0ea7\u0ebd\u0e87\u0e88\u0eb1\u0e99"
+        },
+        "destProvinceId": {
+            "provinceName": "\u0ec1\u0e82\u0ea7\u0e87 \u0eaa\u0eb0\u0eab\u0ea7\u0eb1\u0e99\u0e99\u0eb0\u0ec0\u0e82\u0e94"
+        },
+        "originBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e94\u0ebb\u0e87\u0e9a\u0ead\u0e87(\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e99\u0eb2\u0e8a\u0eb2\u0e8d\u0e97\u0ead\u0e87)"
+        },
+        "destBranchId": {
+            "branch_name": "\u0eaa\u0eb2\u0e82\u0eb2 \u0e9b\u0eb0\u0eaa\u0ebb\u0ea1\u0ec4\u0e8a(\u0ec0\u0ea1\u0eb7\u0ead\u0e87\u0e9e\u0eb4\u0e99)",
+            "branch_address": "\u0e9a\u0ec9\u0eb2\u0e99 \u0e9b\u0eb0\u0eaa\u0ebb\u0ea1\u0ec4\u0e8a",
+            "districtName": "\u0ec0\u0ea1\u0eb7\u0ead\u0e87 \u0e9e\u0eb4\u0e99",
+            "contactInfo": " \u0ec1\u0ead\u0eb1\u0e9a 02099153569]  \u0ec2\u0e97 030 9011669.\u0ec1\u0ead\u0eb1\u0e9a 02054690056"
+        },
+        "customerId": {
+            "id_list": "7715280",
+            "full_name": "HOANG VIET NGOC ",
+            "contact_info": "98709576"
+        },
+        "createdBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        },
+        "originReceiveBy": {
+            "first_name": "\u0ec3\u0e88",
+            "phone_number": 99759792
+        }
     }
 ]
