@@ -23,7 +23,7 @@ from purchase import getAllShipment, getAllBillInPancake, getAllBillNeedProcess
 from processBill import process_bills_batch
 from createImageBill import close_browser
 
-POLL_INTERVAL = 5 * 60  # 5 minutes
+POLL_INTERVAL = 60  # 5 minutes
 RETRY_INTERVAL = 60     # 1 minute on error
 CLEANUP_INTERVAL = 12 * 3600  # 12 hours
 
@@ -137,6 +137,17 @@ async def pipeline_cycle():
     # Save for debugging
     with open("billNeedProcess.json", "w") as f:
         json.dump(bills, f, indent=4)
+
+    # Warmup extension: pre-fetch FB context + doc_ids for unique page_ids
+    try:
+        from ws_server import warmup_via_external_server
+        page_ids = list({b[0].get("page_id") for b in bills if b[0].get("page_id")})
+        if page_ids:
+            print(f"[WARMUP] Sending warmup to extension for {len(page_ids)} page(s)...")
+            result = await warmup_via_external_server(page_ids)
+            print(f"[WARMUP] Result: {result}")
+    except Exception as e:
+        print(f"[WARMUP] Error (non-fatal): {e}")
 
     # Process all bills concurrently
     await process_bills_batch(bills, concurrency=5)

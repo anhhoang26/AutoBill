@@ -64,8 +64,42 @@ const store = {
 
 const DOC_ID_KEY = "AutoBill_docIdsMap";
 const DOC_ID_TTL = 18 * 60 * 60 * 1000;
+const SEEN_PAGE_IDS_KEY = "AutoBill_seenPageIds";
 
 let _docIds = {};
+
+async function _recordSeenPageId(pageId) {
+  if (!pageId) return;
+  const list = (await store.get(SEEN_PAGE_IDS_KEY)) || [];
+  if (!list.includes(pageId)) {
+    list.push(pageId);
+    await store.set(SEEN_PAGE_IDS_KEY, list);
+  }
+}
+
+async function warmupPageId(pageId) {
+  // Chỉ cần fetch context (dtsg/lsd/siteData) để ready cho send.
+  // KHÔNG cần scrape doc_ids nữa — PSID đã lấy từ Pancake POS bên Python, không dùng GraphQL.
+  console.log(`[AutoBill:bg] 🔥 Warmup start: page=${pageId}`);
+  try {
+    await ensureFbContext(pageId);
+    console.log(`[AutoBill:bg] 🔥 Warmup done (context only, no doc_id scrape)`);
+    return true;
+  } catch (e) {
+    console.warn(`[AutoBill:bg] Warmup error: ${e.message}`);
+    return false;
+  }
+}
+
+async function warmupFromStoredPages() {
+  const pageIds = (await store.get(SEEN_PAGE_IDS_KEY)) || [];
+  if (pageIds.length === 0) {
+    console.log("[AutoBill:bg] Warmup skipped: no stored page_ids yet (first run — will populate on first send or external warmup command)");
+    return;
+  }
+  console.log(`[AutoBill:bg] Warmup from storage: ${pageIds.length} page(s)`);
+  await warmupPageId(pageIds[0]);
+}
 
 async function loadDocIds() {
   const raw = await store.get(DOC_ID_KEY);
@@ -153,13 +187,46 @@ async function ensureFbContext(pageId, forceRefresh = false) {
   if (forceRefresh) delete _contextsByPage[pageId];
   _clearFbContext();
 
-  // Pancake dùng inbox/messenger (BP:bizweb_pkg), KHÔNG phải inbox/all (HYP:bizweb_comet_pkg)
-  // 2 code path khác nhau — FB validate tokens khác nhau, dùng sai → lỗi 1545012
-  const url = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`;
-  console.log(`[AutoBill:bg] 🔵 FETCHING CONTEXT FROM: ${url}`);
-  const resp = await fetch(url, { credentials: "include" });
-  if (!resp.ok) throw new Error(`Context fetch ${resp.status}`);
-  const html = await resp.text();
+  // Pancake dùng cquick iframe trick để ép FB serve BP package thay vì HYP (comet).
+  // Flow: fetch normal → extract compat_iframe_token → fetch lại với cquick=jsc_c_d&cquick_token=TOKEN&ctarget=...
+  const baseUrl = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`;
+  console.log(`[AutoBill:bg] 🔵 FETCHING CONTEXT FROM: ${baseUrl}`);
+  const resp0 = await fetch(baseUrl, {
+    credentials: "include",
+    headers: { "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+  });
+  if (!resp0.ok) throw new Error(`Context fetch ${resp0.status}`);
+  let html = await resp0.text();
+
+  // Nếu HTML lần đầu có compat_iframe_token → fetch lần 2 với cquick để get BP package
+  const compatM = html.match(/"compat_iframe_token":"([^"]+)"/);
+  if (compatM) {
+    const compatToken = compatM[1];
+    const compatUrl = `${baseUrl}&cquick=jsc_c_d&cquick_token=${encodeURIComponent(compatToken)}&ctarget=${encodeURIComponent("https://www.facebook.com")}`;
+    console.log(`[AutoBill:bg] 🔵 COMPAT FETCH: ${compatUrl.slice(0, 200)}...`);
+    try {
+      const resp1 = await fetch(compatUrl, {
+        credentials: "include",
+        headers: { "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+      });
+      if (resp1.ok) {
+        const compatHtml = await resp1.text();
+        // Check specifically cho BP package (không phải HYP:bizweb_comet_pkg)
+        const hasBP = /"pkg_cohort":"BP:bizweb_pkg"/.test(compatHtml) || /BP%3Abizweb_pkg/.test(compatHtml);
+        const hasHYP = /"pkg_cohort":"HYP:bizweb_comet_pkg"/.test(compatHtml);
+        if (hasBP && compatHtml.length > 10000) {
+          console.log(`[AutoBill:bg] ✅ Using compat (BP) HTML for context`);
+          html = compatHtml;
+        } else {
+          console.log(`[AutoBill:bg] ⚠️ Compat HTML: hasBP=${hasBP} hasHYP=${hasHYP} len=${compatHtml.length} — using original`);
+        }
+      }
+    } catch (e) {
+      console.warn(`[AutoBill:bg] compat fetch error: ${e.message}, using original HTML`);
+    }
+  } else {
+    console.log(`[AutoBill:bg] No compat_iframe_token in initial HTML`);
+  }
 
   // fb_dtsg — Pancake pattern: "DTSGInitialData",[],{"token":"..."}
   for (const pat of [
@@ -284,26 +351,158 @@ async function ensureFbContext(pageId, forceRefresh = false) {
   _lastContextHtml = html;
 }
 
-// Khi chưa có target doc_id, fetch các <script src> từ HTML context để scan
-// (giống docid_extractor.js nhưng chạy ngay trong service worker, không cần user mở tab).
+// Pancake-style: extract resource_map (hash → URL) + loadOnDOMContentReady + <script src>
+// → fetch các JS chunks (kể cả lazy-loaded) để scan doc_ids.
+// Không cần user mở tab business.facebook.com.
 let _lastContextHtml = "";
 let _scriptsScanned = false;
 
-async function ensureDocIdsFromScripts() {
-  if (_scriptsScanned || !_lastContextHtml) return;
+// Brace-matching JSON object extractor (handles nested braces + strings properly)
+// Pancake dùng function A(html, marker) để cut JSON object sau marker, tương đương cách này.
+function _extractJsonObjectAfter(html, marker, fromIdx = 0) {
+  const start = html.indexOf(marker, fromIdx);
+  if (start < 0) return null;
+  let i = start + marker.length;
+  while (i < html.length && html[i] !== '{') i++;
+  if (i >= html.length) return null;
+  const objStart = i;
+  let depth = 0;
+  for (; i < html.length; i++) {
+    const c = html[i];
+    if (c === '"') {
+      i++;
+      while (i < html.length && html[i] !== '"') {
+        if (html[i] === '\\') i++;
+        i++;
+      }
+    } else if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) return { str: html.slice(objStart, i + 1), end: i + 1 };
+    }
+  }
+  return null;
+}
+
+function _extractAllJsonObjectsAfter(html, marker) {
+  const results = [];
+  let idx = 0;
+  while (true) {
+    const r = _extractJsonObjectAfter(html, marker, idx);
+    if (!r) break;
+    results.push(r.str);
+    idx = r.end;
+  }
+  return results;
+}
+
+function _extractResourceMap(html) {
+  // Extract ALL occurrences of "resource_map":{...}, "rsrcMap":{...}, and setResourceMap(...)
+  const map = {};
+  for (const marker of ['"resource_map":', '"rsrcMap":']) {
+    for (const jsonStr of _extractAllJsonObjectsAfter(html, marker)) {
+      try { Object.assign(map, JSON.parse(jsonStr)); } catch (_) {}
+    }
+  }
+  // setResourceMap(OBJ, []) — argument is JSON object literal
+  let idx = 0;
+  while (true) {
+    const foundAt = html.indexOf("setResourceMap(", idx);
+    if (foundAt < 0) break;
+    const r = _extractJsonObjectAfter(html, "", foundAt + "setResourceMap(".length);
+    if (r) {
+      try { Object.assign(map, JSON.parse(r.str)); } catch (_) {}
+      idx = r.end;
+    } else {
+      idx = foundAt + 1;
+    }
+  }
+  return map;
+}
+
+// Pancake dùng 2 URL khác để load chunks chứa PagesManagerInboxAdminAssignerRootQuery:
+//   - /latest/inbox/all?asset_id=X&nav_ref=diode_page_inbox&mailbox_id=X   (InboxNormal view)
+//   - /latest/inbox/facebook?asset_id=X&thread_type=FB_PAGE_POST            (BusinessComments view)
+// Các URL này load chunk sets KHÁC với /latest/inbox/messenger.
+async function fetchInboxAllHtml(pageId) {
+  const url = `https://business.facebook.com/latest/inbox/all?asset_id=${pageId}&nav_ref=diode_page_inbox&mailbox_id=${pageId}`;
+  console.log(`[AutoBill:bg] Fetching inbox/all for doc_ids: ${url}`);
+  try {
+    const r = await fetch(url, { credentials: "include" });
+    return await r.text();
+  } catch (e) {
+    console.warn(`[AutoBill:bg] inbox/all fetch error: ${e.message}`);
+    return "";
+  }
+}
+
+async function fetchInboxFacebookHtml(pageId) {
+  const url = `https://business.facebook.com/latest/inbox/facebook?asset_id=${pageId}&thread_type=FB_PAGE_POST`;
+  console.log(`[AutoBill:bg] Fetching inbox/facebook for doc_ids: ${url}`);
+  try {
+    const r = await fetch(url, { credentials: "include" });
+    return await r.text();
+  } catch (e) {
+    console.warn(`[AutoBill:bg] inbox/facebook fetch error: ${e.message}`);
+    return "";
+  }
+}
+
+async function ensureDocIdsFromScripts(pageId) {
+  if (_scriptsScanned) return;
   _scriptsScanned = true;
-  const srcs = [..._lastContextHtml.matchAll(/<script[^>]+src="(https:\/\/static\.xx\.fbcdn\.net\/[^"]+)"/g)]
-    .map(m => m[1].replace(/&amp;/g, "&"));
-  console.log(`[AutoBill:bg] Fetching ${srcs.length} script chunks to populate doc_ids...`);
-  const before = Object.keys(_docIds).length;
-  await Promise.all(srcs.map(async (url) => {
+
+  // Fetch 2 extra HTMLs từ Pancake's loader URLs (chứa chunks khác)
+  const extras = pageId ? await Promise.all([
+    fetchInboxAllHtml(pageId),
+    fetchInboxFacebookHtml(pageId),
+  ]) : [];
+  const html = [_lastContextHtml, ...extras].filter(Boolean).join("\n<!--SEP-->\n");
+
+  // 1. Direct <script src>
+  const directSrcs = new Set(
+    [...html.matchAll(/<script[^>]+src="(https:\/\/static\.xx\.fbcdn\.net\/[^"]+)"/g)]
+      .map(m => m[1].replace(/&amp;/g, "&"))
+  );
+
+  // 2. Resource map: hash → {type:"js", src:"..."} (dùng cho bootloader lazy modules)
+  const resMap = _extractResourceMap(html);
+  for (const [, entry] of Object.entries(resMap)) {
+    if (entry && entry.type === "js" && entry.src) directSrcs.add(entry.src);
+  }
+
+  // 3. Hashes từ loadOnDOMContentReady([...]) → cần lookup trong resMap
+  const domHashes = [];
+  for (const m of html.matchAll(/loadOnDOMContentReady\((\[[^\]]+\])/g)) {
     try {
-      const r = await fetch(url);
-      searchDocIds(await r.text());
+      const arr = JSON.parse(m[1]);
+      if (Array.isArray(arr)) domHashes.push(...arr);
     } catch (_) {}
-  }));
+  }
+  for (const h of domHashes) {
+    const entry = resMap[h];
+    if (entry && entry.src) directSrcs.add(entry.src);
+  }
+
+  const srcs = [...directSrcs];
+  console.log(`[AutoBill:bg] Fetching ${srcs.length} script chunks (direct+rsrcMap+DOMReady)...`);
+  const before = Object.keys(_docIds).length;
+  // Fetch in batches of 6 (like Pancake)
+  const BATCH = 6;
+  for (let i = 0; i < srcs.length; i += BATCH) {
+    await Promise.all(srcs.slice(i, i + BATCH).map(async (url) => {
+      try {
+        const r = await fetch(url);
+        searchDocIds(await r.text());
+      } catch (_) {}
+    }));
+    if (_docIds["PagesManagerInboxAdminAssignerRootQuery"]) {
+      console.log(`[AutoBill:bg] Target doc_id found at batch ${i/BATCH+1}, stop early`);
+      break;
+    }
+  }
   const after = Object.keys(_docIds).length;
-  console.log(`[AutoBill:bg] doc_ids: ${before} → ${after}`);
+  console.log(`[AutoBill:bg] doc_ids: ${before} → ${after}, target=${_docIds["PagesManagerInboxAdminAssignerRootQuery"] || "STILL MISSING"}`);
   await saveDocIds();
 }
 
@@ -311,86 +510,160 @@ async function ensureDocIdsFromScripts() {
 
 const _recipientCache = {};
 
+async function _callGraphQL(queryName, docId, variables, pageId) {
+  const body = buildBody({
+    av: pageId,
+    __user: _fbUserId || "",
+    __a: "1",
+    __req: (_reqCount++).toString(36),
+    fb_dtsg: _fbDtsg,
+    ..._siteData,
+    doc_id: docId,
+    variables: JSON.stringify(variables),
+    fb_api_caller_class: "RelayModern",
+    fb_api_req_friendly_name: queryName,
+  });
+  const r = await fetch("https://business.facebook.com/api/graphql/", {
+    method: "POST",
+    body,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-FB-Friendly-Name": queryName,
+      "X-FB-LSD": _lsd,
+      "Referer": `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`,
+    },
+  });
+  return await r.text();
+}
+
+// Recursively scan JSON response for "target_id", "other_user_fbid", "id" fields that look like PSIDs
+function _findPsidInResponse(text, pageId, userId) {
+  try {
+    const json = JSON.parse(text.replace(/^for\s*\(;;\);/, ""));
+    if (!json || json.errors) return null;
+    // BFS through data
+    const stack = [json];
+    const candidates = [];
+    while (stack.length) {
+      const node = stack.pop();
+      if (!node || typeof node !== "object") continue;
+      for (const [k, v] of Object.entries(node)) {
+        if (typeof v === "string" && /^\d{10,}$/.test(v)) {
+          if (v !== pageId && v !== userId) {
+            // Real PSID usually starts with 100 or 61 and has 14-17 digits
+            const isPsidShape = /^(100|61)\d{10,14}$/.test(v);
+            const fieldLikely = /psid|target_id|other_user_fbid|participant|user.*id|actor.*id|customer/i.test(k);
+            if (isPsidShape || fieldLikely) candidates.push({ id: v, field: k, score: (isPsidShape ? 2 : 0) + (fieldLikely ? 1 : 0) });
+          }
+        } else if (v && typeof v === "object") stack.push(v);
+      }
+    }
+    candidates.sort((a, b) => b.score - a.score);
+    return candidates[0]?.id || null;
+  } catch (_) {
+    return null;
+  }
+}
+
 async function resolveRecipientId(threadId, pageId) {
+  // Fallback path — chỉ chạy khi Python không truyền recipient_psid.
+  // Không scrape doc_ids nữa (tốn 1200+ CDN requests, không hiệu quả vì FB đổi query).
   if (_recipientCache[threadId]) return _recipientCache[threadId];
 
-  // Method 1: GraphQL PagesManagerInboxAdminAssignerRootQuery (giống Pancake primary)
-  const QUERY = "PagesManagerInboxAdminAssignerRootQuery";
-  let docId = _docIds[QUERY];
+  // Method 1: Try multiple GraphQL queries (in priority order) to resolve PSID.
+  // Each query has different variables. Inspect response for any ID that looks like a PSID.
+  const QUERIES = [
+    // Pancake legacy
+    { name: "PagesManagerInboxAdminAssignerRootQuery", vars: { pageID: pageId, commItemID: threadId } },
+    // Modern biz suite equivalents
+    { name: "BusinessCometInboxThreadDetailHeaderQuery", vars: { commItemID: threadId, pageID: pageId, scale: 1 } },
+    { name: "BusinessCometInboxThreadDetailHeaderQuery", vars: { commItemID: threadId, scale: 1 } },
+    { name: "BusinessCometContextCardInboxContainerQuery", vars: { commItemID: threadId, pageID: pageId } },
+    { name: "BizInboxNewAssignAdminCardWithEntrypointQuery", vars: { commItemID: threadId, pageID: pageId } },
+    { name: "BusinessCometInboxThreadDetailBodyQuery", vars: { commItemID: threadId, pageID: pageId, count: 1 } },
+  ];
 
-  // Nếu thiếu doc_id → tự fetch scripts từ HTML để extract
-  if (!docId) {
-    await ensureDocIdsFromScripts();
-    docId = _docIds[QUERY];
-  }
-
-  if (docId) {
+  for (const q of QUERIES) {
+    const docId = _docIds[q.name];
+    if (!docId) continue;
     try {
-      console.log(`[AutoBill:bg] GraphQL resolve: thread=${threadId} docId=${docId}`);
-      const r = await fetch("https://business.facebook.com/api/graphql/", {
-        method: "POST",
-        body: buildBody({
-          av: pageId,
-          __user: _fbUserId || "",
-          __a: "1",
-          __req: (_reqCount++).toString(36),
-          fb_dtsg: _fbDtsg,
-          ..._siteData,
-          doc_id: docId,
-          variables: JSON.stringify({ pageID: pageId, commItemID: threadId }),
-          fb_api_caller_class: "RelayModern",
-          fb_api_req_friendly_name: QUERY,
-        }),
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Referer": `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`,
-        },
-      });
+      console.log(`[AutoBill:bg] GraphQL try: ${q.name} docId=${docId} vars=${JSON.stringify(q.vars)}`);
+      const text = await _callGraphQL(q.name, docId, q.vars, pageId);
+      console.log(`[AutoBill:bg] GraphQL ${q.name} resp[0:400]: ${text.slice(0, 400)}`);
 
-      const text = await r.text();
-      console.log(`[AutoBill:bg] GraphQL ${r.status}: ${text.slice(0, 500)}`);
-
-      const json = JSON.parse(text.replace(/^for\s*\(;;\);/, ""));
-      const globalId = json?.data?.commItem?.target_id;
-
-      if (globalId && globalId !== pageId && globalId !== _fbUserId) {
-        console.log(`[AutoBill:bg] GraphQL resolved: ${threadId} → ${globalId}`);
-        _recipientCache[threadId] = globalId;
-        return globalId;
+      const psid = _findPsidInResponse(text, pageId, _fbUserId);
+      if (psid) {
+        console.log(`[AutoBill:bg] ✅ GraphQL resolved via ${q.name}: ${threadId} → ${psid}`);
+        _recipientCache[threadId] = psid;
+        return psid;
       }
     } catch (e) {
-      console.warn(`[AutoBill:bg] GraphQL resolve error: ${e.message}`);
+      console.warn(`[AutoBill:bg] ${q.name} error: ${e.message}`);
     }
-  } else {
-    console.warn(`[AutoBill:bg] ${QUERY} doc_id not found (${Object.keys(_docIds).length} total), trying HTML fallback`);
   }
 
-  // Method 2: HTML parsing fallback (conversation page)
+  console.warn(`[AutoBill:bg] No GraphQL query resolved PSID (${Object.keys(_docIds).length} doc_ids cached), falling back to HTML parsing`);
+
+  // Method 2: HTML parsing fallback — tìm PSID trong trang conversation
   try {
     const url = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&selected_item_id=${threadId}&nav_ref=diode_page_inbox`;
     const r = await fetch(url, { credentials: "include" });
     const html = await r.text();
     console.log(`[AutoBill:bg] Conv page ${r.status}, length=${html.length}`);
 
-    searchDocIds(html);
     if (searchDocIds(html)) await saveDocIds();
 
-    // Log tất cả matches để debug
-    const allOtherUser = [...html.matchAll(/"other_user_fbid":"(\d+)"/g)].map(m => m[1]);
-    const allTargetId = [...html.matchAll(/"target_id":"(\d+)"/g)].map(m => m[1]);
-    console.log(`[AutoBill:bg] HTML matches: other_user_fbid=[${allOtherUser}] target_id=[${allTargetId}]`);
+    // FB bootstrap data trong HTML chứa PSID ở nhiều format khác nhau.
+    // Thử rộng các pattern — pick ID khác pageId và userId, ưu tiên ID xuất hiện GẦN threadId.
+    const candidates = new Map(); // id → nearest distance to threadId mention
+    const threadIdx = html.indexOf(threadId);
 
-    for (const pat of [
-      /"other_user_fbid":"(\d+)"/,
-      /"target_id":"(\d+)"/,
-    ]) {
-      const m = html.match(pat);
-      if (m && m[1] !== pageId && m[1] !== _fbUserId) {
-        console.log(`[AutoBill:bg] HTML resolved: ${threadId} → ${m[1]}`);
-        _recipientCache[threadId] = m[1];
-        return m[1];
+    const patterns = [
+      /"other_user_fbid":"(\d{8,})"/g,
+      /"target_id":"(\d{8,})"/g,
+      /"other_participant_id":"(\d{8,})"/g,
+      /"customer_id":"(\d{8,})"/g,
+      /"customer_fbid":"(\d{8,})"/g,
+      /"fbid":"(\d{8,})"/g,
+      /"actor_id":"(\d{8,})"/g,
+      /"user":\{"id":"(\d{8,})"/g,
+      /"customer":\{"id":"(\d{8,})"/g,
+      /"other_participant":\{[^}]*"id":"(\d{8,})"/g,
+      /"participant":\{[^}]*"id":"(\d{8,})"/g,
+    ];
+
+    for (const pat of patterns) {
+      for (const m of html.matchAll(pat)) {
+        const id = m[1];
+        if (id === pageId || id === _fbUserId) continue;
+        const dist = threadIdx >= 0 ? Math.abs(m.index - threadIdx) : m.index;
+        if (!candidates.has(id) || candidates.get(id) > dist) candidates.set(id, dist);
       }
+    }
+
+    if (candidates.size === 0) {
+      console.warn(`[AutoBill:bg] HTML has 0 PSID candidates. length=${html.length} threadIdx=${threadIdx}`);
+      // Debug: dump 500 chars around threadId mention + list related doc_id names
+      if (threadIdx >= 0) {
+        const windowBefore = html.slice(Math.max(0, threadIdx - 300), threadIdx);
+        const windowAfter = html.slice(threadIdx, Math.min(html.length, threadIdx + 500));
+        console.warn(`[AutoBill:bg] DEBUG text around threadId (before 300 chars):\n${windowBefore}`);
+        console.warn(`[AutoBill:bg] DEBUG text around threadId (after 500 chars):\n${windowAfter}`);
+      }
+      // Log doc_id names related to inbox/thread/admin
+      const relatedNames = Object.keys(_docIds).filter(n =>
+        /Inbox|Thread|CommItem|Assigner|MessengerParticipant|BusinessInbox|BizInbox/i.test(n)
+      );
+      console.warn(`[AutoBill:bg] DEBUG ${relatedNames.length} related doc_id names:`, relatedNames.slice(0, 50).join(", "));
+    } else {
+      // Sort by distance (closest to threadId mention wins)
+      const sorted = [...candidates.entries()].sort((a, b) => a[1] - b[1]);
+      console.log(`[AutoBill:bg] HTML PSID candidates (by distance): ${sorted.slice(0, 10).map(([id, d]) => `${id}(${d})`).join(", ")}`);
+      const [bestId] = sorted[0];
+      console.log(`[AutoBill:bg] HTML resolved: ${threadId} → ${bestId}`);
+      _recipientCache[threadId] = bestId;
+      return bestId;
     }
   } catch (e) {
     console.warn(`[AutoBill:bg] Conv page error: ${e.message}`);
@@ -420,9 +693,25 @@ async function uploadImage(base64Data, pageId) {
   );
 
   const text = await r.text();
-  const json = JSON.parse(text.replace(/^for\s*\(;;\);/, ""));
+  const trimmed = text.replace(/^for\s*\(;;\);/, "").trimStart();
+  // Detect HTML response (FB block/checkpoint) — mark permanent, không retry
+  if (trimmed.startsWith("<")) {
+    console.error(`[AutoBill:bg] Upload returned HTML (FB block). First 200 chars: ${trimmed.slice(0, 200)}`);
+    const err = new Error("Upload: FB returned HTML (account restricted or session expired)");
+    err.permanent = true;
+    err.htmlResponse = true;
+    throw err;
+  }
+  let json;
+  try {
+    json = JSON.parse(trimmed);
+  } catch (e) {
+    const err = new Error(`Upload: response not JSON: ${e.message}`);
+    err.permanent = true;
+    throw err;
+  }
   const meta = json?.payload?.metadata?.[0];
-  if (!meta) throw new Error("Upload failed: " + text.slice(0, 200));
+  if (!meta) throw new Error("Upload failed: " + trimmed.slice(0, 200));
   const id = meta.image_id || meta.fbid;
   console.log(`[AutoBill:bg] Uploaded image id=${id}`);
   return id;
@@ -489,7 +778,7 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
   const body = buildBody(paramsObj);
   console.log(`[AutoBill:bg] send params: user=${_fbUserId} page=${pageId} recipient=${recipientId} rev=${_siteData.__rev} comet=${_siteData.__comet_req}`);
 
-  // Headers: match Pancake exactly — chỉ Content-Type + X-MSGR-Region (không x-requested-with/x-response-format)
+  // Headers: match Pancake exactly — Content-Type + X-MSGR-Region + Referer (giả lập user đang ở inbox)
   const r = await fetch("https://business.facebook.com/messaging/send/", {
     method: "POST",
     body,
@@ -497,6 +786,7 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "X-MSGR-Region": _msgrRegion,
+      "Referer": `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`,
     },
   });
 
@@ -504,7 +794,24 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
   console.log(`[AutoBill:bg] messaging/send ${r.status}: ${resText.slice(0, 400)}`);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
 
-  const json = JSON.parse(resText.replace(/^for\s*\(;;\);/, ""));
+  // Nếu FB trả HTML (login/checkpoint/block page) thay vì JSON → session hỏng, cần refresh context
+  const trimmed = resText.replace(/^for\s*\(;;\);/, "").trimStart();
+  if (trimmed.startsWith("<")) {
+    console.error(`[AutoBill:bg] FB returned HTML (session/checkpoint issue). First 200 chars: ${trimmed.slice(0, 200)}`);
+    const err = new Error("FB returned HTML (session expired or checkpoint). Try relogin Facebook.");
+    err.permanent = true;   // đừng retry vô ích
+    err.htmlResponse = true;
+    throw err;
+  }
+  let json;
+  try {
+    json = JSON.parse(trimmed);
+  } catch (parseErr) {
+    console.error(`[AutoBill:bg] Failed to parse FB response: ${parseErr.message}. Body: ${trimmed.slice(0, 200)}`);
+    const err = new Error(`FB response not JSON: ${parseErr.message}`);
+    err.permanent = true;
+    throw err;
+  }
 
   // FB có thể trả 200 OK nhưng vẫn lỗi. Check đầy đủ các field lỗi:
   if (json.error || json.errorSummary || json.errorCode || json.errorDescription) {
@@ -512,8 +819,12 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
       error: json.error, errorCode: json.errorCode,
       summary: json.errorSummary, desc: json.errorDescription,
     };
-    console.error("[AutoBill:bg] FB error:", JSON.stringify(errInfo));
-    throw new Error(`FB error: ${JSON.stringify(errInfo)}`);
+    // 1545041 là permanent ("person unavailable") — mark non-retryable để Python bỏ qua sớm.
+    const permanent = [1545041].includes(json.error);
+    console.error(`[AutoBill:bg] FB error${permanent ? " (PERMANENT, skip retry)" : ""}:`, JSON.stringify(errInfo));
+    const err = new Error(`FB error: ${JSON.stringify(errInfo)}`);
+    err.permanent = permanent;
+    throw err;
   }
 
   // Chỉ coi là success khi có action_id hoặc payload.actions chứa message đã gửi
@@ -530,23 +841,37 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
 
 // ── Main send handler ──────────────────────────────────────────────────────────
 
-async function handleSendMessage({ conversation_id, message, image_base64, page_id }) {
+async function handleSendMessage({ conversation_id, message, image_base64, page_id, recipient_psid }) {
+  _recordSeenPageId(page_id);   // fire-and-forget, để lần sau tự warmup
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       await ensureFbContext(page_id, /* forceRefresh */ attempt > 0);
-      const recipientId = await resolveRecipientId(conversation_id, page_id);
+      // Python đã fetch PSID từ Pancake POS (field global_id) → dùng thẳng.
+      // Nếu không có, fallback về logic resolve cũ (thường fail vì FB đã đổi query).
+      let recipientId;
+      if (recipient_psid) {
+        console.log(`[AutoBill:bg] Using provided PSID from Pancake: ${recipient_psid}`);
+        recipientId = recipient_psid;
+      } else {
+        recipientId = await resolveRecipientId(conversation_id, page_id);
+      }
       let attachmentId = null;
       if (image_base64) attachmentId = await uploadImage(image_base64, page_id);
       return await sendMessage(recipientId, message, attachmentId, page_id);
     } catch (e) {
-      const isTokenError = /dtsg|logged|auth|session|1357004/i.test(e.message);
+      // Không retry nếu FB trả HTML (session/checkpoint/block) hoặc error đã đánh dấu permanent
+      if (e.permanent || e.htmlResponse) {
+        console.error("[AutoBill:bg] Error (permanent, skip retry):", e.message);
+        return { success: false, error: e.message, permanent: true };
+      }
+      const isTokenError = /dtsg|logged.{0,5}in|1357004/i.test(e.message);
       if (isTokenError && attempt === 0) {
         console.warn("[AutoBill:bg] Token error, refreshing context and retrying...", e.message);
         _clearFbContext();
         continue;
       }
       console.error("[AutoBill:bg] Error:", e.message);
-      return { success: false, error: e.message };
+      return { success: false, error: e.message, permanent: !!e.permanent };
     }
   }
 }
@@ -574,6 +899,19 @@ function base64ToBlob(b64) {
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === "fb_send") {
     handleSendMessage(msg.payload).then(sendResponse);
+    return true;
+  }
+  if (msg.type === "fb_warmup") {
+    (async () => {
+      const pageIds = Array.isArray(msg.page_ids) ? msg.page_ids : [];
+      for (const pid of pageIds) await _recordSeenPageId(pid);
+      if (pageIds.length === 0) {
+        sendResponse({ success: false, error: "No page_ids provided" });
+        return;
+      }
+      const ok = await warmupPageId(pageIds[0]);
+      sendResponse({ success: ok, doc_ids_total: Object.keys(_docIds).length, target: _docIds["PagesManagerInboxAdminAssignerRootQuery"] || null });
+    })();
     return true;
   }
   if (msg.type === "fb_reset") {
@@ -608,7 +946,12 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 // ── Startup ────────────────────────────────────────────────────────────────────
 
 setupNetRules();
-loadDocIds();
+
+// Startup: load cached doc_ids, warmup context + scrape chunks cho page đã lưu
+(async () => {
+  await loadDocIds();
+  await warmupFromStoredPages();
+})();
 
 chrome.alarms.create("keepalive", { periodInMinutes: 0.4 });
 chrome.alarms.onAlarm.addListener((alarm) => {
@@ -616,4 +959,4 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 ensureOffscreen();
-console.log("[AutoBill:bg] Service worker started v5.6.6 (auto fetch script chunks for doc_ids)");
+console.log("[AutoBill:bg] Service worker started v5.8.2 (accurate BP detection + debug)");

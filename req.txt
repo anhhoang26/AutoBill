@@ -1,0 +1,75 @@
+curl 'https://business.facebook.com/latest/inbox/all?page_id=331928150000609&asset_id=331928150000609' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: max-age=0' \
+  -b 'datr=c47laebvoI429YOMw4oOu2It; sb=c47laTIoLv1HffqT4k10womv; dpr=1; locale=en_US; c_user=61578770600262; wd=1080x907; ps_l=1; ps_n=1; i_user=100091964876078; presence=EDvF3EtimeF1776753197EuserFA261578770600262A2EchF_7bCC; xs=50%3AGXqEb-jOOuE2eQ%3A2%3A1776651938%3A-1%3A-1%3A%3AAczI_8szfGSK0LmjqdS9ThEwYwR5vCHyxkLiLO477FU; fr=1z8q0LHtAX2qOrXqY..Bp5xu6..AAA.0.0.Bp5xvT.AWcs7jRVmC6ihmyYvOmZKSDh7xE' \
+  -H 'origin: https://business.facebook.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer;' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-storage-access: active' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36'
+curl 'https://business.facebook.com/latest/inbox/messenger?asset_id=331928150000609&nav_ref=diode_page_inbox' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: max-age=0' \
+  -b 'datr=c47laebvoI429YOMw4oOu2It; sb=c47laTIoLv1HffqT4k10womv; dpr=1; locale=en_US; c_user=61578770600262; wd=1080x907; ps_l=1; ps_n=1; i_user=100091964876078; presence=EDvF3EtimeF1776753197EuserFA261578770600262A2EchF_7bCC; xs=50%3AGXqEb-jOOuE2eQ%3A2%3A1776651938%3A-1%3A-1%3A%3AAczI_8szfGSK0LmjqdS9ThEwYwR5vCHyxkLiLO477FU; fr=1z8q0LHtAX2qOrXqY..Bp5xu6..AAA.0.0.Bp5xvT.AWcs7jRVmC6ihmyYvOmZKSDh7xE' \
+  -H 'origin: https://business.facebook.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer;' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-storage-access: active' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36'
+curl 'https://business.facebook.com/latest/inbox/messenger?asset_id=331928150000609&nav_ref=diode_page_inbox&cquick=jsc_c_d&cquick_token=AUdBqqoGbfRbKDF5DLcAkg6p--o&ctarget=https%3A%2F%2Fwww.facebook.com' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: max-age=0' \
+  -b 'datr=c47laebvoI429YOMw4oOu2It; sb=c47laTIoLv1HffqT4k10womv; dpr=1; locale=en_US; c_user=61578770600262; wd=1080x907; ps_l=1; ps_n=1; i_user=100091964876078; presence=EDvF3EtimeF1776753197EuserFA261578770600262A2EchF_7bCC; xs=50%3AGXqEb-jOOuE2eQ%3A2%3A1776651938%3A-1%3A-1%3A%3AAczI_8szfGSK0LmjqdS9ThEwYwR5vCHyxkLiLO477FU; fr=1z8q0LHtAX2qOrXqY..Bp5xu6..AAA.0.0.Bp5xvT.AWcs7jRVmC6ihmyYvOmZKSDh7xE' \
+  -H 'origin: https://business.facebook.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer;' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-storage-access: active' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36'
+curl 'https://business.facebook.com/messaging/send/' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: max-age=0' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -b 'datr=c47laebvoI429YOMw4oOu2It; sb=c47laTIoLv1HffqT4k10womv; dpr=1; locale=en_US; c_user=61578770600262; wd=1080x907; ps_l=1; ps_n=1; i_user=100091964876078; presence=EDvF3EtimeF1776753197EuserFA261578770600262A2EchF_7bCC; xs=50%3AGXqEb-jOOuE2eQ%3A2%3A1776651938%3A-1%3A-1%3A%3AAczI_8szfGSK0LmjqdS9ThEwYwR5vCHyxkLiLO477FU; fr=1z8q0LHtAX2qOrXqY..Bp5xu6..AAA.0.0.Bp5xvT.AWcs7jRVmC6ihmyYvOmZKSDh7xE' \
+  -H 'origin: https://business.facebook.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer;' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-storage-access: active' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'x-msgr-region: CLN' \
+  --data-raw 'body=&offline_threading_id=7452244977249874756&source=source%3Apage_unified_inbox&timestamp=1776753658592&request_user_id=331928150000609&__user=61578770600262&__a=1&__req=5k&__csr=&__beoa=0&__pc=BP%3Abizweb_pkg&dpr=2&__ccg=EXCELLENT&__rev=1037753511&__hsi=7631096553685212102&__hs=20564.BP%3Abizweb_pkg.2.0...0&__comet_req=0&__spin_r=1037753511&__spin_b=trunk&__spin_t=1776753122&__s=asnmcb%3A329sl7%3A0jpvt2&fb_dtsg=NAftNhp1j42HRqSMHsSSTc8901B3n2xM0UsWFLcL2YUWpVxwJtNyQ0A%3A50%3A1776651938&jazoest=25296&lsd=h0n1vTu5YKG9N8_Js6ZFzy&__usid=null&specific_to_list%5B0%5D=fbid%3A100085893921171&specific_to_list%5B1%5D=fbid%3A331928150000609&other_user_fbid=100085893921171&message_id=7452244977249874756&client=mercury&action_type=ma-type%3Auser-generated-message&ephemeral_ttl_mode=0&has_attachment=true&image_ids%5B0%5D=1687662165922122'
+curl 'https://business.facebook.com/api/graphql/' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: max-age=0' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -b 'datr=c47laebvoI429YOMw4oOu2It; sb=c47laTIoLv1HffqT4k10womv; dpr=1; locale=en_US; c_user=61578770600262; wd=1080x907; ps_l=1; ps_n=1; i_user=100091964876078; presence=EDvF3EtimeF1776753197EuserFA261578770600262A2EchF_7bCC; xs=50%3AGXqEb-jOOuE2eQ%3A2%3A1776651938%3A-1%3A-1%3A%3AAczI_8szfGSK0LmjqdS9ThEwYwR5vCHyxkLiLO477FU; fr=1z8q0LHtAX2qOrXqY..Bp5xu6..AAA.0.0.Bp5xvT.AWcs7jRVmC6ihmyYvOmZKSDh7xE' \
+  -H 'dpr: 2' \
+  -H 'origin: https://business.facebook.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer;' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-storage-access: active' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'viewport-width: 1115' \
+  -H 'x-asbd-id: 129477' \
+  -H 'x-fb-friendly-name: BizInboxCommentThreadListContainerQuery' \
+  -H 'x-fb-lsd: wp-8kuxI2XHgjhWEsQpS9A' \
+  --data-raw '__user=61578770600262&__a=1&__req=7c&__csr=&__beoa=0&__pc=BP%3Abizweb_pkg&dpr=2&__ccg=GOOD&__rev=1037753511&__hsi=7631097712660723432&__hs=20564.BP%3Abizweb_pkg.2.0...0&__comet_req=0&__spin_r=1037753511&__spin_b=trunk&__spin_t=1776753392&__s=9ibn3l%3Aqvxkok%3Auq60fd&fb_dtsg=NAftI9cUeTClQlWQs-T9YypPehP8jToyMjr4_CtkPj9trPuw1rp_kug%3A50%3A1776651938&jazoest=25828&lsd=wp-8kuxI2XHgjhWEsQpS9A&av=120700747666840&doc_id=24929307126694343&variables=%7B%22filterStatus%22%3A%22TODO%22%2C%22platformFilter%22%3A%22FACEBOOK%22%2C%22filterIsReadStatus%22%3Anull%2C%22filterOwnerID%22%3Anull%2C%22isStarsComment%22%3Afalse%2C%22isHighlightedComment%22%3Afalse%2C%22count%22%3A20%2C%22filterType%22%3Anull%2C%22pageID%22%3A%22120700747666840%22%2C%22cursor%22%3Anull%7D&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=BizInboxCommentThreadListContainerQuery&__usid=null'

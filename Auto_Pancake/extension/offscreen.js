@@ -53,9 +53,19 @@ function connect() {
           message: msg.message,
           image_base64: msg.image_base64,
           page_id: msg.page_id,
+          recipient_psid: msg.recipient_psid,
         },
       });
 
+      ws.send(JSON.stringify({ action: "result", correlation_id: msg.correlation_id, ...result }));
+    }
+
+    if (msg.action === "warmup") {
+      console.log(`[AutoBill] warmup → background pages=${msg.page_ids?.length}`);
+      const result = await chrome.runtime.sendMessage({
+        type: "fb_warmup",
+        page_ids: msg.page_ids || [],
+      });
       ws.send(JSON.stringify({ action: "result", correlation_id: msg.correlation_id, ...result }));
     }
   };

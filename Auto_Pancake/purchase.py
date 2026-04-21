@@ -214,12 +214,15 @@ def getAllBillInPancake():
     return allBill
 
 def _slim_bill_pancake(bill):
-    """Keep only fields used downstream: id, page_id (flat), conversation_id, updated_at."""
+    """Keep only fields used downstream: id, page_id (flat), conversation_id, updated_at, customer.id.
+    customer.id (Pancake UUID) is needed to call /conversations/.../messages endpoint for PSID."""
+    cust_uuid = (bill.get("customer") or {}).get("id")
     return {
         "id": bill.get("id"),
         "page_id": bill.get("page_id") or (bill.get("page") or {}).get("id"),
         "conversation_id": bill.get("conversation_id"),
         "updated_at": bill.get("updated_at"),
+        "customer": {"id": cust_uuid} if cust_uuid else None,
     }
 
 
@@ -289,23 +292,6 @@ def _slim_hal(item):
     }
 
 
-MAX_BILL_AGE_DAYS = 7
-
-
-def _is_too_old(updated_at, max_days=MAX_BILL_AGE_DAYS):
-    """Return True if updated_at (Pancake ISO string) is older than max_days."""
-    if not updated_at:
-        return False
-    try:
-        dt = datetime.fromisoformat(str(updated_at).replace("Z", "+00:00"))
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        age = datetime.now(timezone.utc) - dt
-        return age > timedelta(days=max_days)
-    except Exception:
-        return False
-
-
 def getAllBillNeedProcess():
     listBillInPancake = json.load(open("listBillInPancake.json"))
     listShipmentAnousith = json.load(open("listShipmentAnousith.json"))
@@ -314,18 +300,12 @@ def getAllBillNeedProcess():
     dictShipmentHal = {bill["receiver_customer"]["name"]: bill for bill in listShipmentHal}
 
     listBillNeedProcess = []
-    skipped_old = 0
     for bill in listBillInPancake:
-        if _is_too_old(bill.get("updated_at")):
-            skipped_old += 1
-            continue
         slim_pancake = _slim_bill_pancake(bill)
         if bill["id"] in dictShipmentAnousith:
             listBillNeedProcess.append((slim_pancake, _slim_anousith(dictShipmentAnousith[bill["id"]]), False))
         elif bill["id"] in dictShipmentHal:
             listBillNeedProcess.append((slim_pancake, _slim_hal(dictShipmentHal[bill["id"]]), True))
-    if skipped_old:
-        print(f"[MATCH] Skipped {skipped_old} bills older than {MAX_BILL_AGE_DAYS} days")
     return listBillNeedProcess
 if __name__ == "__main__":
     getAllBillInPancake()

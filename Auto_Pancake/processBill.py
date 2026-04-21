@@ -11,6 +11,7 @@ Flow:
 import asyncio
 import json
 import os
+import time
 import requests
 from dotenv import load_dotenv
 from createImageBill import generate_image, close_browser
@@ -39,6 +40,53 @@ def _get_thread_id(bill_pancake):
         return conv_id.split("_", 1)[1]
     return conv_id
 
+
+_full_bills_cache = None
+
+
+def _lookup_customer_uuid(bill_id):
+    """Fallback: load customer.id from listBillInPancake.json by bill id (when slim bill lacks it)."""
+    global _full_bills_cache
+    if _full_bills_cache is None:
+        try:
+            with open("listBillInPancake.json", "r") as f:
+                _full_bills_cache = {b["id"]: b for b in json.load(f)}
+        except Exception:
+            _full_bills_cache = {}
+    full = _full_bills_cache.get(bill_id)
+    return (full.get("customer") or {}).get("id") if full else None
+
+
+def fetch_recipient_psid(bill_pancake):
+    """Call Pancake's conversation messages endpoint to get the real FB PSID (global_id).
+    Returns None on error."""
+    page_id = _get_page_id(bill_pancake)
+    conv_id = bill_pancake.get("conversation_id")
+    customer_uuid = (bill_pancake.get("customer") or {}).get("id")
+    # Slim billNeedProcess.json from older run may lack customer.id — fallback to full file
+    if not customer_uuid:
+        customer_uuid = _lookup_customer_uuid(bill_pancake.get("id"))
+    if not (page_id and conv_id and customer_uuid):
+        print(f"[PSID] Missing required fields for {bill_pancake.get('id')}: page={bool(page_id)} conv={bool(conv_id)} cust={bool(customer_uuid)}")
+        return None
+    url = (
+        f"https://pancake.vn/api/v1/pages/{page_id}/conversations/{conv_id}/messages"
+        f"?access_token={PANCAKE_ACCESS_TOKEN}&customer_id={customer_uuid}&limit=1"
+    )
+    try:
+        resp = requests.get(url, timeout=10)
+        if resp.status_code != 200:
+            print(f"[PSID] Fetch failed {bill_pancake['id']}: HTTP {resp.status_code} body={resp.text[:200]}")
+            return None
+        data = resp.json()
+        psid = data.get("global_id")
+        if not psid and data.get("customers"):
+            psid = data["customers"][0].get("global_id")
+        return psid
+    except Exception as e:
+        print(f"[PSID] Fetch error {bill_pancake['id']}: {e}")
+        return None
+
 # --- Extension fallback queue ---
 
 _ext_queue: asyncio.Queue | None = None
@@ -52,31 +100,29 @@ def get_ext_queue() -> asyncio.Queue:
     return _ext_queue
 
 
-_ws_server_started = False
-
-
-def _ensure_ws_server():
-    """Start the WebSocket server (background thread) so the Chrome extension can connect."""
-    global _ws_server_started
-    if _ws_server_started:
-        return
-    from ws_server import start_background_server
-    start_background_server()
-    _ws_server_started = True
+WS_SERVER_URL = os.getenv("WS_SERVER_URL", "ws://localhost:8765")
 
 
 async def start_ext_worker():
-    """Background worker that processes the extension fallback queue."""
+    """Background worker that processes the extension fallback queue.
+    Assumes ws_server.py is running as an external standalone process — does NOT start its own server."""
     global _ext_worker_task
-    _ensure_ws_server()
     if _ext_worker_task and not _ext_worker_task.done():
         return
     _ext_worker_task = asyncio.create_task(_ext_worker_loop())
 
 
+EXT_SEND_DELAY = 3                 # delay giữa mỗi lần gửi (s)
+EXT_PAGE_COOLDOWN = 15 * 60        # cooldown per-page khi FB block page đó (s)
+
+# Track pages đang bị FB block: page_id -> unblock timestamp
+_blocked_pages: dict[str, float] = {}
+
+
 async def _ext_worker_loop():
-    """Process extension queue items one by one."""
-    from ws_server import send_message_to_extension
+    """Process extension queue items one by one via external ws_server.
+    Per-page cooldown khi FB block (1404078) — các page khác vẫn gửi bình thường."""
+    from ws_server import send_via_external_server
 
     queue = get_ext_queue()
     while True:
@@ -84,22 +130,54 @@ async def _ext_worker_loop():
         bill_pancake = item["bill_pancake"]
         bill_file = item["bill_file"]
         ship_fee = item["ship_fee"]
+        page_id = _get_page_id(bill_pancake)
 
-        print(f"[EXT-Q] Processing {bill_pancake['id']} via extension...")
+        # Nếu page đang cooldown → DROP bill (sẽ được main.py cycle tiếp theo fetch lại), không re-queue
+        now = time.time()
+        unblock_at = _blocked_pages.get(page_id)
+        if unblock_at and now < unblock_at:
+            remaining = int(unblock_at - now)
+            print(f"[EXT-Q] Drop {bill_pancake['id']} (page {page_id} cooldown {remaining}s)")
+            queue.task_done()
+            continue
+        if unblock_at and now >= unblock_at:
+            del _blocked_pages[page_id]
+            print(f"[EXT-Q] Page {page_id} cooldown hết → resume")
 
+        print(f"[EXT-Q] Processing {bill_pancake['id']} (page={page_id})")
+
+        # Pre-fetch real PSID from Pancake POS
+        loop = asyncio.get_running_loop()
+        recipient_psid = await loop.run_in_executor(None, fetch_recipient_psid, bill_pancake)
+        if recipient_psid:
+            print(f"[EXT-Q] {bill_pancake['id']} PSID={recipient_psid}")
+
+        blocked_this_page = False
         for attempt in range(3):
             try:
-                result = await send_message_to_extension(
+                result = await send_via_external_server(
                     _get_thread_id(bill_pancake),
                     message="",
                     image_path=bill_file,
-                    page_id=_get_page_id(bill_pancake),
+                    page_id=page_id,
+                    recipient_psid=recipient_psid,
+                    bill_id=bill_pancake["id"],
+                    server_url=WS_SERVER_URL,
                 )
                 if isinstance(result, dict) and result.get("success"):
                     print(f"[EXT-Q] Success: {bill_pancake['id']}")
                     _cleanup_and_update(bill_pancake, bill_file, ship_fee)
                     break
-                print(f"[EXT-Q] Attempt {attempt + 1} failed: {bill_pancake['id']}: {result}")
+                print(f"[EXT-Q] Attempt {attempt + 1} failed: {bill_pancake['id']}")
+                err_str = json.dumps(result) if isinstance(result, dict) else str(result)
+                if "1404078" in err_str or "account is restricted" in err_str.lower():
+                    _blocked_pages[page_id] = time.time() + EXT_PAGE_COOLDOWN
+                    print(f"[EXT-Q] 🚨 Page {page_id} blocked → cooldown {EXT_PAGE_COOLDOWN}s, skip bill")
+                    blocked_this_page = True
+                    break
+                if isinstance(result, dict) and result.get("permanent"):
+                    print(f"[EXT-Q] {bill_pancake['id']} permanent — skip retry")
+                    break
             except Exception as e:
                 print(f"[EXT-Q] Attempt {attempt + 1} error: {bill_pancake['id']}: {e}")
 
@@ -109,6 +187,9 @@ async def _ext_worker_loop():
             print(f"[EXT-Q] Gave up on {bill_pancake['id']} after 3 attempts")
 
         queue.task_done()
+        # Nếu page này vừa bị block thì không delay thêm (bill đã put_nowait về), chuyển qua page khác
+        if not blocked_this_page:
+            await asyncio.sleep(EXT_SEND_DELAY)
 
 
 # --- Pancake API functions ---
@@ -144,17 +225,16 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
                 data = {"raw": resp.text[:300]}
 
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] Upload failed {bill_pancake['id']}: HTTP {resp.status_code}")
-                print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
+                print(f"[PANCAKE] Upload HTTP {resp.status_code} {bill_pancake['id']}")
                 if 400 <= resp.status_code < 500 and resp.status_code != 429:
                     return None
                 continue
 
             if data.get("success"):
                 return data
-            print(f"[PANCAKE] Upload not successful {bill_pancake['id']}: {json.dumps(data, ensure_ascii=False)[:300]}")
+            print(f"[PANCAKE] Upload fail {bill_pancake['id']} err={data.get('error_code')}")
         except Exception as e:
-            print(f"[PANCAKE] Upload error attempt {attempt + 1}: {e}")
+            print(f"[PANCAKE] Upload err: {e}")
 
     return None
 
@@ -173,7 +253,7 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
                 timeout=15,
             )
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] create_fb_ids failed {bill_pancake['id']}: HTTP {resp.status_code} {resp.text[:300]}")
+                print(f"[PANCAKE] fb_ids HTTP {resp.status_code} {bill_pancake['id']}")
                 if 400 <= resp.status_code < 500 and resp.status_code != 429:
                     return None
                 continue
@@ -181,9 +261,9 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
             data = resp.json()
             if data.get("success"):
                 return data["fb_ids"][0]
-            print(f"[PANCAKE] create_fb_ids not successful {bill_pancake['id']}: {data}")
+            print(f"[PANCAKE] fb_ids fail {bill_pancake['id']} err={data.get('error_code')}")
         except Exception as e:
-            print(f"[PANCAKE] create_fb_ids error attempt {attempt + 1}: {e}")
+            print(f"[PANCAKE] fb_ids err: {e}")
 
     return None
 
@@ -215,24 +295,20 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
                 data = {"raw": resp.text[:300]}
 
             if resp.status_code < 200 or resp.status_code >= 300:
-                print(f"[PANCAKE] send_message failed {bill_pancake['id']}: HTTP {resp.status_code}")
-                print(f"  URL: {url[:150]}")
-                print(f"  Payload: {json.dumps(payload, ensure_ascii=False)[:300]}")
-                print(f"  Response: {json.dumps(data, ensure_ascii=False)[:300]}")
+                print(f"[PANCAKE] send HTTP {resp.status_code} {bill_pancake['id']}")
                 if 400 <= resp.status_code < 500 and resp.status_code != 429:
                     return False
                 continue
 
             if data.get("success"):
-                print(f"[PANCAKE] Success send message {bill_pancake['id']}")
+                print(f"[PANCAKE] Success {bill_pancake['id']}")
                 return True
-            print(f"[PANCAKE] send_message not successful {bill_pancake['id']}: {json.dumps(data, ensure_ascii=False)[:300]}")
+            print(f"[PANCAKE] send fail {bill_pancake['id']} err={data.get('e_code')} sub={data.get('e_subcode')}")
             # Non-retryable Facebook errors (by e_subcode)
             if data.get("e_subcode") in (2018278, 2018001, 551):
-                print(f"[PANCAKE] {bill_pancake['id']} non-retryable (e_subcode={data.get('e_subcode')}), skip retry")
                 return False
         except Exception as e:
-            print(f"[PANCAKE] send_message error attempt {attempt + 1}: {e}")
+            print(f"[PANCAKE] send err: {e}")
 
     return False
 
@@ -380,7 +456,7 @@ def processBill(bill_info):
 if __name__ == "__main__":
     import sys
     target_id = sys.argv[1] if len(sys.argv) > 1 else None
-    target_id = 'L74447HN'
+    target_id = 'L74032HN'
     if target_id:
         # Find specific bill by receiver name or tracking number
         anousith = json.load(open("listShipmentAnousith.json", encoding="utf-8")) if os.path.exists("listShipmentAnousith.json") else []
