@@ -146,11 +146,14 @@ async def _ext_worker_loop():
 
         print(f"[EXT-Q] Processing {bill_pancake['id']} (page={page_id})")
 
-        # Pre-fetch real PSID from Pancake POS
+        # Pre-fetch real PSID from Pancake POS. Không có → SKIP (extension fallback sẽ sai PSID).
         loop = asyncio.get_running_loop()
         recipient_psid = await loop.run_in_executor(None, fetch_recipient_psid, bill_pancake)
-        if recipient_psid:
-            print(f"[EXT-Q] {bill_pancake['id']} PSID={recipient_psid}")
+        if not recipient_psid:
+            print(f"[EXT-Q] Skip {bill_pancake['id']} — Pancake POS không có PSID (global_id=None)")
+            queue.task_done()
+            continue
+        print(f"[EXT-Q] {bill_pancake['id']} PSID={recipient_psid}")
 
         blocked_this_page = False
         for attempt in range(3):
@@ -456,7 +459,7 @@ def processBill(bill_info):
 if __name__ == "__main__":
     import sys
     target_id = sys.argv[1] if len(sys.argv) > 1 else None
-    target_id = 'L74032HN'
+    target_id = 'L71643HN'
     if target_id:
         # Find specific bill by receiver name or tracking number
         anousith = json.load(open("listShipmentAnousith.json", encoding="utf-8")) if os.path.exists("listShipmentAnousith.json") else []

@@ -187,8 +187,6 @@ async function ensureFbContext(pageId, forceRefresh = false) {
   if (forceRefresh) delete _contextsByPage[pageId];
   _clearFbContext();
 
-  // Pancake dùng cquick iframe trick để ép FB serve BP package thay vì HYP (comet).
-  // Flow: fetch normal → extract compat_iframe_token → fetch lại với cquick=jsc_c_d&cquick_token=TOKEN&ctarget=...
   const baseUrl = `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`;
   console.log(`[AutoBill:bg] 🔵 FETCHING CONTEXT FROM: ${baseUrl}`);
   const resp0 = await fetch(baseUrl, {
@@ -959,4 +957,4 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 ensureOffscreen();
-console.log("[AutoBill:bg] Service worker started v5.8.2 (accurate BP detection + debug)");
+console.log("[AutoBill:bg] Service worker started v5.8.4");
