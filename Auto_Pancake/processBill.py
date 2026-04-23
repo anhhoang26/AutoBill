@@ -229,6 +229,10 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
 
             if resp.status_code < 200 or resp.status_code >= 300:
                 print(f"[PANCAKE] Upload HTTP {resp.status_code} {bill_pancake['id']}")
+                print(f"[PANCAKE] Upload request: POST {url}")
+                print(f"[PANCAKE] Upload file: {file_local}")
+                print(f"[PANCAKE] Upload response headers: {dict(resp.headers)}")
+                print(f"[PANCAKE] Upload response body: {resp.text}")
                 if 400 <= resp.status_code < 500 and resp.status_code != 429:
                     return None
                 continue
@@ -236,6 +240,9 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
             if data.get("success"):
                 return data
             print(f"[PANCAKE] Upload fail {bill_pancake['id']} err={data.get('error_code')}")
+            print(f"[PANCAKE] Upload request: POST {url}")
+            print(f"[PANCAKE] Upload file: {file_local}")
+            print(f"[PANCAKE] Upload response body: {resp.text}")
         except Exception as e:
             print(f"[PANCAKE] Upload err: {e}")
 
@@ -342,6 +349,10 @@ def update_order_status(bill_pancake, ship_fee, max_retries=3):
             if 200 <= resp.status_code < 300:
                 return True
             print(f"[PANCAKE] update_status failed {bill_pancake['id']}: HTTP {resp.status_code}")
+            print(f"[PANCAKE] update_status request: PUT {url}")
+            print(f"[PANCAKE] update_status payload: {payload}")
+            print(f"[PANCAKE] update_status response headers: {dict(resp.headers)}")
+            print(f"[PANCAKE] update_status response body: {resp.text}")
             if 400 <= resp.status_code < 500 and resp.status_code != 429:
                 return False
         except Exception as e:
