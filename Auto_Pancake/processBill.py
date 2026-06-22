@@ -216,11 +216,13 @@ def upload_bill_to_pancake(bill_pancake, file_local, max_retries=3):
     url = f"https://pancake.vn/api/v1/pages/{page_id}/contents?access_token={PANCAKE_ACCESS_TOKEN}"
 
     for attempt in range(max_retries):
+        if attempt:
+            time.sleep(2 ** (attempt - 1))  # backoff: 1s, 2s
         try:
             with open(file_local, "rb") as f:
                 files = [("file", (os.path.basename(file_local), f, "image/png"))]
                 upload_headers = {k: v for k, v in _pancake_headers().items() if k != "Content-Type"}
-                resp = requests.post(url, headers=upload_headers, files=files, timeout=15)
+                resp = requests.post(url, headers=upload_headers, files=files, timeout=(5, 20))
 
             try:
                 data = resp.json()
@@ -255,12 +257,14 @@ def create_fb_ids(bill_pancake, content_id, max_retries=3):
     url = f"https://pancake.vn/api/v1/pages/{page_id}/contents/facebook?access_token={PANCAKE_ACCESS_TOKEN}&is_reusable=true&async=false"
 
     for attempt in range(max_retries):
+        if attempt:
+            time.sleep(2 ** (attempt - 1))  # backoff: 1s, 2s
         try:
             resp = requests.post(
                 url,
                 headers=_pancake_headers(),
                 json={"content_ids": [content_id]},
-                timeout=15,
+                timeout=(5, 25),  # FB attachment registration (async=false) is slow
             )
             if resp.status_code < 200 or resp.status_code >= 300:
                 print(f"[PANCAKE] fb_ids HTTP {resp.status_code} {bill_pancake['id']}")
@@ -297,8 +301,10 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
     send_headers = {k: v for k, v in _pancake_headers().items() if k != "Content-Type"}
 
     for attempt in range(max_retries):
+        if attempt:
+            time.sleep(2 ** (attempt - 1))  # backoff: 1s, 2s
         try:
-            resp = requests.post(url, headers=send_headers, files=multipart, timeout=15)
+            resp = requests.post(url, headers=send_headers, files=multipart, timeout=(5, 20))
             try:
                 data = resp.json()
             except Exception:
@@ -325,15 +331,25 @@ def send_message_via_pancake(bill_pancake, upload_response, fb_ids, max_retries=
 
 def send_via_pancake(bill_pancake, file_local):
     """Full Pancake send pipeline: upload -> create fb_ids -> send message."""
+    bid = bill_pancake["id"]
+
+    s0 = time.time()
     upload_resp = upload_bill_to_pancake(bill_pancake, file_local)
+    s1 = time.time()
     if not upload_resp:
+        print(f"[TIMER] {bid} send-steps: upload={s1-s0:.2f}s (FAILED)")
         return False
 
     fb_ids = create_fb_ids(bill_pancake, upload_resp["id"])
+    s2 = time.time()
     if not fb_ids:
+        print(f"[TIMER] {bid} send-steps: upload={s1-s0:.2f}s fb_ids={s2-s1:.2f}s (FAILED)")
         return False
 
-    return send_message_via_pancake(bill_pancake, upload_resp, fb_ids)
+    ok = send_message_via_pancake(bill_pancake, upload_resp, fb_ids)
+    s3 = time.time()
+    print(f"[TIMER] {bid} send-steps: upload={s1-s0:.2f}s fb_ids={s2-s1:.2f}s msg={s3-s2:.2f}s")
+    return ok
 
 
 # --- Order status update ---
@@ -344,8 +360,10 @@ def update_order_status(bill_pancake, ship_fee, max_retries=3):
     payload = {"status": 2, "partner_fee": ship_fee}
 
     for attempt in range(max_retries):
+        if attempt:
+            time.sleep(2 ** (attempt - 1))  # backoff: 1s, 2s
         try:
-            resp = requests.put(url, json=payload, timeout=10)
+            resp = requests.put(url, json=payload, timeout=(5, 15))
             if 200 <= resp.status_code < 300:
                 return True
             print(f"[PANCAKE] update_status failed {bill_pancake['id']}: HTTP {resp.status_code}")

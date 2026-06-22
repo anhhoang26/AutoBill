@@ -50,7 +50,7 @@ async def _get_page_pool() -> asyncio.Queue:
         for _ in range(PAGE_POOL_SIZE):
             page = await browser.new_page(
                 viewport={"width": 800, "height": 900},
-                device_scale_factor=2,
+                device_scale_factor=1,
             )
             await pool.put(page)
         _page_pool = pool
