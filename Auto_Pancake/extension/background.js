@@ -326,6 +326,11 @@ async function ensureFbContext(pageId, forceRefresh = false) {
     __spin_t:    sd.__spin_t ? String(sd.__spin_t) : "1514187418",
     __s:         _webSessionId,
   };
+  // Pancake buildParams thêm 2 field này có điều kiện — extract nếu có:
+  //   force_blue=1 → FB phân biệt request "Business UI thật" vs "bot/incomplete"
+  //   __spin_dev_mhenv → spin field thứ 4 (đôi khi FB inject ở dev/staging branch)
+  if (sd.force_blue) _siteData.force_blue = 1;
+  if (sd.__spin_dev_mhenv) _siteData.__spin_dev_mhenv = sd.__spin_dev_mhenv;
 
   _lastPageId = pageId;
   _contextsByPage[pageId] = {
@@ -676,18 +681,53 @@ async function resolveRecipientId(threadId, pageId) {
 async function uploadImage(base64Data, pageId) {
   const blob = base64ToBlob(base64Data);
   const form = new FormData();
-  form.append("upload_1024", blob, "bill.png");
 
-  const params = new URLSearchParams({
-    __user: _fbUserId || "0",
+  // Pancake official randomizes form field upload_1024..upload_1034 mỗi request
+  // → tránh FB fingerprint pattern "luôn upload_1024 + bill.png" của bot.
+  const fieldName = `upload_${1024 + Math.floor(Math.random() * 11)}`;
+  const filename = `image_${Date.now()}_${Math.random().toString(36).slice(2, 8)}.png`;
+  form.append(fieldName, blob, filename);
+
+  // Full session params giống sendMessage — nếu chỉ gửi __user/__a/fb_dtsg/request_user_id
+  // thì FB anti-abuse từ chối (error 3252001) vì request shape không match Business Manager UI.
+  const paramsObj = {
+    __user: _fbUserId || "",
     __a: "1",
+    __req: (_reqCount++).toString(36),
+    __csr: _siteData.__csr ?? "",
+    __beoa: _siteData.__beoa,
+    __pc: _siteData.__pc,
+    dpr: _siteData.dpr,
+    __ccg: _siteData.__ccg,
+    __rev: _siteData.__rev,
+    __hsi: _siteData.__hsi,
+    __hs: _siteData.__hs,
+    __comet_req: _siteData.__comet_req,
+    __spin_r: _siteData.__spin_r,
+    __spin_b: _siteData.__spin_b,
+    __spin_t: _siteData.__spin_t,
+    __s: _siteData.__s,
     fb_dtsg: _fbDtsg,
+    [_sprinkleParamName]: _jazoest,
+    lsd: _lsd,
+    // force_blue=1 + __spin_dev_mhenv: Pancake official set conditionally trong buildParams
+    ...(_siteData.force_blue ? { force_blue: _siteData.force_blue } : {}),
+    ...(_siteData.__spin_dev_mhenv ? { __spin_dev_mhenv: _siteData.__spin_dev_mhenv } : {}),
     ...(pageId ? { request_user_id: pageId } : {}),
-  });
+  };
+  const params = new URLSearchParams(paramsObj);
 
   const r = await fetch(
     `https://upload-business.facebook.com/ajax/mercury/upload.php?${params}`,
-    { method: "POST", body: form, credentials: "include" }
+    {
+      method: "POST",
+      body: form,
+      credentials: "include",
+      headers: {
+        "X-MSGR-Region": _msgrRegion,
+        "Referer": `https://business.facebook.com/latest/inbox/messenger?asset_id=${pageId}&nav_ref=diode_page_inbox`,
+      },
+    }
   );
 
   const text = await r.text();
@@ -757,10 +797,15 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
     __spin_r: _siteData.__spin_r,
     __spin_b: _siteData.__spin_b,
     __spin_t: _siteData.__spin_t,
+    // __spin_dev_mhenv (spin field thứ 4) — Pancake set khi SiteData có
+    ...(_siteData.__spin_dev_mhenv ? { __spin_dev_mhenv: _siteData.__spin_dev_mhenv } : {}),
     __s: _siteData.__s,
     fb_dtsg: _fbDtsg,
     [_sprinkleParamName]: _jazoest,   // jazoest SAU fb_dtsg
     lsd: _lsd,
+    // force_blue=1 — Pancake official set khi SiteData.force_blue truthy
+    // → FB classify request là "Business UI thật" thay vì bot/incomplete
+    ...(_siteData.force_blue ? { force_blue: _siteData.force_blue } : {}),
     __usid: "null",                   // __usid SAU lsd, TRƯỚC specific_to_list
     "specific_to_list[0]": `fbid:${recipientId}`,
     "specific_to_list[1]": `fbid:${pageId}`,
@@ -841,6 +886,16 @@ async function sendMessage(recipientId, text, attachmentId, pageId) {
 
 async function handleSendMessage({ conversation_id, message, image_base64, page_id, recipient_psid }) {
   _recordSeenPageId(page_id);   // fire-and-forget, để lần sau tự warmup
+
+  // Pancake official getErrorHandler: các error code này → restartInbox (refresh context + retry).
+  // Nguồn: 0.5.41_0/scripts/background.js — retryableErrors = [1357004,1545012,1545006,3252001,1390008]
+  //   1357004 = token (fb_dtsg) hết hạn
+  //   1545012 = "Temporary Failure" (transient)
+  //   1545006 = ảnh attachment expired → cần reupload
+  //   3252001 = anti-abuse từ chối (request shape)
+  //   1390008 = rate limit ngầm
+  const RESTART_INBOX_ERRORS = [1357004, 1545012, 1545006, 3252001, 1390008];
+
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       await ensureFbContext(page_id, /* forceRefresh */ attempt > 0);
@@ -862,10 +917,17 @@ async function handleSendMessage({ conversation_id, message, image_base64, page_
         console.error("[AutoBill:bg] Error (permanent, skip retry):", e.message);
         return { success: false, error: e.message, permanent: true };
       }
+      // Extract FB error code từ message (sendMessage throw err với JSON ở trong)
+      const codeMatch = e.message.match(/"error":(\d+)/);
+      const fbErrorCode = codeMatch ? parseInt(codeMatch[1], 10) : null;
+      const isRestartable = fbErrorCode && RESTART_INBOX_ERRORS.includes(fbErrorCode);
       const isTokenError = /dtsg|logged.{0,5}in|1357004/i.test(e.message);
-      if (isTokenError && attempt === 0) {
-        console.warn("[AutoBill:bg] Token error, refreshing context and retrying...", e.message);
+
+      if ((isRestartable || isTokenError) && attempt < 1) {
+        console.warn(`[AutoBill:bg] FB error ${fbErrorCode || 'token'} → restartInbox: force refresh context + retry`);
         _clearFbContext();
+        // Backoff ngắn: 1-2s (giữ tổng < 30s WS timeout)
+        await new Promise(r => setTimeout(r, 1000 + Math.floor(Math.random() * 1000)));
         continue;
       }
       console.error("[AutoBill:bg] Error:", e.message);

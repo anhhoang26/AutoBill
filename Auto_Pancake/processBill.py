@@ -179,7 +179,12 @@ async def _ext_worker_loop():
                     blocked_this_page = True
                     break
                 if isinstance(result, dict) and result.get("permanent"):
-                    print(f"[EXT-Q] {bill_pancake['id']} permanent — skip retry")
+                    # 1545041 = "person not available" — recipient deactivated/blocked/out of 24h window.
+                    # Pancake official cũng treat = cannotRetry. Log riêng để dễ filter sau.
+                    if "1545041" in err_str:
+                        print(f"[EXT-Q] 🚫 {bill_pancake['id']} recipient unavailable (1545041, PSID={recipient_psid}) — skip")
+                    else:
+                        print(f"[EXT-Q] {bill_pancake['id']} permanent — skip retry")
                     break
             except Exception as e:
                 print(f"[EXT-Q] Attempt {attempt + 1} error: {bill_pancake['id']}: {e}")
